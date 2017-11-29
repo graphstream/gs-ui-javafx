@@ -39,9 +39,9 @@ public class FxMouseManager implements MouseManager
 	public void init(GraphicGraph graph, View view) {
 		this.view = view;
 		this.graph = graph;
-		view.addEventFilter(MouseEvent.MOUSE_PRESSED, mousePressed);
-		view.addEventFilter(MouseEvent.MOUSE_DRAGGED, mouseDragged);
-		view.addEventFilter(MouseEvent.MOUSE_RELEASED, mouseRelease);
+		view.addListener(MouseEvent.MOUSE_PRESSED, mousePressed);
+		view.addListener(MouseEvent.MOUSE_DRAGGED, mouseDragged);
+		view.addListener(MouseEvent.MOUSE_RELEASED, mouseRelease);
 	}
 	
 	// Command
@@ -150,7 +150,9 @@ public class FxMouseManager implements MouseManager
 	
 	@Override
 	public void release() {
-		
+		view.removeListener(MouseEvent.MOUSE_PRESSED, mousePressed);
+		view.removeListener(MouseEvent.MOUSE_DRAGGED, mouseDragged);
+		view.removeListener(MouseEvent.MOUSE_RELEASED, mouseRelease);
 	}
 
 	@Override

@@ -31,14 +31,6 @@
  */
 package org.graphstream.ui.fxViewer;
 
-import java.awt.Graphics2D;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.Collection;
 import java.util.EnumSet;
 
@@ -55,6 +47,8 @@ import org.graphstream.ui.view.util.InteractiveElement;
 import org.graphstream.ui.view.util.MouseManager;
 import org.graphstream.ui.view.util.ShortcutManager;
 
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -109,8 +103,7 @@ import javafx.scene.canvas.GraphicsContext;
  * graph attribute is the identifier of the view.
  * </p>
  */
-public class FxDefaultView extends FxViewPanel implements WindowListener, ComponentListener {
-	private static final long serialVersionUID = -4489484861592064398L;
+public class FxDefaultView extends FxViewPanel {
 
 	/**
 	 * Parent viewer.
@@ -154,7 +147,6 @@ public class FxDefaultView extends FxViewPanel implements WindowListener, Compon
 		setMouseManager(null);
 		setShortcutManager(null);
 		renderer.open(graph, this);
-		
 	}
 	
 	protected void setupGraphics() {
@@ -229,61 +221,6 @@ public class FxDefaultView extends FxViewPanel implements WindowListener, Compon
 		layoutChildren();
 	}
 
-	// Window Listener
-
-	public void windowActivated(WindowEvent e) {
-	}
-
-	public void windowClosed(WindowEvent e) {
-	}
-
-	public void windowClosing(WindowEvent e) {
-		graph.setAttribute("ui.viewClosed", getId());
-
-		switch (viewer.getCloseFramePolicy()) {
-		case CLOSE_VIEWER:
-			viewer.removeView(getId());
-			break;
-		case HIDE_ONLY:
-			
-			break;
-		case EXIT:
-			System.exit(0);
-		default:
-			throw new RuntimeException(String.format("The %s view is not up to date, do not know %s CloseFramePolicy.",
-					getClass().getName(), viewer.getCloseFramePolicy()));
-		}
-	}
-
-	public void windowDeactivated(WindowEvent e) {
-	}
-
-	public void windowDeiconified(WindowEvent e) {
-	}
-
-	public void windowIconified(WindowEvent e) {
-	}
-
-	public void windowOpened(WindowEvent e) {
-		graph.removeAttribute("ui.viewClosed");
-	}
-
-	public void componentHidden(ComponentEvent e) {
-		layoutChildren();
-	}
-
-	public void componentMoved(ComponentEvent e) {
-		layoutChildren();
-	}
-
-	public void componentResized(ComponentEvent e) {
-		layoutChildren();
-	}
-
-	public void componentShown(ComponentEvent e) {
-		layoutChildren();
-	}
-
 	// Methods deferred to the renderer
 
 	@Override
@@ -349,49 +286,24 @@ public class FxDefaultView extends FxViewPanel implements WindowListener, Compon
 
 		shortcuts = manager;
 	}
-
-	@Override
-	public void addKeyListener(KeyListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeKeyListener(KeyListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addMouseListener(MouseListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeMouseListener(MouseListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addMouseMotionListener(MouseMotionListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeMouseMotionListener(MouseMotionListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public Viewer getViewer() {
 		// TODO Auto-generated method stub
 		return this.viewer;
 	}
-
 	
-
+	public <T, U> void addListener(T descriptor, U listener) {
+		EventType eventType = (EventType) descriptor;
+		EventHandler eventFilter = (EventHandler) listener;
+		
+		addEventFilter(eventType, eventFilter);
+	}
+	
+	public <T, U> void removeListener(T descriptor, U listener) {
+		EventType eventType = (EventType) descriptor;
+		EventHandler eventFilter = (EventHandler) listener;
+		
+		removeEventFilter(eventType, eventFilter);
+	}
 }

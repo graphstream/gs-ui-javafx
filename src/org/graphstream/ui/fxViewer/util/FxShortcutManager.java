@@ -28,11 +28,11 @@ public class FxShortcutManager implements ShortcutManager {
 	
 	public void init(GraphicGraph graph, View view) {
 		this.view = view;
-		view.addEventFilter(KeyEvent.KEY_PRESSED, keyPressed);
+		view.addListener(KeyEvent.KEY_PRESSED, keyPressed);
 	}
 	
 	public void release() {
-
+		view.removeListener(KeyEvent.KEY_PRESSED, keyPressed);
 	}
 	
 	// Events
