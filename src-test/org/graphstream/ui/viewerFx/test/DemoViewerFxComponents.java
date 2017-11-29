@@ -31,41 +31,54 @@
  */
 package org.graphstream.ui.viewerFx.test;
 
-import javax.swing.UIManager;
-
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
-import org.graphstream.stream.ProxyPipe;
-import org.graphstream.stream.thread.ThreadProxyPipe;
+import org.graphstream.ui.fxViewer.FxDefaultView;
 import org.graphstream.ui.fxViewer.FxViewer;
+import org.graphstream.ui.fxViewer.basicRenderer.FxBasicGraphRenderer;
+import org.graphstream.ui.fxViewer.util.DefaultApplication;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.spriteManager.Sprite;
 import org.graphstream.ui.spriteManager.SpriteManager;
+import org.graphstream.ui.view.View;
+import org.graphstream.ui.view.ViewerListener;
+import org.graphstream.ui.view.ViewerPipe;
 
-public class DemoViewerFxComponents {
+import javafx.application.Application;
+
+public class DemoViewerFxComponents implements ViewerListener {
 	public static void main(String args[]) {
-		// setLAF();
 		new DemoViewerFxComponents();
 	}
+	
+	public static final String URL_IMAGE = "file:///home/hicham/Bureau/b.png" ;
 
+	private boolean loop = true;
+	private Graph graph = new MultiGraph("main graph");
+	private Node A, B, C;
+	
 	public DemoViewerFxComponents() {
-		Graph graph = new MultiGraph("main graph");
-		ThreadProxyPipe toSwing = new ThreadProxyPipe(graph);
-		FxViewer viewer = new FxViewer(toSwing);
-		ProxyPipe fromSwing = viewer.newThreadProxyOnGraphicGraph();
-		SpriteManager sman = new SpriteManager(graph);
 
-		fromSwing.addAttributeSink(graph);
-		viewer.addDefaultView(true);
+		FxViewer viewer = new FxViewer( graph, FxViewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD );
+		ViewerPipe pipeIn = viewer.newViewerPipe();
+		FxDefaultView view = (FxDefaultView)viewer.addView("view1", new FxBasicGraphRenderer() );
+		
+		DefaultApplication.init(view, graph);
+	    new Thread(() -> Application.launch(DefaultApplication.class)).start();
+	    
+		pipeIn.addAttributeSink(graph);
+		pipeIn.addViewerListener( this );
+		pipeIn.pump();
+		//viewer.addDefaultView(true);
+		
+		A = graph.addNode("quit");
+		B = graph.addNode("B");
+		C = graph.addNode("C");
 
-		Node A = graph.addNode("A");
-		Node B = graph.addNode("B");
-		Node C = graph.addNode("C");
-
-		graph.addEdge("AB", "A", "B");
+		graph.addEdge("AB", "quit", "B");
 		graph.addEdge("BC", "B", "C");
-		graph.addEdge("CA", "C", "A");
+		graph.addEdge("CA", "C", "quit");
 
 		A.setAttribute("xyz", 0, 1, 0);
 		B.setAttribute("xyz", 1, 0, 0);
@@ -77,6 +90,8 @@ public class DemoViewerFxComponents {
 
 		graph.setAttribute("ui.stylesheet", styleSheet);
 
+		SpriteManager sman = new SpriteManager(graph);
+
 		Sprite s1 = sman.addSprite("S1");
 		Sprite s2 = sman.addSprite("S2");
 		Sprite s3 = sman.addSprite("S3");
@@ -86,14 +101,9 @@ public class DemoViewerFxComponents {
 		s1.setPosition(StyleConstants.Units.PX, 1, 0, 0);
 		s2.setPosition(0.5f);
 		s3.setPosition(0, 0.5f, 0);
-		s1.setAttribute("ui.label", "1");
+		s1.setAttribute("ui.label", "Clic");
 		s2.setAttribute("ui.label", "2");
-		// s3.setAttribute( "ui.label", "" );
 
-		boolean loop = true;
-		// float x = 0;
-		// float y = 1;
-		// float dir = 0.005f;
 		float angle = 0;
 
 		while (loop) {
@@ -103,109 +113,114 @@ public class DemoViewerFxComponents {
 				e.printStackTrace();
 			}
 
-			fromSwing.pump();
+			pipeIn.pump();	
 
-			if (graph.hasAttribute("ui.viewClosed")) {
-				loop = false;
-			} else {
-				if (A.hasAttribute("ui.clicked")) {
-					System.err.printf("A clicked (%s)%n",
-							A.getLabel("ui.label"));
-					A.removeAttribute("ui.clicked");
-					loop = false;
-				} else if (B.hasAttribute("ui.clicked")) {
-					System.err.printf("B clicked (%s)%n",
-							B.getLabel("ui.label"));
-					B.removeAttribute("ui.clicked");
-				} else if (C.hasAttribute("ui.clicked")) {
-					System.err.printf("C clicked (%s)%n",
-							C.getLabel("ui.label"));
-					C.removeAttribute("ui.clicked");
-					if (C.hasAttribute("ui.class"))
-						C.removeAttribute("ui.class");
-					else
-						C.setAttribute("ui.class", "editable");
-				}
-
-				angle += 0.01;
-				if (angle > 360)
-					angle = 0;
-				s1.setPosition(StyleConstants.Units.PX, 70, angle, angle);
-				/*
-				 * x += dir;
-				 * 
-				 * if( x > 0.5f || x < -0.5f ) dir = -dir;
-				 * 
-				 * if( x == -0 ) x = 0;
-				 * 
-				 * A.setAttribute( "xyz", x, y, 0 );
-				 */// showSelection( graph );
-			}
+			angle += 0.03;
+			if (angle > 360)
+				angle = 0;
+			
+			double r = 60 ;
+			
+			double x = r*Math.cos(angle);
+			double y = r*Math.sin(angle);
+			
+			s1.setPosition(StyleConstants.Units.PX, x, y, 0);
 		}
 
 		System.out.printf("Bye bye ...%n");
 		System.exit(0);
 	}
 
-	protected static String styleSheet = "graph {" + "	padding:      60px;"
-			+ "	stroke-width: 1px;" + "	stroke-color: rgb(200,200,200);"
-			+ "	stroke-mode:  dots;" + "	fill-mode:    gradient-diagonal1;"
-			+ "	fill-color:   white, rgb(230,230,230);" + "}" + "node {"
-			+ "	shape:        jcomponent;" + "	jcomponent:   button;"
-			+ "	size:         100px, 30px;" + "	stroke-width: 2px;"
-			+ "	stroke-color: rgb(180,180,180);" + "	fill-mode:    none;"
-			+ "	text-font:    arial;" + "	text-size:    11;"
-			+ "	text-color:   rgb(30,30,30);" + "	text-style:   bold;" + " }"
-			+ "node#B {" + "	shape:      jcomponent;"
-			+ "	jcomponent: text-field;" + "	text-color: red;"
-			+ "	text-style: italic;" + "}" + "node#C {"
-			+ "	icon:		url(\"file:///home/antoine/GSLogo11a32.png\");"
-			+ "	icon-mode:	at-left;" + "}" + "sprite#S3 {"
-			+ "	size:       70, 80;" + "	size-mode:	fit;"
-			+ "	icon:		url(\"file:///home/antoine/GSLogo11a64.png\");"
-			+ "	icon-mode:	above;" + "}" + "node.editable {"
-			+ "	shape:      jcomponent;" + "	jcomponent: text-field;" + "}"
+	protected static String styleSheet = ""
+			+ "graph {" 
+			+ "	padding:      60px;"
+			+ "	stroke-width: 1px;" 
+			+ "	stroke-color: rgb(200,200,200);"
+			+ "	stroke-mode:  dots;" 
+			+ "	fill-mode:    gradient-diagonal1;"
+			+ "	fill-color:   white, rgb(230,230,230);" 
+			+ "}"
+			+ "node {"
+			+ "	shape:        jcomponent;" 
+			+ "	jcomponent:   button;"
+			+ "	size:         100px, 30px;" 
+			+ "	stroke-width: 2px;"
+			+ "	stroke-color: rgb(180,180,180);" 
+			+ "	fill-mode:    none;"
+			+ "	text-font:    arial;"
+			+ "	text-size:    11;"
+			+ "	text-color:   rgb(30,30,30);"
+			+ "	text-style:   bold;" 
+			+ "	stroke-mode: plain;"
+  			+ "	stroke-color: rgba(100,100,100,255);"
+  			+ "	stroke-width: 9px;"
+			+ " }"
+			+ "node#B {"
+			+ "	shape:      jcomponent;"
+			+ "	jcomponent: text-field;" 
+			+ "	text-color: red;"
+			+ "	text-style: italic;"
+			+ "}"
+			+ "node#C {"
+			+ "	size:       200px, 30px;"
+			+ "	icon:		url('"+URL_IMAGE+"');"
+			+ "	icon-mode:	at-left;"
+			+ "}"
+			+ "sprite#S3 {"
+			+ "	size:       70, 80;"
+			+ "	size-mode:	fit;"
+			+ "	icon:		url('"+URL_IMAGE+"');"
+			+ "	icon-mode:	above;"
+			+ "}" 
+			+ "node.editable {"
+			+ "	shape:      jcomponent;"
+			+ "	jcomponent: text-field;"
+			+ "}"
 			+ "node:selected {"
 			+ "	stroke-mode: plain; stroke-width: 5px; stroke-color: red;"
-			+ "}" + "sprite {" + "	shape:      jcomponent;"
-			+ "	jcomponent: button;" + "	size:       30px, 30px;"
-			+ "	fill-mode:  none;" + "}";
+			+ "}"
+			+ "sprite {" 
+			+ "	shape:      jcomponent;"
+			+ "	jcomponent: button;" 
+			+ "	size:       51px, 20px;"
+			+ "	fill-mode:  none;" 
+			+ "}";
+	
 
-	protected static void setLAF() {
-		try {
-			UIManager.LookAndFeelInfo[] installed = UIManager
-					.getInstalledLookAndFeels();
+	@Override
+	public void viewClosed(String viewName) {
+		loop = false ;
+	}
 
-			for (int i = 0; i < installed.length; i++) {
-				if (installed[i].getName().startsWith("GTK")) {
-					UIManager.setLookAndFeel(installed[i].getClassName());
-					i = installed.length;
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+	@Override
+	public void buttonPushed(String id) {
+		System.out.println("Button "+id+" pushed");
+		
+		if(id.equals("S1")) {
+			C.setAttribute("ui.label", B.getAttribute("ui.label"));
+		}
+		else if(id.equals("C")) {
+			C.setAttribute("ui.label", "Editable");
+		}
+		else if( id.equals("quit") ) {
+			loop = false;
 		}
 	}
 
-	protected void showSelection(Graph graph) {
-		boolean selection = false;
-		StringBuilder sb = new StringBuilder();
+	@Override
+	public void buttonReleased(String id) {
+		
+	}
 
-		sb.append("[");
+	@Override
+	public void mouseOver(String id) {
+		// TODO Auto-generated method stub
+		
+	}
 
-		for (Node node : graph) {
-			if (node.hasAttribute("ui.selected")) {
-				sb.append(String.format(" %s", node.getId()));
-				selection = true;
-			}
-			if (node.hasAttribute("ui.clicked")) {
-				System.err.printf("node %s clicked%n", node.getId());
-			}
-		}
-
-		sb.append(" ]");
-
-		if (selection)
-			System.err.printf("selection = %s%n", sb.toString());
+	@Override
+	public void mouseLeft(String id) {
+		// TODO Auto-generated method stub
+		
 	}
 }

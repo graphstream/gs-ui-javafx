@@ -242,7 +242,7 @@ public class FxBasicGraphRenderer extends FxGraphRendererBase {
 			rect.setHeight(metrics.size.data[1] - px1);
 
 			//g.setStroke(new BasicStroke((float) metrics.lengthToGu(stroke)));
-			Color c = Color.color(graph.getStyle().getStrokeColor(0).getRed(), graph.getStyle().getStrokeColor(0).getGreen(), graph.getStyle().getStrokeColor(0).getBlue());
+			Color c = Color.rgb(graph.getStyle().getStrokeColor(0).getRed(), graph.getStyle().getStrokeColor(0).getGreen(), graph.getStyle().getStrokeColor(0).getBlue());
 			g.setFill(c);
 			g.setStroke(c);
 			

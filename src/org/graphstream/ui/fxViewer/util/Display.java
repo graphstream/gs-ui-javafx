@@ -1,6 +1,7 @@
 package org.graphstream.ui.fxViewer.util;
 
 import org.graphstream.graph.Graph;
+import org.graphstream.ui.fxViewer.FxDefaultView;
 import org.graphstream.ui.fxViewer.FxViewer;
 import org.graphstream.ui.layout.Layout;
 import org.graphstream.ui.layout.Layouts;
@@ -17,14 +18,14 @@ public class Display implements org.graphstream.util.Display {
 				FxViewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 		
 		GraphRenderer renderer = FxViewer.newGraphRenderer();
-		viewer.addView(FxViewer.DEFAULT_VIEW_ID, renderer);
+		FxDefaultView view = (FxDefaultView) viewer.addView(FxViewer.DEFAULT_VIEW_ID, renderer);
 		
 		if(autoLayout) {
 			Layout layout = Layouts.newLayoutAlgorithm() ;
 			viewer.enableAutoLayout(layout);
 		}
 		
-		DefaultApplication.view = viewer;
+		DefaultApplication.init(view, graph);
 	    new Thread(() -> Application.launch(DefaultApplication.class)).start();
 		
 		return viewer;

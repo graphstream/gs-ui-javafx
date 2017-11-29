@@ -196,14 +196,14 @@ public abstract class FxElementRenderer {
 	protected void configureText(StyleGroup group, Camera camera) {
 		String fontName = group.getTextFont();
 		//StyleConstants.TextStyle textStyle = group.getTextStyle();
-
+		
 		textSize = (int) group.getTextSize().value;
-		textColor = Color.color(group.getTextColor(0).getRed(), group.getTextColor(0).getGreen(), group.getTextColor(0).getBlue());
+		textColor = Color.rgb(group.getTextColor(0).getRed(), group.getTextColor(0).getGreen(), group.getTextColor(0).getBlue());
 		textFont = Font.font(fontName, textSize);
 	}
 	
 	/**
-	 * Get awt color and convert to javafx Color
+	 * Get awt color in group and convert to javafx Color
 	 * @param group
 	 * @param id
 	 * @return javafx.scene.paint.Color
