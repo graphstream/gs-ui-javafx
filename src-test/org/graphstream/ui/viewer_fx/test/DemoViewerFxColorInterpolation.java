@@ -44,7 +44,7 @@ public class DemoViewerFxColorInterpolation implements ViewerListener {
 	public static void main(String args[]) {
 		// System.setProperty( "gs.ui.renderer",
 		// "org.graphstream.ui.j2dviewer.J2DGraphRenderer" );
-		System.setProperty("org.graphstream.ui", "org.graphstream.ui.fxViewer.util.Display");		
+		System.setProperty("org.graphstream.ui", "org.graphstream.ui.fx_viewer.util.Display");		
 		
 		new DemoViewerFxColorInterpolation();
 	}
