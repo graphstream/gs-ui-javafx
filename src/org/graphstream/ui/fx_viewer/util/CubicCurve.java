@@ -29,7 +29,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-C and LGPL licenses and that you accept their terms.
  */
-package org.graphstream.ui.fxViewer.util;
+package org.graphstream.ui.fx_viewer.util;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

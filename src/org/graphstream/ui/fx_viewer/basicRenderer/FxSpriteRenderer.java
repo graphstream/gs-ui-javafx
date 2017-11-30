@@ -29,9 +29,9 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-C and LGPL licenses and that you accept their terms.
  */
-package org.graphstream.ui.fxViewer.basicRenderer;
+package org.graphstream.ui.fx_viewer.basicRenderer;
 
-import org.graphstream.ui.fxViewer.util.FxDefaultCamera;
+import org.graphstream.ui.fx_viewer.util.FxDefaultCamera;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.GraphicSprite;
 import org.graphstream.ui.graphicGraph.StyleGroup;

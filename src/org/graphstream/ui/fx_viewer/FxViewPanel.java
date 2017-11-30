@@ -29,13 +29,68 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-C and LGPL licenses and that you accept their terms.
  */
-package org.graphstream.ui.fxViewer;
+package org.graphstream.ui.fx_viewer;
 
-import org.graphstream.ui.view.GraphRenderer;
+import org.graphstream.ui.view.View;
+import org.graphstream.ui.view.Viewer;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Region ;
+import javafx.scene.layout.StackPane;
+/**
+ * A view on a graphic graph.
+ * 
+ * Basically a view is a Swing panel where a
+ * {@link org.graphstream.ui.view.GraphRenderer} renders the graphic graph. If
+ * you are in the Swing thread, you can change the view on the graphic graph
+ * using methods to translate, zoom and rotate the view.
+ */
+public abstract class FxViewPanel extends StackPane implements View {
 
-public interface FxGraphRenderer extends GraphRenderer<Region, GraphicsContext> {
+	/**
+	 * The view identifier.
+	 */
+	private final String id;
+	
+	private Canvas canvas ;
+	/**
+	 * New view.
+	 *
+	 * @param identifier
+	 *            The view unique identifier.
+	 */
+	public FxViewPanel(final String identifier) {
 
+		if (null == identifier || identifier.isEmpty()) {
+			throw new IllegalArgumentException("View id cannot be null/empty.");
+		}
+		id = identifier;
+	
+		canvas = new Canvas(800, 600);
+    	
+		this.getChildren().add(canvas);
+		this.setPrefSize(800, 600);
+		
+		canvas.widthProperty().bind(
+        		this.widthProperty());
+		canvas.heightProperty().bind(
+        		this.heightProperty());
+	}
+
+	public String getIdView() {
+		return id;
+	}
+	
+	public GraphicsContext getGraphics() {
+		return canvas.getGraphicsContext2D();
+	}
+	
+	public void setAliasing(boolean ali) {
+		
+	}
+	
+	public abstract Viewer getViewer();
+
+	@Override
+	protected abstract void layoutChildren() ;
 }

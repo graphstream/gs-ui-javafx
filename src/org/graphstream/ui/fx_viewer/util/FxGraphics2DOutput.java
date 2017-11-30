@@ -29,51 +29,33 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-C and LGPL licenses and that you accept their terms.
  */
-package org.graphstream.ui.fxViewer;
+package org.graphstream.ui.fx_viewer.util;
 
-import org.graphstream.ui.view.GraphRendererBase;
-import org.graphstream.ui.view.View;
-import org.graphstream.ui.view.Viewer;
+import java.io.IOException;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Region ;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
+/**
+ * A special interface for renderers that allows to replace the Graphics2D.
+ *
+ * <p>
+ * Several external libraries use to replace the {@link Graphics2D} of AWT in
+ * order to produce a file or on a printer in a given format. However it is not possible to
+ * link such libraries in the gs-core module of GraphStream. To avoid this
+ * problem, this interface defines a plug-in that must implement be able to
+ * yield a {@link Graphics2D} usable instead of the default one. 
+ * </p>
+ */
+public interface FxGraphics2DOutput {
+	/**
+	 * The graphics to use instead of the default {@link Graphics2D} of AWT.
+	 */
+	GraphicsContext getGraphics();
 
-public abstract class FxGraphRendererBase extends GraphRendererBase<Region, GraphicsContext>
-		implements FxGraphRenderer {
-
-	// Utilities
-
-	public View createDefaultView(Viewer viewer, String viewId) {
-		return new FxDefaultView(viewer, viewId, this);
-	}
-
-	protected void displayNothingToDo(GraphicsContext g, int w, int h) {
-		String msg1 = "Graph width/height/depth is zero !!";
-		String msg2 = "Place components using the 'xyz' attribute.";
-
-		g.setStroke(Color.RED);
-		g.setFill(Color.RED);
-		g.strokeLine(0, 0, w, h);
-		g.strokeLine(0, h, w, 0);
-		
-		final Text text1 = new Text(msg1);
-		final Text text2 = new Text(msg2);
-		text1.applyCss();
-		text2.applyCss();
-		
-		double msg1length = text1.getLayoutBounds().getWidth();
-		double msg2length = text2.getLayoutBounds().getWidth();
-		
-		double x = w / 2;
-		double y = h / 2;
-
-		g.setStroke(Color.RED);
-		g.setFill(Color.RED);
-		g.fillText(msg1, (float) (x - msg1length / 2), (float) (y - 20));
-		g.fillText(msg2, (float) (x - msg2length / 2), (float) (y + 20));
-	}
-
+	/**
+	 * Output (if needed) the results of the last painting done with the {@link Graphics2D}.
+	 * @param outputName The name of the output to use, for some renderers it is a file,
+	 * for others it is an URL, a string description of the output, etc. 
+	 */
+	void outputTo(String outputName) throws IOException;
 }

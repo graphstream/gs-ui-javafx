@@ -29,15 +29,15 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-C and LGPL licenses and that you accept their terms.
  */
-package org.graphstream.ui.viewerFx.test;
+package org.graphstream.ui.viewer_fx.test;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
-import org.graphstream.ui.fxViewer.FxDefaultView;
-import org.graphstream.ui.fxViewer.FxViewer;
-import org.graphstream.ui.fxViewer.basicRenderer.FxBasicGraphRenderer;
-import org.graphstream.ui.fxViewer.util.DefaultApplication;
+import org.graphstream.ui.fx_viewer.FxDefaultView;
+import org.graphstream.ui.fx_viewer.FxViewer;
+import org.graphstream.ui.fx_viewer.basicRenderer.FxBasicGraphRenderer;
+import org.graphstream.ui.fx_viewer.util.DefaultApplication;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.spriteManager.Sprite;
 import org.graphstream.ui.spriteManager.SpriteManager;

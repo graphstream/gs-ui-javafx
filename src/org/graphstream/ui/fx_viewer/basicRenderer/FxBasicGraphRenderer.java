@@ -29,7 +29,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-C and LGPL licenses and that you accept their terms.
  */
-package org.graphstream.ui.fxViewer.basicRenderer;
+package org.graphstream.ui.fx_viewer.basicRenderer;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -44,9 +44,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import org.graphstream.graph.Element;
-import org.graphstream.ui.fxViewer.FxGraphRendererBase;
-import org.graphstream.ui.fxViewer.util.FxDefaultCamera;
-import org.graphstream.ui.fxViewer.util.FxGraphics2DOutput;
+import org.graphstream.ui.fx_viewer.FxGraphRendererBase;
+import org.graphstream.ui.fx_viewer.util.FxDefaultCamera;
+import org.graphstream.ui.fx_viewer.util.FxGraphics2DOutput;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.GraphicGraph;

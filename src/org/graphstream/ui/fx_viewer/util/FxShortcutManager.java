@@ -1,4 +1,4 @@
-package org.graphstream.ui.fxViewer.util;
+package org.graphstream.ui.fx_viewer.util;
 
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphicGraph;

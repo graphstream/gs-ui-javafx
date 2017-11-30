@@ -1,8 +1,8 @@
-package org.graphstream.ui.fxViewer.util;
+package org.graphstream.ui.fx_viewer.util;
 
 import org.graphstream.graph.Graph;
-import org.graphstream.ui.fxViewer.FxDefaultView;
-import org.graphstream.ui.fxViewer.FxViewer;
+import org.graphstream.ui.fx_viewer.FxDefaultView;
+import org.graphstream.ui.fx_viewer.FxViewer;
 import org.graphstream.ui.layout.Layout;
 import org.graphstream.ui.layout.Layouts;
 import org.graphstream.ui.view.GraphRenderer;

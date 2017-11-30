@@ -29,54 +29,51 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-C and LGPL licenses and that you accept their terms.
  */
-package org.graphstream.ui.viewerFx.test;
+package org.graphstream.ui.fx_viewer;
 
-import org.graphstream.graph.Graph;
-import org.graphstream.graph.implementations.MultiGraph;
-import org.graphstream.ui.fxViewer.FxViewPanel;
-import org.graphstream.ui.fxViewer.FxViewer;
+import org.graphstream.ui.view.GraphRendererBase;
+import org.graphstream.ui.view.View;
+import org.graphstream.ui.view.Viewer;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Region ;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
-public class DemoAllInFx extends Application {
-	protected static String styleSheet =
-			"graph {"+
-			"	padding: 60px;"+
-			"}";
 
-	
-	public static void main(String args[]) {
-        Application.launch(DemoAllInFx.class, args);
+public abstract class FxGraphRendererBase extends GraphRendererBase<Region, GraphicsContext>
+		implements FxGraphRenderer {
+
+	// Utilities
+
+	public View createDefaultView(Viewer viewer, String viewId) {
+		return new FxDefaultView(viewer, viewId, this);
 	}
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		Graph graph  = new MultiGraph("mg");
+
+	protected void displayNothingToDo(GraphicsContext g, int w, int h) {
+		String msg1 = "Graph width/height/depth is zero !!";
+		String msg2 = "Place components using the 'xyz' attribute.";
+
+		g.setStroke(Color.RED);
+		g.setFill(Color.RED);
+		g.strokeLine(0, 0, w, h);
+		g.strokeLine(0, h, w, 0);
 		
-		FxViewer viewer = new FxViewer(graph, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
+		final Text text1 = new Text(msg1);
+		final Text text2 = new Text(msg2);
+		text1.applyCss();
+		text2.applyCss();
+		
+		double msg1length = text1.getLayoutBounds().getWidth();
+		double msg2length = text2.getLayoutBounds().getWidth();
+		
+		double x = w / 2;
+		double y = h / 2;
 
-		graph.addNode("A");
-		graph.addNode("B");
-		graph.addNode("C");
-		graph.addEdge("AB", "A", "B");
-		graph.addEdge("BC", "B", "C");
-		graph.addEdge("CA", "C", "A");
-		graph.setAttribute( "ui.antialias" );
-		graph.setAttribute( "ui.quality" );
-		graph.setAttribute( "ui.stylesheet", styleSheet );
-   
-		graph.getNode("A").setAttribute("xyz", -1, 0, 0 );
-		graph.getNode("B").setAttribute("xyz",  1, 0, 0 );
-  		graph.getNode("C").setAttribute("xyz",  0, 1, 0 );
-   
-  		// On ins�re la vue principale du viewer dans la JFrame.
-  		
-  		FxViewPanel v =  (FxViewPanel) viewer.addDefaultView( false ) ;
-  		Scene scene = new Scene(v, 800, 600);
-  		primaryStage.setScene(scene);
-  				
-		primaryStage.show();
+		g.setStroke(Color.RED);
+		g.setFill(Color.RED);
+		g.fillText(msg1, (float) (x - msg1length / 2), (float) (y - 20));
+		g.fillText(msg2, (float) (x - msg2length / 2), (float) (y + 20));
 	}
+
 }

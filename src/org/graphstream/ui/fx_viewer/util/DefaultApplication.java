@@ -1,7 +1,7 @@
-package org.graphstream.ui.fxViewer.util;
+package org.graphstream.ui.fx_viewer.util;
 
 import org.graphstream.graph.Graph;
-import org.graphstream.ui.fxViewer.FxDefaultView;
+import org.graphstream.ui.fx_viewer.FxDefaultView;
 import org.graphstream.ui.view.View;
 
 import javafx.application.Application;

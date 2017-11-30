@@ -29,33 +29,54 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-C and LGPL licenses and that you accept their terms.
  */
-package org.graphstream.ui.fxViewer.util;
+package org.graphstream.ui.viewer_fx.test;
 
-import java.io.IOException;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.MultiGraph;
+import org.graphstream.ui.fx_viewer.FxViewPanel;
+import org.graphstream.ui.fx_viewer.FxViewer;
 
-import javafx.scene.canvas.GraphicsContext;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-/**
- * A special interface for renderers that allows to replace the Graphics2D.
- *
- * <p>
- * Several external libraries use to replace the {@link Graphics2D} of AWT in
- * order to produce a file or on a printer in a given format. However it is not possible to
- * link such libraries in the gs-core module of GraphStream. To avoid this
- * problem, this interface defines a plug-in that must implement be able to
- * yield a {@link Graphics2D} usable instead of the default one. 
- * </p>
- */
-public interface FxGraphics2DOutput {
-	/**
-	 * The graphics to use instead of the default {@link Graphics2D} of AWT.
-	 */
-	GraphicsContext getGraphics();
+public class DemoAllInFx extends Application {
+	protected static String styleSheet =
+			"graph {"+
+			"	padding: 60px;"+
+			"}";
 
-	/**
-	 * Output (if needed) the results of the last painting done with the {@link Graphics2D}.
-	 * @param outputName The name of the output to use, for some renderers it is a file,
-	 * for others it is an URL, a string description of the output, etc. 
-	 */
-	void outputTo(String outputName) throws IOException;
+	
+	public static void main(String args[]) {
+        Application.launch(DemoAllInFx.class, args);
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Graph graph  = new MultiGraph("mg");
+		
+		FxViewer viewer = new FxViewer(graph, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
+
+		graph.addNode("A");
+		graph.addNode("B");
+		graph.addNode("C");
+		graph.addEdge("AB", "A", "B");
+		graph.addEdge("BC", "B", "C");
+		graph.addEdge("CA", "C", "A");
+		graph.setAttribute( "ui.antialias" );
+		graph.setAttribute( "ui.quality" );
+		graph.setAttribute( "ui.stylesheet", styleSheet );
+   
+		graph.getNode("A").setAttribute("xyz", -1, 0, 0 );
+		graph.getNode("B").setAttribute("xyz",  1, 0, 0 );
+  		graph.getNode("C").setAttribute("xyz",  0, 1, 0 );
+   
+  		// On ins�re la vue principale du viewer dans la JFrame.
+  		
+  		FxViewPanel v =  (FxViewPanel) viewer.addDefaultView( false ) ;
+  		Scene scene = new Scene(v, 800, 600);
+  		primaryStage.setScene(scene);
+  				
+		primaryStage.show();
+	}
 }

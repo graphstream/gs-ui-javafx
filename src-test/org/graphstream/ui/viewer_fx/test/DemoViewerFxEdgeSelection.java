@@ -29,16 +29,16 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-C and LGPL licenses and that you accept their terms.
  */
-package org.graphstream.ui.viewerFx.test;
+package org.graphstream.ui.viewer_fx.test;
 
 import java.util.EnumSet;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
-import org.graphstream.ui.fxViewer.FxViewPanel;
-import org.graphstream.ui.fxViewer.FxViewer;
-import org.graphstream.ui.fxViewer.util.FxMouseManager;
+import org.graphstream.ui.fx_viewer.FxViewPanel;
+import org.graphstream.ui.fx_viewer.FxViewer;
+import org.graphstream.ui.fx_viewer.util.FxMouseManager;
 import org.graphstream.ui.view.ViewerListener;
 import org.graphstream.ui.view.ViewerPipe;
 import org.graphstream.ui.view.util.InteractiveElement;
