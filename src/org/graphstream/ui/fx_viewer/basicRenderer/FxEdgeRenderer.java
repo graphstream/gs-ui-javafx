@@ -33,6 +33,7 @@ package org.graphstream.ui.fx_viewer.basicRenderer;
 
 import java.awt.geom.Line2D;
 
+import org.graphstream.ui.fx.util.ColorManager;
 import org.graphstream.ui.geom.Vector2;
 import org.graphstream.ui.graphicGraph.GraphicEdge;
 import org.graphstream.ui.graphicGraph.GraphicElement;
@@ -66,7 +67,7 @@ public class FxEdgeRenderer extends FxElementRenderer {
 	@Override
 	protected void pushDynStyle(StyleGroup group, GraphicsContext g, Camera camera,
 			GraphicElement element) {
-		Color color = FxElementRenderer.getFillColor(group, 0);
+		Color color = ColorManager.getFillColor(group, 0);
 
 		if (element != null && group.getFillMode() == FillMode.DYN_PLAIN)
 			color = interpolateColor(group, element);
@@ -92,7 +93,7 @@ public class FxEdgeRenderer extends FxElementRenderer {
 		arrowWidth = camera.getMetrics().lengthToGu(group.getArrowSize(),
 				group.getArrowSize().size() > 1 ? 1 : 0);
 		
-		Color color = FxElementRenderer.getFillColor(group, 0);
+		Color color = ColorManager.getFillColor(group, 0);
 		g.setFill(color);
         g.setStroke(color);
         

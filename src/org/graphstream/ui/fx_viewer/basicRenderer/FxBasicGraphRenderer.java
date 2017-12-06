@@ -44,8 +44,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import org.graphstream.graph.Element;
+import org.graphstream.ui.fx.util.ColorManager;
 import org.graphstream.ui.fx_viewer.FxGraphRendererBase;
-import org.graphstream.ui.fx_viewer.util.FxDefaultCamera;
+import org.graphstream.ui.fx_viewer.util.DefaultCamera;
 import org.graphstream.ui.fx_viewer.util.FxGraphics2DOutput;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphicElement;
@@ -95,7 +96,7 @@ public class FxBasicGraphRenderer extends FxGraphRendererBase {
 	/**
 	 * Set the view on the view port defined by the metrics.
 	 */
-	protected FxDefaultCamera camera = null;
+	protected DefaultCamera camera = null;
 
 	protected FxNodeRenderer nodeRenderer = new FxNodeRenderer();
 
@@ -129,7 +130,7 @@ public class FxBasicGraphRenderer extends FxGraphRendererBase {
 	@Override
 	public void open(GraphicGraph graph, Region renderingSurface) {
 		super.open(graph, renderingSurface);
-		camera = new FxDefaultCamera(graph);
+		camera = new DefaultCamera(graph);
 	}
 
 	/*
@@ -265,7 +266,7 @@ public class FxBasicGraphRenderer extends FxGraphRendererBase {
 		StyleGroup group = graph.getStyle();
 
 		if (group.getFillMode() != FillMode.NONE) {
-			Color c = FxElementRenderer.getFillColor(group, 0);
+			Color c = ColorManager.getFillColor(group, 0);
 			g.setFill(c);
 			g.setStroke(c);
 			
@@ -321,7 +322,7 @@ public class FxBasicGraphRenderer extends FxGraphRendererBase {
 	}
 
 	protected void setupSpriteStyle(GraphicsContext g, StyleGroup group) {
-		Color c = FxElementRenderer.getFillColor(group, 0);
+		Color c = ColorManager.getFillColor(group, 0);
 		g.setFill(c);
 		g.setStroke(c);
 	}
