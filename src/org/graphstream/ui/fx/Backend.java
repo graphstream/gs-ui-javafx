@@ -5,13 +5,13 @@ import org.graphstream.ui.fx.renderer.shape.Shape;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.StyleGroup;
 
-import javafx.scene.Parent;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Region;
 
 public interface Backend {
     
     /** Called before any prior use of this back-end. */
-    void open(Parent drawingSurface);
+    void open(Region drawingSurface);
     
     /** Called after finished using this object. */
     void close();
@@ -83,5 +83,5 @@ public interface Backend {
      * The drawing surface may be different than the one passed as
      * argument to open(), the back-end is free to create a new surface
      * as it sees fit. */
-    Parent drawingSurface();
+    Region drawingSurface();
 }	

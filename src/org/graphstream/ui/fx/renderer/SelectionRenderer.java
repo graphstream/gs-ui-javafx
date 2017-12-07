@@ -17,9 +17,9 @@ public class SelectionRenderer {
 	protected Rectangle2D shape = new Rectangle2D();
 	
 	protected Color linesColor   = Color.rgb(240, 240, 240);
-	protected Color linesColorQ  = Color.rgb(  0,   0,   0, 64);
-	protected Color fillColor    = Color.rgb( 50,  50, 200, 32);
-	protected Color strokeColorQ = Color.rgb( 50,  50, 200, 64);
+	protected Color linesColorQ  = Color.rgb(  0,   0,   0, (64/100));
+	protected Color fillColor    = Color.rgb( 50,  50, 200, (32/100));
+	protected Color strokeColorQ = Color.rgb( 50,  50, 200, (64/100));
 	protected Color strokeColor  = Color.rgb(128, 128, 128);
 			
 	public SelectionRenderer(Selection selection, GraphicGraph graph) {

@@ -31,8 +31,6 @@
  */
 package org.graphstream.ui.fx;
 
-import java.awt.Container;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +42,12 @@ import javax.imageio.ImageIO;
 
 import org.graphstream.graph.Element;
 import org.graphstream.ui.fx.renderer.GraphBackgroundRenderer;
+import org.graphstream.ui.fx.renderer.SelectionRenderer;
+import org.graphstream.ui.fx.renderer.StyleRenderer;
+import org.graphstream.ui.fx.util.FPSLogger;
+import org.graphstream.ui.fx.util.Selection;
+import org.graphstream.ui.fx_viewer.FxDefaultView;
+import org.graphstream.ui.fx_viewer.util.FxGraphics2DOutput;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphicEdge;
 import org.graphstream.ui.graphicGraph.GraphicElement;
@@ -57,11 +61,16 @@ import org.graphstream.ui.graphicGraph.stylesheet.Selector;
 import org.graphstream.ui.view.Camera;
 import org.graphstream.ui.view.GraphRenderer;
 import org.graphstream.ui.view.LayerRenderer;
-import org.graphstream.ui.view.Selection;
 import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
 import org.graphstream.ui.view.util.GraphMetrics;
 import org.graphstream.ui.view.util.InteractiveElement;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Region;
 
 /**	
  * 2D renderer.
@@ -86,7 +95,7 @@ import org.graphstream.ui.view.util.InteractiveElement;
  * for drawing the graph, the backend is also responsible for the shape
  * creation.
  */
-public class FxFullGraphRenderer implements GraphRenderer<Container, Graphics2D>, StyleGroupListener {
+public class FxFullGraphRenderer implements GraphRenderer<Region, GraphicsContext>, StyleGroupListener {
 	public final static String DEFAULT_RENDERER = "j2d_def_rndr";
 	
 	protected FxDefaultCamera camera = null;
@@ -95,9 +104,9 @@ public class FxFullGraphRenderer implements GraphRenderer<Container, Graphics2D>
 	
 	protected Selection selection = new Selection();
 	
-	protected LayerRenderer<Graphics2D> backRenderer = null;
+	protected LayerRenderer<GraphicsContext> backRenderer = null;
 
-	protected LayerRenderer<Graphics2D> foreRenderer = null;
+	protected LayerRenderer<GraphicsContext> foreRenderer = null;
 	
 	protected Backend backend = null ;
 	
@@ -106,7 +115,7 @@ public class FxFullGraphRenderer implements GraphRenderer<Container, Graphics2D>
 // Construction
 
 	@Override
-	public void open(GraphicGraph graph, Container drawingSurface) {
+	public void open(GraphicGraph graph, Region drawingSurface) {
 		if( this.graph == null ) {
 			this.graph   = graph;
 			this.backend = new BackendJ2D();		// choose it according to some setting
@@ -143,7 +152,7 @@ public class FxFullGraphRenderer implements GraphRenderer<Container, Graphics2D>
 		return camera;
 	}
 		  
-	public Container renderingSurface() {
+	public Region renderingSurface() {
 		return backend.drawingSurface();
 	}
 	
@@ -204,7 +213,7 @@ public class FxFullGraphRenderer implements GraphRenderer<Container, Graphics2D>
 // Commands -- Rendering
     
     @Override
-    public void render(Graphics2D g, int x, int y, int width, int height) {
+    public void render(GraphicsContext g, int x, int y, int width, int height) {
     	if(graph != null) {
   	        startFrame();
   	        
@@ -271,7 +280,7 @@ public class FxFullGraphRenderer implements GraphRenderer<Container, Graphics2D>
 	}
 	
 	/** Render a back or from layer. */ 
-	protected void renderLayer(LayerRenderer<Graphics2D> renderer) {
+	protected void renderLayer(LayerRenderer<GraphicsContext> renderer) {
 		GraphMetrics metrics = camera.getMetrics();
 		
 		renderer.render(backend.graphics2D(), graph, metrics.ratioPx2Gu,
@@ -290,61 +299,84 @@ public class FxFullGraphRenderer implements GraphRenderer<Container, Graphics2D>
 	}
 	
 	public void screenshot(String filename, int width, int height) {
-		if(filename.toLowerCase().endsWith("png")) {
-			BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-			render(img.createGraphics(), 0, 0, width, height);
-			File file = new File(filename);
-			try {
-				ImageIO.write(img, "png", file);
-			} catch (IOException e) { e.printStackTrace(); }
-	   	} 
-		else if(filename.toLowerCase().endsWith("bmp")) {
-			// Who, in the world, is still using BMP ???
-			BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-			render(img.createGraphics(), 0, 0, width, height);
-			File file = new File(filename);
-			try {
-				ImageIO.write(img, "bmp", file);
-			} catch (IOException e) { e.printStackTrace(); }
-		}
-		else if(filename.toLowerCase().endsWith("jpg") || filename.toLowerCase().endsWith("jpeg")) {
-			BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-			render(img.createGraphics(), 0, 0, width, height);
-			File file = new File(filename);
-			try {
-				ImageIO.write(img, "jpg", file);
-			} catch (IOException e) {e.printStackTrace();}
-		} 
-		else if(filename.toLowerCase().endsWith("svg")) {
-		    try {
-				String plugin = "org.graphstream.ui.batik.BatikGraphics2D";
-				Class c = Class.forName(plugin);
-				Object o = (Object)c.newInstance();
-				if(o instanceof Graphics2DOutput) {
-					Graphics2DOutput out = (Graphics2DOutput)o;
-					Graphics2D g2 = out.getGraphics();
-					render(g2, 0, 0, width, height);
-					out.outputTo(filename);
-				} 
-				else {
-					Logger.getLogger(this.getClass().getSimpleName()).warning("Plugin "+plugin+" is not an instance of Graphics2DOutput ("+o.getClass().getName()+").");
+		if (graph != null) {
+			if (filename.endsWith("png") || filename.endsWith("PNG")) {
+				BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+				Image img = SwingFXUtils.toFXImage(image, null);
+				
+				Canvas canvas = new Canvas(width, height);
+				GraphicsContext c = canvas.getGraphicsContext2D();
+				c.drawImage(img, 0,0);
+				render(c, 0, 0, width, height);
+				
+				image = SwingFXUtils.fromFXImage(img, null);
+				
+				File file = new File(filename);
+				try {
+					ImageIO.write(image, "png", file);
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-			} catch (Exception e){ e.printStackTrace();}
-		} 
-		else {
-		    Logger.getLogger(this.getClass().getSimpleName()).warning("Unknown screenshot filename extension "+filename+", saving to jpeg.");
-		    BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-			render(img.createGraphics(), 0, 0, width, height);
-			File file = new File(filename+".jpg");
-			try {
-				ImageIO.write(img, "jpg", file);
-			} catch (IOException e) { e.printStackTrace(); }
+			} else if (filename.endsWith("bmp") || filename.endsWith("BMP")) {
+				BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+				Image img = SwingFXUtils.toFXImage(image, null);
+				
+				Canvas canvas = new Canvas(width, height);
+				GraphicsContext c = canvas.getGraphicsContext2D();
+				c.drawImage(img, 0,0);
+				render(c, 0, 0, width, height);
+				
+				image = SwingFXUtils.fromFXImage(img, null);
+				
+				File file = new File(filename);
+				try {
+					ImageIO.write(image, "bmp", file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (filename.endsWith("jpg") || filename.endsWith("JPG") || filename.endsWith("jpeg")
+					|| filename.endsWith("JPEG")) {
+				BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+				Image img = SwingFXUtils.toFXImage(image, null);
+				
+				Canvas canvas = new Canvas(width, height);
+				GraphicsContext c = canvas.getGraphicsContext2D();
+				c.drawImage(img, 0,0);
+				render(c, 0, 0, width, height);
+				
+				image = SwingFXUtils.fromFXImage(img, null);
+				
+				File file = new File(filename);
+				try {
+					ImageIO.write(image, "jpg", file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (filename.toLowerCase().endsWith("svg")) {
+				try {
+					String plugin = "org.graphstream.ui.batik.BatikGraphics2D";
+					Class<?> c = Class.forName(plugin);
+					Object o = c.newInstance();
+					if (o instanceof FxGraphics2DOutput) {
+						FxGraphics2DOutput out = (FxGraphics2DOutput) o;
+						GraphicsContext g2 = out.getGraphics();
+						render(g2, (int) camera.getMetrics().viewport[0], (int) camera.getMetrics().viewport[1],
+								(int) camera.getMetrics().viewport[2], (int) camera.getMetrics().viewport[3]);
+						out.outputTo(filename);
+					} else {
+						System.err.println(String.format("Plugin %s is not an instance of Graphics2DOutput (%s).", plugin,
+								o.getClass().getName()));
+					}
+				} catch (Exception e) {
+					System.err.println("Unexpected error during screen shot. "+e);
+				}
+			}
 		}
 	}
 	
-	public void setBackLayerRenderer(LayerRenderer<Graphics2D> renderer) { backRenderer = renderer; }
+	public void setBackLayerRenderer(LayerRenderer<GraphicsContext> renderer) { backRenderer = renderer; }
 
-	public void setForeLayoutRenderer(LayerRenderer<Graphics2D> renderer) { foreRenderer = renderer; }
+	public void setForeLayoutRenderer(LayerRenderer<GraphicsContext> renderer) { foreRenderer = renderer; }
 	
 	// Commands -- Style group listener
     public void elementStyleChanged(Element element, StyleGroup oldStyle, StyleGroup style) {
@@ -353,14 +385,15 @@ public class FxFullGraphRenderer implements GraphRenderer<Container, Graphics2D>
     	if(oldStyle != null) {
     		SwingElementRenderer renderer = oldStyle.getRenderer(FxFullGraphRenderer.DEFAULT_RENDERER);
 
-	    	if((renderer != null ) && renderer instanceof FxComponentRenderer)
-	    		((FxComponentRenderer)renderer).unequipElement((GraphicElement)element);
+    		// Not implemented yet
+	    	/*if((renderer != null ) && renderer instanceof FxComponentRenderer)
+	    		((FxComponentRenderer)renderer).unequipElement((GraphicElement)element);*/
     	}
     }
     
     @Override
     public View createDefaultView(Viewer viewer, String id) {
-    	return new DefaultView(viewer, id, this);
+    	return new FxDefaultView(viewer, id, this);
     }
 
 	@Override

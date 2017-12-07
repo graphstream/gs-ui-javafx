@@ -6,6 +6,8 @@ import org.graphstream.ui.fx.renderer.Skeleton;
 import org.graphstream.ui.fx.renderer.shape.fx.baseShapes.Form.Rectangle2D;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 
+import javafx.scene.shape.Shape;
+
 public abstract class RectangularAreaShape extends AreaShape {
 	private Rectangle2D theShape = new Rectangle2D();
 	
@@ -14,7 +16,7 @@ public abstract class RectangularAreaShape extends AreaShape {
 		double w = area.theSize.x;
 		double h = area.theSize.y;
 		
-		theShape().setFrame(area.theCenter.x-w/2, area.theCenter.y-h/2, w, h);	
+		((Form)theShape()).setFrame(area.theCenter.x-w/2, area.theCenter.y-h/2, w, h);	
 	}
 
 	@Override
@@ -24,7 +26,7 @@ public abstract class RectangularAreaShape extends AreaShape {
 		double w = area.theSize.x + shadowable.theShadowWidth.x * 2;
 		double h = area.theSize.y + shadowable.theShadowWidth.y * 2;
 		
-		theShape().setFrame(x-w/2, y-h/2, w, h);
+		((Form)theShape()).setFrame(x-w/2, y-h/2, w, h);
 	}
 
 	@Override
@@ -41,7 +43,7 @@ public abstract class RectangularAreaShape extends AreaShape {
  		shadowable.cast(bck.graphics2D(), theShape());
 	}
 	
-	public Rectangle2D theShape() {
+	public Shape theShape() {
 		return theShape;
 	}
 }

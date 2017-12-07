@@ -6,18 +6,42 @@ import java.util.logging.Logger;
 
 import org.graphstream.ui.fx.renderer.GraphBackgroundRenderer;
 import org.graphstream.ui.fx.renderer.shape.Shape;
+import org.graphstream.ui.fx.renderer.shape.fx.advancedShapes.AngleShape;
+import org.graphstream.ui.fx.renderer.shape.fx.advancedShapes.BlobShape;
+import org.graphstream.ui.fx.renderer.shape.fx.advancedShapes.CubicCurveShape;
+import org.graphstream.ui.fx.renderer.shape.fx.advancedShapes.FreePlaneEdgeShape;
+import org.graphstream.ui.fx.renderer.shape.fx.advancedShapes.HorizontalSquareEdgeShape;
+import org.graphstream.ui.fx.renderer.shape.fx.advancedShapes.LSquareEdgeShape;
+import org.graphstream.ui.fx.renderer.shape.fx.advancedShapes.PieChartShape;
+import org.graphstream.ui.fx.renderer.shape.fx.arrowShapes.ArrowOnEdge;
+import org.graphstream.ui.fx.renderer.shape.fx.arrowShapes.CircleOnEdge;
+import org.graphstream.ui.fx.renderer.shape.fx.arrowShapes.DiamondOnEdge;
+import org.graphstream.ui.fx.renderer.shape.fx.arrowShapes.ImageOnEdge;
+import org.graphstream.ui.fx.renderer.shape.fx.baseShapes.LineShape;
+import org.graphstream.ui.fx.renderer.shape.fx.baseShapes.PolylineEdgeShape;
+import org.graphstream.ui.fx.renderer.shape.fx.basicShapes.CircleShape;
+import org.graphstream.ui.fx.renderer.shape.fx.basicShapes.CrossShape;
+import org.graphstream.ui.fx.renderer.shape.fx.basicShapes.DiamondShape;
+import org.graphstream.ui.fx.renderer.shape.fx.basicShapes.FreePlaneNodeShape;
+import org.graphstream.ui.fx.renderer.shape.fx.basicShapes.PolygonShape;
+import org.graphstream.ui.fx.renderer.shape.fx.basicShapes.RoundedSquareShape;
+import org.graphstream.ui.fx.renderer.shape.fx.basicShapes.SquareShape;
+import org.graphstream.ui.fx.renderer.shape.fx.basicShapes.TriangleShape;
+import org.graphstream.ui.fx.renderer.shape.fx.spriteShapes.OrientableSquareShape;
+import org.graphstream.ui.fx.renderer.shape.fx.spriteShapes.SpriteArrowShape;
+import org.graphstream.ui.fx.renderer.shape.fx.spriteShapes.SpriteFlowShape;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.StyleGroup;
 
 import javafx.geometry.Point2D;
-import javafx.scene.Parent;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Region;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.NonInvertibleTransformException;
 
 public class BackendJ2D implements Backend {
 	
-	private Parent surface ;
+	private Region surface ;
 	private GraphicsContext g2 ;
 	private Stack<Affine> matrixStack ;
 	private Affine Tx ;
@@ -37,7 +61,7 @@ public class BackendJ2D implements Backend {
 	}
 		
 	@Override
-	public void open(Parent drawingSurface) {
+	public void open(Region drawingSurface) {
 		surface = drawingSurface ;
 	}
 
@@ -400,7 +424,7 @@ public class BackendJ2D implements Backend {
 			throw new RuntimeException("Jcomponent should have its own renderer");
 		default:
 			throw new RuntimeException(group.getShape().toString()+" shape cannot be set for nodes");
-	}
+		}
 	}
 
 	@Override
@@ -409,7 +433,7 @@ public class BackendJ2D implements Backend {
 	}
 
 	@Override
-	public Parent drawingSurface() {
+	public Region drawingSurface() {
 		return surface ;
 	}
 

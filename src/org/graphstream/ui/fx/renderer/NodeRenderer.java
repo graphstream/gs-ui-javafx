@@ -17,9 +17,9 @@ public class NodeRenderer extends StyleRenderer {
 	}
 	
 	public static StyleRenderer apply(StyleGroup style, FxFullGraphRenderer renderer) {
-		if (style.getShape() == org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.Shape.JCOMPONENT)
+		/*if (style.getShape() == org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.Shape.JCOMPONENT)
 			return new JComponentRenderer(style, renderer);
-		else
+		else*/
 			return new NodeRenderer(style);
 	}
 

@@ -16,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 
 public interface Form  {
 	public void drawByPoints(GraphicsContext g) ;
+	public void setFrame(double x, double y, double w, double h);
 	// used by the Double Stroke (see ShapeStroke.class)
 	public String getIdForm();
 	public Object getPath();
@@ -39,7 +40,7 @@ public interface Form  {
 		}
 		
 		public void drawByPoints(GraphicsContext g) {
-			g.strokeRect(getX(), getY(), getWidth(), getHeight());
+			g.fillRect(getX(), getY(), getWidth(), getHeight());
 		}
 
 		@Override
@@ -51,16 +52,22 @@ public interface Form  {
 		public double[][] getPath() {
 			return path;
 		}
+
+		public void setRoundRect(double x, double y, double w, double h, double r, double r2) {
+			setFrame(x, y, w, h);
+			setArcWidth(r);
+			setArcHeight(r);
+		}
 	}
 	
 	public class Path2D extends Path implements Form {
 		
-		PathElement[] path = new PathElement[10];
+		PathElement[] path = new PathElement[20];
 		
 		int size = 0;
 		
 		public void reset() {
-			path = new PathElement[10];
+			path = new PathElement[20];
 			size = 0 ;		
 			
 			getElements().removeAll();
@@ -135,7 +142,7 @@ public interface Form  {
 				}
 			}
 			g.closePath();
-			g.stroke();
+			g.fill();
 		}
 
 		@Override
@@ -146,6 +153,11 @@ public interface Form  {
 		@Override
 		public PathElement[] getPath() {
 			return path;
+		}
+
+		@Override
+		public void setFrame(double x, double y, double w, double h) {
+			throw new RuntimeException("SetFrame with Path2D ?");
 		}
 	}
 
@@ -170,7 +182,7 @@ public interface Form  {
 			g.moveTo(getStartX(), getStartY());
 			g.bezierCurveTo(getControlX1(),getControlY1(), getControlX2(), getControlY2(), getEndX(), getEndY());
 			g.closePath();
-			g.stroke();
+			g.fill();
 		}
 
 		@Override
@@ -181,7 +193,12 @@ public interface Form  {
 		@Override
 		public double[][] getPath() {
 			return path;
-		}	
+		}
+		
+		@Override
+		public void setFrame(double x, double y, double w, double h) {
+			throw new RuntimeException("SetFrame with CubicCurve ?");
+		}
 	}
 
 	public class Line2D extends Line implements Form {
@@ -211,6 +228,17 @@ public interface Form  {
 		public double[][] getPath() {
 			return path;
 		}
+
+		@Override
+		public void setFrame(double x, double y, double w, double h) {
+			path[0][0] = x ; path[0][1] = y ;
+			path[1][0] = w; path[1][1] = h ;
+			
+			setStartX(x);
+			setStartY(y);
+			setEndX(w);
+			setEndY(h);
+		}
 	}
 
 	public class Arc2D extends Arc implements Form {
@@ -234,7 +262,7 @@ public interface Form  {
 		
 		@Override
 		public void drawByPoints(GraphicsContext g) {
-			g.strokeArc(getCenterX(), getCenterY(), getRadiusX(), getRadiusY(), getStartAngle(), getLength(), getType());
+			g.fillArc(getCenterX(), getCenterY(), getRadiusX(), getRadiusY(), getStartAngle(), getLength(), getType());
 		}
 
 		@Override
@@ -247,6 +275,10 @@ public interface Form  {
 			return path;
 		}
 		
+		@Override
+		public void setFrame(double x, double y, double w, double h) {
+			throw new RuntimeException("SetFrame with Arc2D ?");
+		}
 	}
 
 	public class Ellipse2D extends Ellipse implements Form {
@@ -263,9 +295,20 @@ public interface Form  {
 			path[1][0] = cornerX ; path[1][1] = cornerY ;
 		}
 		
+		public void setFrame(double x, double y, double cornerX, double cornerY) {
+			//----> Need to change from setFrameFromCenter
+			setCenterX(x);
+			setCenterY(y);
+			setRadiusX(cornerX);
+			setRadiusY(cornerY);
+			
+			path[0][0] = x ; path[0][1] = x ;
+			path[1][0] = cornerX ; path[1][1] = cornerY ;
+		}
+		
 		@Override
 		public void drawByPoints(GraphicsContext g) {
-			g.strokeOval(getCenterX(), getCenterY(), getRadiusX(), getRadiusY());
+			g.fillOval(getCenterX(), getCenterY(), getRadiusX(), getRadiusY());
 		}
 
 		@Override

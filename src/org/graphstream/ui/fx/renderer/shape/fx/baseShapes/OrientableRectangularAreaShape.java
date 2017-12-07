@@ -67,7 +67,7 @@ public class OrientableRectangularAreaShape extends RectangularAreaShape {
 	
 			w = camera.getMetrics().lengthToPx(area.theSize.x, Units.GU);
 			h = camera.getMetrics().lengthToPx(area.theSize.y, Units.GU);
-			theShape().setFrame(0, 0, w, h);
+			((Form) theShape()).setFrame(0, 0, w, h);
 		} else {
 			if (forShadow)
 				super.makeShadow(bck, camera);
@@ -91,7 +91,7 @@ public class OrientableRectangularAreaShape extends RectangularAreaShape {
 	 		strokable.stroke(g, theShape());
 	 		fillable.fill(g, theShape(), camera);
 	 		g.setTransform( Tx );						// Restore the original transform
-	 		theShape().setFrame(area.theCenter.x-w/2, area.theCenter.y-h/2, w, h);
+	 		((Form) theShape()).setFrame(area.theCenter.x-w/2, area.theCenter.y-h/2, w, h);
 	 		decorArea(bck, camera, skel.iconAndText, element, theShape());
  		}
  		else {
