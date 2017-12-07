@@ -79,21 +79,21 @@ public class BackendJ2D implements Backend {
 
 	@Override
 	public Point3 transform(double x, double y, double z) {
-		dummyPoint = dummyPoint.add(x, y);
+		dummyPoint = new Point2D(x, y);
 		dummyPoint = Tx.transform(dummyPoint.getX(), dummyPoint.getY());
 		return new Point3(dummyPoint.getX(), dummyPoint.getY(), 0);
 	}
 
 	@Override
 	public Point3 inverseTransform(double x, double y, double z) {
-		dummyPoint = dummyPoint.add(x, y);
+		dummyPoint = new Point2D(x, y);
 		dummyPoint = xT.transform(dummyPoint.getX(), dummyPoint.getY());
         return new Point3(dummyPoint.getX(), dummyPoint.getY(), 0);
 	}
 
 	@Override
 	public Point3 transform(Point3 p) {
-		dummyPoint = dummyPoint.add(p.x, p.y);
+		dummyPoint = new Point2D(p.x, p.y);
 		dummyPoint = Tx.transform(dummyPoint.getX(), dummyPoint.getY());
 		p.set(dummyPoint.getX(), dummyPoint.getY(), 0);
 		return p;
@@ -101,7 +101,7 @@ public class BackendJ2D implements Backend {
 
 	@Override
 	public Point3 inverseTransform(Point3 p) {
-		dummyPoint = dummyPoint.add(p.x, p.y);
+		dummyPoint = new Point2D(p.x, p.y);
 		dummyPoint = xT.transform(dummyPoint.getX(), dummyPoint.getY());
 		p.set(dummyPoint.getX(), dummyPoint.getY(), 0);
 		return p;

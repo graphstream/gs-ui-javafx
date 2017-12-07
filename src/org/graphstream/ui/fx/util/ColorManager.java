@@ -51,6 +51,26 @@ public class ColorManager {
 		return Color.rgb(group.getShadowColor(id).getRed(), group.getShadowColor(id).getGreen(), group.getShadowColor(id).getBlue());
 	}
 
+	/**
+	 * Get test awt color in group and convert to javafx Color
+	 * @param group
+	 * @param id
+	 * @return javafx.scene.paint.Color
+	 */
+	public static Color getTextColor(Style group, int id) {
+		return Color.rgb(group.getTextColor(id).getRed(), group.getTextColor(id).getGreen(), group.getTextColor(id).getBlue());
+	}
+	
+	/**
+	 * Get test background awt color in group and convert to javafx Color
+	 * @param group
+	 * @param id
+	 * @return javafx.scene.paint.Color
+	 */
+	public static Color getTextBackgroundColor(Style group, int id) {
+		return Color.rgb(group.getTextBackgroundColor(id).getRed(), group.getTextBackgroundColor(id).getGreen(), group.getTextBackgroundColor(id).getBlue());
+	}
+	
 	public static Color getShadowColor(Style group, int id) {
 		return Color.rgb(group.getShadowColor(id).getRed(), group.getShadowColor(id).getGreen(), group.getShadowColor(id).getBlue());
 	}
@@ -68,5 +88,6 @@ public class ColorManager {
 	public static Color getStrokeColor(Style group, int id) {
 		return Color.rgb(group.getStrokeColor(id).getRed(), group.getStrokeColor(id).getGreen(), group.getStrokeColor(id).getBlue());
 	}
+	
 	
 }

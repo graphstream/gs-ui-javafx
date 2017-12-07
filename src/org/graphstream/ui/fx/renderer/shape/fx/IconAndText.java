@@ -124,7 +124,8 @@ class IconAndTextOnlyText extends IconAndText {
 	public void setIcon(Backend backend, String url) {}
 	
 	public void render(Backend backend, FxDefaultCamera camera, double xLeft, double yBottom) {
-		this.text.render(backend, offx+xLeft, offy+yBottom - ascentDescent/2);
+		System.out.println("xLeft = "+xLeft +" yBottom = "+yBottom);
+		this.text.render(backend, offx+xLeft, offy+yBottom - (ascentDescent/2));
 	}
 }
 
@@ -342,6 +343,7 @@ class FxTextBox extends TextBox {
 			g.setStroke(textColor);
 			g.setFill(textColor);
 			g.fillText(text.getText(), xLeft, yBottom);
+			System.out.println(text.getText()+" ["+xLeft+" ; "+yBottom+"]");
 		}
 	}
 }
