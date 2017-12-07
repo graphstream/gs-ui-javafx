@@ -23,16 +23,17 @@ public class Strokable {
 	public void stroke( GraphicsContext g, Shape shape ) {
 		if(theStroke != null) {
 			theStroke.stroke( theStrokeWidth, ((Form)shape)).changeStrokeProperties(g);
-			
+
 			g.setStroke(strokeColor);
 			g.setFill(strokeColor);
-			((Form)shape).drawByPoints(g);
+			((Form)shape).drawByPoints(g, true);
 		}	  
 	}
 	
  	/** Configure all the static parts needed to stroke the shape. */
  	public void configureStrokableForGroup( Style style, FxDefaultCamera camera ) {
 		theStrokeWidth = camera.getMetrics().lengthToGu( style.getStrokeWidth() );
+		
 		/*if( strokeColor == null )*/ strokeColor = ShapeStroke.strokeColor( style );
 		/*if( theStroke   == null )*/ theStroke   = ShapeStroke.strokeForArea( style );
  	}

@@ -37,7 +37,7 @@ public class ShadowableLine {
    		g.setStroke(theShadowColor);
    		g.setFill(theShadowColor);
    		shadowStroke.stroke( theShadowWidth , ((Form)shape) ).changeStrokeProperties(g);
-   	  	((Form)shape).drawByPoints(g);
+   	  	((Form)shape).drawByPoints(g, false);
    	}
  
     /** Configure all the static parts needed to cast the shadow of the shape. */

@@ -95,7 +95,7 @@ public class PieChartShape extends FillableMulticolored implements Shape, Attrib
                 g.setStroke(fillColors[(int) (col % fillColors.length)]);
                 g.setFill(fillColors[(int) (col % fillColors.length)]);
 
-                arc.drawByPoints(g);
+                arc.drawByPoints(g, false);
                 beg = end;
                 sum += value;
                 col += 1;
@@ -109,7 +109,7 @@ public class PieChartShape extends FillableMulticolored implements Shape, Attrib
             g.setStroke(Color.RED);
             g.setFill(Color.RED);
 
-            theShape.drawByPoints(g);
+            theShape.drawByPoints(g, false);
         }
 	}
 

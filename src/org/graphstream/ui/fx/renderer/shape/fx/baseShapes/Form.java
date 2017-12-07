@@ -15,7 +15,7 @@ import javafx.scene.shape.QuadCurveTo;
 import javafx.scene.shape.Rectangle;
 
 public interface Form  {
-	public void drawByPoints(GraphicsContext g) ;
+	public void drawByPoints(GraphicsContext g, boolean stroke) ;
 	public void setFrame(double x, double y, double w, double h);
 	// used by the Double Stroke (see ShapeStroke.class)
 	public String getIdForm();
@@ -39,8 +39,11 @@ public interface Form  {
 			setHeight(h);
 		}
 		
-		public void drawByPoints(GraphicsContext g) {
-			g.fillRect(getX(), getY(), getWidth(), getHeight());
+		public void drawByPoints(GraphicsContext g, boolean stroke) {
+			if(stroke)
+				g.strokeRect(getX(), getY(), getWidth(), getHeight());
+			else
+				g.fillRect(getX(), getY(), getWidth(), getHeight());
 		}
 
 		@Override
@@ -108,7 +111,7 @@ public interface Form  {
 		}
 		
 		
-		public void drawByPoints(GraphicsContext g) {
+		public void drawByPoints(GraphicsContext g, boolean stroke) {
 			g.beginPath();
 			
 			g.moveTo(((MoveTo)path[0]).getX(), ((MoveTo)path[0]).getY());
@@ -142,7 +145,11 @@ public interface Form  {
 				}
 			}
 			g.closePath();
-			g.fill();
+			
+			if (stroke)
+				g.stroke();
+			else
+				g.fill();
 		}
 
 		@Override
@@ -177,12 +184,16 @@ public interface Form  {
 		}
 
 		@Override
-		public void drawByPoints(GraphicsContext g) {
+		public void drawByPoints(GraphicsContext g, boolean stroke) {
 			g.beginPath();
 			g.moveTo(getStartX(), getStartY());
 			g.bezierCurveTo(getControlX1(),getControlY1(), getControlX2(), getControlY2(), getEndX(), getEndY());
 			g.closePath();
-			g.fill();
+			
+			if (stroke)
+				g.stroke();
+			else
+				g.fill();
 		}
 
 		@Override
@@ -215,7 +226,7 @@ public interface Form  {
 		}
 
 		@Override
-		public void drawByPoints(GraphicsContext g) {
+		public void drawByPoints(GraphicsContext g, boolean stroke) {
 			g.strokeLine(getStartX(), getStartY(), getEndX(), getEndY());
 		}
 
@@ -261,8 +272,11 @@ public interface Form  {
 		}
 		
 		@Override
-		public void drawByPoints(GraphicsContext g) {
-			g.fillArc(getCenterX(), getCenterY(), getRadiusX(), getRadiusY(), getStartAngle(), getLength(), getType());
+		public void drawByPoints(GraphicsContext g, boolean stroke) {
+			if (stroke)
+				g.strokeArc(getCenterX(), getCenterY(), getRadiusX(), getRadiusY(), getStartAngle(), getLength(), getType());
+			else
+				g.fillArc(getCenterX(), getCenterY(), getRadiusX(), getRadiusY(), getStartAngle(), getLength(), getType());
 		}
 
 		@Override
@@ -307,7 +321,7 @@ public interface Form  {
 		}
 		
 		@Override
-		public void drawByPoints(GraphicsContext g) {
+		public void drawByPoints(GraphicsContext g, boolean stroke) {
 			g.fillOval(getCenterX(), getCenterY(), getRadiusX(), getRadiusY());
 		}
 

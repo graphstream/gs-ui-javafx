@@ -19,14 +19,14 @@ import javafx.scene.shape.Shape;
 public class Fillable {
 	
 	/** The fill paint. */
-	ShapePaint fillPaint = null;
+	private ShapePaint fillPaint = null;
  
 	/** Value in [0..1] for dyn-colors. */
-	double theFillPercent = 0.0;
+	private double theFillPercent = 0.0;
 	
-	Color theFillColor = null;
+	private Color theFillColor = null;
 	
-	boolean plainFast = false;
+	private boolean plainFast = false;
 	
 	/** Fill the shape.
 	 * @param g The Java2D graphics.
@@ -36,20 +36,20 @@ public class Fillable {
 		if(plainFast) {
 			g.setStroke(theFillColor);
 			g.setFill(theFillColor);
-			((Form)shape).drawByPoints(g);
+			((Form)shape).drawByPoints(g, false);
 	    } 
 		else {
 			if ( fillPaint instanceof ShapeAreaPaint ) {	
 				Paint p = ((ShapeAreaPaint)fillPaint).paint(shape, camera.getMetrics().ratioPx2Gu) ;
 				g.setFill(p);
 				g.setStroke(p);
-				((Form)shape).drawByPoints(g);
+				((Form)shape).drawByPoints(g, false);
 			}
 			else if (fillPaint instanceof ShapeColorPaint ) {
 				Paint p = ((ShapeColorPaint)fillPaint).paint(dynColor, optColor);
 				g.setFill(p);
 				g.setStroke(p);
-				((Form)shape).drawByPoints(g);
+				((Form)shape).drawByPoints(g, false);
 			}
 	    }
 	}
@@ -67,6 +67,7 @@ public class Fillable {
  
  		if(fillPaint instanceof ShapePlainColorPaint) {
  			ShapePlainColorPaint paint = (ShapePlainColorPaint)fillPaint;
+ 			
  		    plainFast = true;
  		    theFillColor = paint.color;
  		    bck.graphics2D().setStroke(theFillColor);

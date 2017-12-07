@@ -48,7 +48,6 @@ public abstract class ShapeStroke {
 			return null;
 		}
 	}
-	
 }
 
 class PlainShapeStroke extends ShapeStroke {

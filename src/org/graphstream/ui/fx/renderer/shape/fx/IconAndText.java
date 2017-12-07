@@ -2,6 +2,7 @@ package org.graphstream.ui.fx.renderer.shape.fx;
 
 import org.graphstream.ui.fx.Backend;
 import org.graphstream.ui.fx.FxDefaultCamera;
+import org.graphstream.ui.fx.util.ColorManager;
 import org.graphstream.ui.fx.util.FontCache;
 import org.graphstream.ui.fx.util.ImageCache;
 import org.graphstream.ui.graphicGraph.GraphicElement;
@@ -124,7 +125,6 @@ class IconAndTextOnlyText extends IconAndText {
 	public void setIcon(Backend backend, String url) {}
 	
 	public void render(Backend backend, FxDefaultCamera camera, double xLeft, double yBottom) {
-		System.out.println("xLeft = "+xLeft +" yBottom = "+yBottom);
 		this.text.render(backend, offx+xLeft, offy+yBottom - (ascentDescent/2));
 	}
 }
@@ -208,7 +208,7 @@ abstract class TextBox {
 		String fontName  = style.getTextFont();
 		TextStyle fontStyle = style.getTextStyle();
 		Value fontSize  = style.getTextSize();
-		Color textColor = getTextColor(style, 0);
+		Color textColor = ColorManager.getTextColor(style, 0);
 		Color bgColor = null;
 		boolean rounded = false;	
 		
@@ -216,11 +216,11 @@ abstract class TextBox {
 			case NONE: break;
 			case PLAIN: 
 				rounded = false; 
-				bgColor = getTextBackgroundColor(style, 0);
+				bgColor = ColorManager.getTextBackgroundColor(style, 0);
 				break;
 			case ROUNDEDBOX: 
 				rounded = true; 
-				bgColor = getTextBackgroundColor(style, 0);
+				bgColor = ColorManager.getTextBackgroundColor(style, 0);
 				break;
 			default: break;
 		}
@@ -232,14 +232,6 @@ abstract class TextBox {
 			camera.getMetrics().lengthToPx(padding, 1);
 		
 		return TextBox.apply(fontName, fontStyle, (int)fontSize.value, textColor, bgColor, rounded, padx, pady);
-	}
-	
-	public static Color getTextColor(Style group, int id) {
-		return  Color.rgb(group.getTextColor(id).getRed(), group.getTextColor(id).getGreen(), group.getTextColor(id).getBlue());
-	}
-	
-	public static Color getTextBackgroundColor(Style group, int id) {
-		return  Color.rgb(group.getTextBackgroundColor(id).getRed(), group.getTextBackgroundColor(id).getGreen(), group.getTextBackgroundColor(id).getBlue());
 	}
 	
 	public static TextBox apply(String fontName, TextStyle style, int fontSize, Color textColor, Color bgColor,
@@ -343,7 +335,6 @@ class FxTextBox extends TextBox {
 			g.setStroke(textColor);
 			g.setFill(textColor);
 			g.fillText(text.getText(), xLeft, yBottom);
-			System.out.println(text.getText()+" ["+xLeft+" ; "+yBottom+"]");
 		}
 	}
 }

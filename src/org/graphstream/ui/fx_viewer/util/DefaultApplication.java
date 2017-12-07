@@ -2,7 +2,6 @@ package org.graphstream.ui.fx_viewer.util;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.ui.fx_viewer.FxDefaultView;
-import org.graphstream.ui.view.View;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -59,7 +58,7 @@ public class DefaultApplication extends Application {
 		if (title != null)
 			stage.setTitle(title);
 		else
-			stage.setTitle("GraphStream Fx");
+			stage.setTitle("GraphStream FX");
 		
 	}
 	

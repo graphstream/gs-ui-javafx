@@ -25,7 +25,7 @@ public class FillableLine {
 		    if(plainFast) {
 				g.setStroke(theFillColor);
 				g.setFill(theFillColor);
-				shape.drawByPoints(g);
+				shape.drawByPoints(g, false);
 		    }
 		    else {
 				fillStroke.stroke(width, shape).changeStrokeProperties(g);
@@ -33,7 +33,7 @@ public class FillableLine {
 				g.setStroke(theFillColor);
 				g.setFill(theFillColor);
 								
-				shape.drawByPoints(g);
+				shape.drawByPoints(g, false);
 			}
 		}
 	}

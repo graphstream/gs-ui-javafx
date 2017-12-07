@@ -37,13 +37,13 @@ public class Shadowable {
 			Paint p = ((ShapeAreaPaint)shadowPaint).paint( shape, 1 ) ;
 			g.setStroke(p);
 			g.setFill(p);
-			((Form)shape).drawByPoints(g);
+			((Form)shape).drawByPoints(g, false);
 		}
 		else if ( shadowPaint instanceof ShapeColorPaint ) {
 			Paint p = ((ShapeColorPaint)shadowPaint).paint( 0, null ) ;
 			g.setStroke(p);
 			g.setFill(p);
-			((Form)shape).drawByPoints(g);
+			((Form)shape).drawByPoints(g, false);
 		}
 		else {
 			System.out.println("no shadow !!!");

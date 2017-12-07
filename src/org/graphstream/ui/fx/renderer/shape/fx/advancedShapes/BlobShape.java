@@ -210,7 +210,7 @@ public class BlobShape extends AreaConnectorShape {
 			newS.changeStrokeProperties(g);
 			g.setStroke(Color.RED);
 			g.setFill(Color.RED);
-			theShape.drawByPoints(g);
+			theShape.drawByPoints(g, false);
 			
 			oldS.changeStrokeProperties(g);
 			g.setFill(fill);
