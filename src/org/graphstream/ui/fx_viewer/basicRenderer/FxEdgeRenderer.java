@@ -33,7 +33,6 @@ package org.graphstream.ui.fx_viewer.basicRenderer;
 
 import java.awt.geom.Line2D;
 
-import org.graphstream.ui.fx.util.ColorManager;
 import org.graphstream.ui.geom.Vector2;
 import org.graphstream.ui.graphicGraph.GraphicEdge;
 import org.graphstream.ui.graphicGraph.GraphicElement;
@@ -43,6 +42,7 @@ import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.ArrowShape;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.FillMode;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.SizeMode;
+import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.graphicGraph.stylesheet.Values;
 import org.graphstream.ui.view.Camera;
 

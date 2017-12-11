@@ -32,7 +32,6 @@
 package org.graphstream.ui.fx_viewer.basicRenderer;
 
 import org.graphstream.graph.Element;
-import org.graphstream.ui.fx.util.ColorManager;
 import org.graphstream.ui.fx_viewer.util.DefaultCamera;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphicElement;
@@ -41,6 +40,7 @@ import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.StyleGroup.ElementEvents;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.Units;
+import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.view.Camera;
 
 import javafx.geometry.Point2D;

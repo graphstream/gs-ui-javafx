@@ -44,7 +44,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import org.graphstream.graph.Element;
-import org.graphstream.ui.fx.util.ColorManager;
 import org.graphstream.ui.fx_viewer.FxGraphRendererBase;
 import org.graphstream.ui.fx_viewer.util.DefaultCamera;
 import org.graphstream.ui.fx_viewer.util.FxGraphics2DOutput;
@@ -55,6 +54,7 @@ import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.StyleGroupSet;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.FillMode;
+import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.graphicGraph.stylesheet.Value;
 import org.graphstream.ui.view.Camera;
 import org.graphstream.ui.view.LayerRenderer;

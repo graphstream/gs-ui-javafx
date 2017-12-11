@@ -31,9 +31,9 @@
  */
 package org.graphstream.ui.fx_viewer.util;
 
-import org.graphstream.ui.fx.util.ColorManager;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.FillMode;
+import org.graphstream.ui.javafx.util.ColorManager;
 
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;

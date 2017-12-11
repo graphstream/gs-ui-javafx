@@ -31,7 +31,6 @@
  */
 package org.graphstream.ui.fx_viewer.basicRenderer;
 
-import org.graphstream.ui.fx.util.ColorManager;
 import org.graphstream.ui.fx_viewer.util.DefaultCamera;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.GraphicSprite;
@@ -39,6 +38,7 @@ import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.FillMode;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.SizeMode;
+import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.graphicGraph.stylesheet.Values;
 import org.graphstream.ui.view.Camera;
 import org.graphstream.ui.view.util.GraphMetrics;

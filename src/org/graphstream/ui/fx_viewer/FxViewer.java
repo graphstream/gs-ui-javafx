@@ -408,6 +408,29 @@ public class FxViewer implements Viewer {
 			return view;
 		}
 	}
+	
+	/**
+	 * Build the default graph view and insert it. The view identifier is
+	 * {@link #DEFAULT_VIEW_ID}. You can request the view to be open in its own
+	 * frame.
+	 * 
+	 * @param renderer
+	 * @param openInAFrame
+	 *            It true, the view is placed in a frame, else the view is only
+	 *            created and you must embed it yourself in your application.
+	 */
+	public View addDefaultView(boolean openInAFrame, GraphRenderer<?, ?> renderer) {
+		synchronized (views) {
+			View view = renderer.createDefaultView(this, DEFAULT_VIEW_ID);
+			
+			addView(view);
+			
+			if (openInAFrame)
+				view.openInAFrame(true);
+
+			return view;
+		}
+	}
 
 	/**
 	 * Add a view using its identifier. If there was already a view with this
