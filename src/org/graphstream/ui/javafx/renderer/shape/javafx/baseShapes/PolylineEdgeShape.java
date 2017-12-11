@@ -21,7 +21,7 @@ public class PolylineEdgeShape extends LineConnectorShape {
 	public void make(Backend backend, FxDefaultCamera camera) {
 		int n = skel.size();
 		
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo(skel.apply(0).x, skel.apply(0).y);
 		
 		for(int i = 0 ; i < n ; i++) {

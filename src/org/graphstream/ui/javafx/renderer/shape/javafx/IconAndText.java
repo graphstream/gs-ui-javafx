@@ -4,13 +4,13 @@ import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.IconMode;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.TextStyle;
+import org.graphstream.ui.graphicGraph.stylesheet.Value;
+import org.graphstream.ui.graphicGraph.stylesheet.Values;
 import org.graphstream.ui.javafx.Backend;
 import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.javafx.util.FontCache;
 import org.graphstream.ui.javafx.util.ImageCache;
-import org.graphstream.ui.graphicGraph.stylesheet.Value;
-import org.graphstream.ui.graphicGraph.stylesheet.Values;
 
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
@@ -29,7 +29,6 @@ public abstract class IconAndText {
 	//protected double height;
 	/** Overall height of the icon and text with all space and padding included. */
 	protected double ascentDescent; 
-	
 	protected TextBox text;
 	protected double offx;
 	protected double offy;
@@ -309,8 +308,9 @@ class FxTextBox extends TextBox {
 	 *  Except for the last line which does not include the line gap. 
 	 * @return
 	 */
+	@Override
 	public double getAscentDescent() {
-		if ( text != null ) 
+		if ( text != null )
 			return text.getBoundsInLocal().getHeight() ;
 		else
 			return 0 ;
@@ -334,6 +334,7 @@ class FxTextBox extends TextBox {
 			}
 			g.setStroke(textColor);
 			g.setFill(textColor);
+			
 			g.fillText(text.getText(), xLeft, yBottom);
 		}
 	}

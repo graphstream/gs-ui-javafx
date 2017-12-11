@@ -55,10 +55,11 @@ public class ArrowOnEdge extends AreaOnConnectorShape {
 		
 		// Create a polygon.
 
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo( p1.x , p1.y );
 		theShape.lineTo( p1.x - dir.x() + per.x(), p1.y - dir.y() + per.y() );		
 		theShape.lineTo( p1.x - dir.x() - per.x(), p1.y - dir.y() - per.y() );
+		theShape.closePath();
 	}
 
 	private void makeOnLine(boolean forShadow, FxDefaultCamera camera) {
@@ -95,10 +96,11 @@ public class ArrowOnEdge extends AreaOnConnectorShape {
 		
 		// Create a polygon.
 	
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo( x , y );
 		theShape.lineTo( x - theDirection.x() + perp.x(), y - theDirection.y() + perp.y() );	
 		theShape.lineTo( x - theDirection.x() - perp.x(), y - theDirection.y() - perp.y() );
+		theShape.closePath();
 	}
 
 	@Override

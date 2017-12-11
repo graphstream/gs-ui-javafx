@@ -43,7 +43,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
 		double c2x = skel.apply(2).x + sox;
 		double c2y = skel.apply(2).y + soy;
 
-        theShape.reset();
+        theShape = new Path2D();
         theShape.moveTo(fromx, fromy);
         theShape.curveTo(c1x, c1y, c2x, c2y, tox, toy);
 	}
@@ -58,7 +58,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
 		double c2x = skel.apply(2).x + sox;
 		double c2y = skel.apply(2).y + soy;
 
-        theShape.reset();
+        theShape = new Path2D();
         theShape.moveTo(fromx, fromy);
         theShape.curveTo(c1x, c1y, c2x, c2y, tox, toy);
 	}
@@ -85,7 +85,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
 			skel.setPoly(pts);
 		}
 		
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo(from.x, from.y);
 		theShape.lineTo(inter.x, inter.y);
 		theShape.lineTo(to.x, to.y);

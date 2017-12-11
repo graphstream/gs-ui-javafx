@@ -50,7 +50,7 @@ public class CubicCurveShape extends LineConnectorShape {
 		double c2x = skel.apply(2).x + sox;
 		double c2y = skel.apply(2).y + soy;
 		
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo(fromx, fromy);
 		theShape.curveTo(c1x, c1y, c2x, c2y, tox, toy);
 	}
@@ -65,7 +65,7 @@ public class CubicCurveShape extends LineConnectorShape {
 		double c2x = skel.apply(2).x + sox;
 		double c2y = skel.apply(2).y + soy;	
 
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo(fromx, fromy);
 		theShape.curveTo(c1x, c1y, c2x, c2y, tox, toy);
 	}
@@ -80,7 +80,7 @@ public class CubicCurveShape extends LineConnectorShape {
 		double c2x = skel.apply(2).x + sox;
 		double c2y = skel.apply(2).y + soy;
 		
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo(fromx, fromy);
 		theShape.curveTo(c1x, c1y, c2x, c2y, tox, toy);	
 
@@ -121,7 +121,7 @@ public class CubicCurveShape extends LineConnectorShape {
             c2y = c1y;
         }
 
-        theShape.reset();
+        theShape = new Path2D();
         theShape.moveTo(fromx, fromy);
         theShape.curveTo(c1x, c1y, c2x, c2y, tox, toy);
 

@@ -18,7 +18,7 @@ import javafx.scene.shape.Shape;
 
 public interface ShapePaint {
 	
-	/*public static float[] predefFractions2 = {0f, 1f} ;
+	public static float[] predefFractions2 = {0f, 1f} ;
 	public static float[] predefFractions3 = {0f, 0.5f, 1f};
 	public static float[] predefFractions4 = {0f, 0.33f, 0.66f, 1f };
 	public static float[] predefFractions5 = {0f, 0.25f, 0.5f, 0.75f, 1f };
@@ -30,10 +30,10 @@ public interface ShapePaint {
 
 	public static float[][] predefFractions = {null, null, predefFractions2, predefFractions3, predefFractions4, predefFractions5,
 			predefFractions6, predefFractions7, predefFractions8, predefFractions9, predefFractions10};
-	*/
+	
 	public static ShapePaint apply(Style style) {
 		return ShapePaint.apply(style, false);
-	}	
+	}
 	
 	public static ShapePaint apply(Style style, boolean forShadow) {
 		if( forShadow ) {
@@ -88,52 +88,47 @@ public interface ShapePaint {
 		}
 	}
 	
+	
 	/**
+	 * Create colors and fractions
+	 * 
+	 * The array of colors in the fill-color property of the style.
+	 * 
 	 * An array of floats regularly spaced in range [0,1], the number of floats is given by the
 	 * style fill-color count.
-	 * @param style The style to use.
-	 */
-	/*static float[] createFractions(Style style, Boolean forShadow) {
-		if( forShadow )
-			return createFractions( style, style.getShadowColorCount() );
-		else 
-			return createFractions( style, style.getFillColorCount() );
-	}
- 
-	static float[] createFractions(Style style, int n) {
-		if( n < predefFractions.length ) {
-			return predefFractions[n];
-		} 
-		else {
-			float[] fractions = new float[n]; 
-			float div = 1f / (n - 1);
-
-			for( int i = 0 ; i < n ; i++ )
-				fractions[i] = div * i;
-	
-			fractions[0] = 0f ;
-			fractions[n-1] = 1f ; 
-		
-			return fractions;
-		}
-	}*/
-	
-	/**
-	 * The array of colors in the fill-color property of the style.
+	 * 
 	 * @param style The style to use.
 	 */
 	static Stop[] createColors( Style style, boolean forShadow ) {
 		if( forShadow )
-			return createColors( style, style.getShadowColorCount(), style.getShadowColors() );
+			return createColors( style, style.getShadowColorCount(), style.getShadowColors(), style.getShadowColorCount()  );
 		else
-			return createColors( style, style.getFillColorCount(),   style.getFillColors() );
+			return createColors( style, style.getFillColorCount(), style.getFillColors(), style.getFillColorCount() );
 	}
  
-	static Stop[] createColors( Style style, int n, Colors theColors ) {
-		Stop[] colors = new Stop[n];
+	static Stop[] createColors( Style style, int nColor, Colors theColors, int nFraction ) {
+		Stop[] colors = new Stop[nColor];
+		
+		float[] fractions = new float[nFraction]; 
+		if ( nFraction >= predefFractions.length ) {
+			float div = 1f / (nFraction - 1);
+
+			for( int i = 0 ; i < nFraction ; i++ )
+				fractions[i] = div * i;
 	
+			fractions[0] = 0f ;
+			fractions[nFraction-1] = 1f ; 
+		}
+		
+		
 		for (int i = 0 ; i < theColors.size() ; i++) {
-			colors[i] = new Stop(i, ColorManager.getColor(theColors.get(i))) ;
+			
+			if( nFraction < predefFractions.length ) {
+				colors[i] = new Stop(predefFractions[nFraction][i], ColorManager.getColor(theColors.get(i))) ;
+			}
+			else {
+				colors[i] = new Stop(fractions[i], ColorManager.getColor(theColors.get(i))) ;
+			}
 		}
 
 		return colors ;
@@ -313,7 +308,7 @@ public interface ShapePaint {
 			if( w > h )
 				rad = (float) w ;
 			
-			return new RadialGradient( cx, cy, rad, cx, cy, false, CycleMethod.NO_CYCLE, colors );
+			return new RadialGradient( 0, 0, cx, cy, rad, false, CycleMethod.REFLECT, colors );
 		}
 	}
 	

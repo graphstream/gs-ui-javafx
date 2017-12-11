@@ -3,6 +3,7 @@ package org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
+import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.Ellipse;
@@ -64,17 +65,8 @@ public interface Form  {
 	}
 	
 	public class Path2D extends Path implements Form {
-		
 		PathElement[] path = new PathElement[20];
-		
 		int size = 0;
-		
-		public void reset() {
-			path = new PathElement[20];
-			size = 0 ;		
-			
-			getElements().removeAll();
-		}
 		
 		public void moveTo(double x, double y) {
 			MoveTo moveTo = new MoveTo();
@@ -97,7 +89,7 @@ public interface Form  {
 		public void curveTo(double xc1, double yc1, double xc2, double yc2, double x1, double y1) {
 			CubicCurveTo curveTo = new CubicCurveTo(xc1, yc1, xc2, yc2, x1, y1);
 			getElements().add(curveTo);
-			
+
 			path[size] = curveTo ;
 			size++;
 		}
@@ -110,6 +102,13 @@ public interface Form  {
 			size++;
 		}
 		
+		public void closePath() {
+			ClosePath closePath = new ClosePath();
+			getElements().add(closePath);
+			
+			path[size] = closePath ;
+			size++ ;
+		}
 		
 		public void drawByPoints(GraphicsContext g, boolean stroke) {
 			g.beginPath();
@@ -140,11 +139,13 @@ public interface Form  {
 					
 					g.quadraticCurveTo(xc, yc, x, y);
 				}
+				else if (path[i] instanceof ClosePath) {
+					g.closePath();
+				}
 				else {
 					throw new RuntimeException("Shape unknown "+path[i]);
 				}
 			}
-			g.closePath();
 			
 			if (stroke)
 				g.stroke();
@@ -322,7 +323,10 @@ public interface Form  {
 		
 		@Override
 		public void drawByPoints(GraphicsContext g, boolean stroke) {
-			g.fillOval(getCenterX(), getCenterY(), getRadiusX(), getRadiusY());
+			if(stroke)
+				g.strokeOval(getCenterX(), getCenterY(), getRadiusX(), getRadiusY());
+			else
+				g.fillOval(getCenterX(), getCenterY(), getRadiusX(), getRadiusY());
 		}
 
 		@Override

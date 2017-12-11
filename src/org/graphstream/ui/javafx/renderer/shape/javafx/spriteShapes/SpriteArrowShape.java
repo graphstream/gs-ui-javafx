@@ -9,6 +9,7 @@ import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.Orientable;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.PolygonalShape;
+import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
 
 public class SpriteArrowShape extends PolygonalShape {
 	Orientable orientable ;
@@ -41,10 +42,11 @@ public class SpriteArrowShape extends PolygonalShape {
 		dir.scalarMult( area.theSize.x );
 		per.scalarMult( area.theSize.y / 2 );
 
-		theShape().reset();
+		theShape = new Path2D();
 		theShape().moveTo( x + per.x(), y + per.y() );
 		theShape().lineTo( x + dir.x(), y + dir.y() );
 		theShape().lineTo( x - per.x(), y - per.y() );
+		theShape.closePath();
 	}
 
 	@Override
@@ -58,9 +60,10 @@ public class SpriteArrowShape extends PolygonalShape {
 		dir.scalarMult( area.theSize.x + shadowable.theShadowWidth.x );
 		per.scalarMult( ( area.theSize.y + shadowable.theShadowWidth.y ) / 2 );
 
-		theShape().reset();
+		theShape = new Path2D();
 		theShape().moveTo( x + per.x(), y + per.y() );
 		theShape().lineTo( x + dir.x(), y + dir.y() );
 		theShape().lineTo( x - per.x(), y - per.y() );
+		theShape.closePath();
 	}
 }

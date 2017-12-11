@@ -63,7 +63,7 @@ public class AngleShape extends AreaConnectorShape {
 		    mid2.scalarMult(theSize * 0.99f);
 		}
 
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo(fromx + perpFrom.x(), fromy + perpFrom.y());
 		if (isDirected) {
 		    theShape.curveTo(c1x + mid1.x(), c1y + mid1.y(), c2x + mid2.x(), c2y + mid2.y(), tox, toy);
@@ -77,6 +77,7 @@ public class AngleShape extends AreaConnectorShape {
 		    theShape.lineTo(tox - perpTo.x(), toy - perpTo.y());
 		    theShape.curveTo(c2x - mid2.x(), c2y - mid2.y(), c1x - mid1.x(), c1y - mid1.y(), fromx - perpFrom.x(), fromy - perpFrom.y());
 		}		
+		theShape.closePath();
 	}
 
 	private void makeMulti(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
@@ -112,7 +113,7 @@ public class AngleShape extends AreaConnectorShape {
 		//  X                     X
 		// from                  to
 		
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo(fromx + perp.x(), fromy + perp.y());
 		if (isDirected) {
 		    theShape.curveTo(c1x + perp1.x(), c1y + perp1.y(),
@@ -131,6 +132,7 @@ public class AngleShape extends AreaConnectorShape {
 		        c1x - perp.x(), c1y - perp.y(),
 		        fromx - perp.x(), fromy - perp.y());
 		}
+		theShape.closePath();
 	}
 
 	private void makeOnPolyline(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
@@ -148,7 +150,7 @@ public class AngleShape extends AreaConnectorShape {
 
 		 perp.scalarMult((theSize + swx) / 2f);	
 
-		 theShape.reset();
+		 theShape = new Path2D();
 		 theShape.moveTo(fromx + perp.x(), fromy + perp.y());
 		 if (isDirected) {
 			 theShape.lineTo(tox, toy);
@@ -157,6 +159,7 @@ public class AngleShape extends AreaConnectorShape {
 			 theShape.lineTo(tox - perp.x(), toy - perp.y());
 		 }
 		 theShape.lineTo(fromx - perp.x(), fromy - perp.y());
+		 theShape.closePath();
 	}
 
 	@Override

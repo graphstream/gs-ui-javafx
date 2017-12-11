@@ -110,7 +110,7 @@ public class SpriteFlowShape implements Shape {
 				
 				per.normalize();
 				per.scalarMult(offset);
-				theShape.reset();
+				theShape = new Path2D();
 				theShape.moveTo(P0.x + per.x(), P0.y + per.y());
 				
 				while(t <= along) {
@@ -143,7 +143,7 @@ public class SpriteFlowShape implements Shape {
 				per.normalize();
 				per.scalarMult(offset);
 				
-				theShape.reset();
+				theShape = new Path2D();
 
 				if(reverse) {
 				    int n = connectorSkel.size();
@@ -179,7 +179,7 @@ public class SpriteFlowShape implements Shape {
 				per.scalarMult(offset);
 				dir.scalarMult(along);
 
-				theShape.reset();
+				theShape = new Path2D();
 				theShape.moveTo(P0.x + per.x(), P0.y + per.y());
 				theShape.lineTo(P0.x + dir.x() + per.x(), P0.y + dir.y() + per.y());
 	        }

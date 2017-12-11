@@ -3,6 +3,7 @@ package org.graphstream.ui.javafx.renderer.shape.javafx.basicShapes;
 import org.graphstream.ui.javafx.Backend;
 import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.PolygonalShape;
+import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
 
 public class DiamondShape extends PolygonalShape {
 
@@ -13,11 +14,12 @@ public class DiamondShape extends PolygonalShape {
 		double w2 = area.theSize.x / 2;
 		double h2 = area.theSize.y / 2;
 		
-		theShape().reset();
+		theShape = new Path2D();
 		theShape().moveTo( x - w2, y );
 		theShape().lineTo( x, y - h2 );
 		theShape().lineTo( x + w2, y );
 		theShape().lineTo( x, y + h2 );
+		theShape.closePath();
 	}
 
 	@Override
@@ -27,10 +29,11 @@ public class DiamondShape extends PolygonalShape {
 		double w2 = ( area.theSize.x + shadowable.theShadowWidth.x ) / 2;
 		double h2 = ( area.theSize.y + shadowable.theShadowWidth.y ) / 2;
 		
-		theShape().reset();
+		theShape = new Path2D();
 		theShape().moveTo( x - w2, y );
 		theShape().lineTo( x, y - h2 );
 		theShape().lineTo( x + w2, y );
 		theShape().lineTo( x, y + h2 );
+		theShape.closePath();
 	}
 }

@@ -44,7 +44,6 @@ public class EdgeRenderer extends StyleRenderer {
 	public void renderElement(Backend bck, FxDefaultCamera camera, GraphicElement element) {
 		GraphicEdge edge = (GraphicEdge)element;
 		ConnectorSkeleton skel = getOrSetConnectorSkeleton(element);
-		
 		shape.configureForElement(bck, element, skel, camera);
 		shape.render(bck, camera, element, skel);
 		  

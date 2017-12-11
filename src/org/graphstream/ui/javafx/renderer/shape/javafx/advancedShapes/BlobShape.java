@@ -78,7 +78,7 @@ public class BlobShape extends AreaConnectorShape {
 		    mid2.scalarMult((theSize + swx) * 4f);
 		}
 		
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo(fromx + perpFrom.x(), fromy + perpFrom.y());
 		if (isDirected) {
 		    theShape.curveTo(c1x + mid1.x(), c1y + mid1.y(), c2x + mid2.x(), c2y + mid2.y(), tox, toy);
@@ -92,6 +92,7 @@ public class BlobShape extends AreaConnectorShape {
 		    theShape.lineTo(tox - perpTo.x(), toy - perpTo.y());
 		    theShape.curveTo(c2x - mid2.x(), c2y - mid2.y(), c1x - mid1.x(), c1y - mid1.y(), fromx - perpFrom.x(), fromy - perpFrom.y());
 		}
+		theShape.closePath();
 	}
 
 	private void makeMulti(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
@@ -129,7 +130,7 @@ public class BlobShape extends AreaConnectorShape {
 		else 
 			perp2.scalarMult((trgsz + swx) / 2f);
 		
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo(fromx + perp1.x(), fromy + perp1.y());
 		
 		theShape.quadTo(c1x + perpm.x(), c1y + perpm.y(),
@@ -143,6 +144,7 @@ public class BlobShape extends AreaConnectorShape {
 				c2x - maindir.x() / t - perpm.x(), c2y - maindir.y() / t - perpm.y());
 		theShape.lineTo(c1x + maindir.x() / t - perpm.x(), c1y + maindir.y() / t - perpm.y());
 		theShape.quadTo(c1x - perpm.x(), c1y - perpm.y(), fromx - perp1.x(), fromy - perp1.y());
+		theShape.closePath();
 	}
 
 	private void makeOnPolyline(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
@@ -173,7 +175,7 @@ public class BlobShape extends AreaConnectorShape {
 		double t1 = 5f;
 		double t2 = 2.3f;
 		double m = 1f;
-		theShape.reset();
+		theShape = new Path2D();
 		theShape.moveTo(fromx + perp1.x(), fromy + perp1.y());
 		theShape.quadTo(fromx + dir.x() / t1 + perpm.x() * m, fromy + dir.y() / t1 + perpm.y() * m,
 				fromx + dir.x() / t2 + perpm.x(), fromy + dir.y() / t2 + perpm.y());
@@ -186,6 +188,7 @@ public class BlobShape extends AreaConnectorShape {
 		theShape.lineTo(fromx + dir.x() / t2 - perpm.x(), fromy + dir.y() / t2 - perpm.y());
 		theShape.quadTo(fromx + dir.x() / t1 - perpm.x() * m, fromy + dir.y() / t1 - perpm.y() * m,
 				fromx - perp1.x(), fromy - perp1.y());
+		theShape.closePath();
 	}
 
 	@Override

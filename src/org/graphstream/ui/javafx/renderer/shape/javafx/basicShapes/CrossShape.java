@@ -3,6 +3,7 @@ package org.graphstream.ui.javafx.renderer.shape.javafx.basicShapes;
 import org.graphstream.ui.javafx.Backend;
 import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.PolygonalShape;
+import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
 
 public class CrossShape extends PolygonalShape {
 
@@ -17,7 +18,7 @@ public class CrossShape extends PolygonalShape {
 		double w4 = area.theSize.x * 0.3f;
 		double h4 = area.theSize.y * 0.3f;
 		
-		theShape().reset();
+		theShape = new Path2D();
 		theShape().moveTo( x - w2, y + h4 );
 		theShape().lineTo( x - w4, y + h2 );
 		theShape().lineTo( x,      y + h1 );
@@ -30,6 +31,7 @@ public class CrossShape extends PolygonalShape {
 		theShape().lineTo( x - w4, y - h2 );
 		theShape().lineTo( x - w2, y - h4 );
 		theShape().lineTo( x - w1, y );
+		theShape().closePath();
 	}
 
 	@Override
@@ -43,7 +45,7 @@ public class CrossShape extends PolygonalShape {
 		double w4 = ( area.theSize.x + shadowable.theShadowWidth.x ) * 0.3f;
 		double h4 = ( area.theSize.y + shadowable.theShadowWidth.y ) * 0.3f;
 		
-		theShape().reset();
+		theShape = new Path2D();
 		theShape().moveTo( x - w2, y + h4 );
 		theShape().lineTo( x - w4, y + h2 );
 		theShape().lineTo( x,      y + h1 );
@@ -56,5 +58,6 @@ public class CrossShape extends PolygonalShape {
 		theShape().lineTo( x - w4, y - h2 );
 		theShape().lineTo( x - w2, y - h4 );
 		theShape().lineTo( x - w1, y );
+		theShape().closePath();
 	}	
 }

@@ -1,10 +1,15 @@
 package org.graphstream.ui.javafx.util;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 public class ImageCache {
@@ -29,12 +34,14 @@ public class ImageCache {
 
 	public static Image loadImage(String fileNameOrUrl, boolean forceTryReload) {
 		if (imageCache.get(fileNameOrUrl) == null) {
-			Image image = null ;			
-			File file = new File(fileNameOrUrl);
+			URL url = ImageCache.class.getClassLoader().getResource(fileNameOrUrl);
+			BufferedImage buffImage = null ;
+			Image image = null ;
 			
-			if (file.exists()) { // The image is in the class path.
+			if (url != null) { // The image is in the class path.
 				try {
-					image = new Image(fileNameOrUrl);
+					buffImage = ImageIO.read(url);
+					image = SwingFXUtils.toFXImage(buffImage, null);
 					imageCache.put(fileNameOrUrl, image);
 				}
 				catch (Exception e) {
@@ -42,9 +49,25 @@ public class ImageCache {
 				}
 			}
 			else {
-				image = dummy ;
-				imageCache.put( fileNameOrUrl, image );
-				Logger.getLogger(ImageCache.class.getSimpleName()).log(Level.WARNING, "Cannot read image "+fileNameOrUrl+".");
+				try {
+					url = new URL(fileNameOrUrl);
+					
+					buffImage = ImageIO.read(url);
+					image = SwingFXUtils.toFXImage(buffImage, null);
+					imageCache.put(fileNameOrUrl, image);
+				}
+				catch (Exception e) {
+					try {
+						buffImage = ImageIO.read( new File( fileNameOrUrl ) );	// Try the file.
+						image = SwingFXUtils.toFXImage(buffImage, null);
+						imageCache.put( fileNameOrUrl, image );
+					}
+					catch (Exception ex) {
+						image = dummy ;
+						imageCache.put( fileNameOrUrl, image );
+						Logger.getLogger(ImageCache.class.getSimpleName()).log(Level.WARNING, "Cannot read image '%s'.".format(fileNameOrUrl), e);
+					}
+				}
 			}
 			
 			return image ;
