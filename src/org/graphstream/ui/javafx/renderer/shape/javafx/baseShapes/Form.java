@@ -260,16 +260,15 @@ public interface Form  {
 		Object[] path = new Object[8];
 		
 		public void setArcByCenter(double x, double y, double rad, double angleSt, double angleLen, ArcType type) {
-			path[0] = x ; path[1] = y ;
-			path[2] =rad; path[3] = rad ;
+			path[0] = x-rad ; path[1] = y-rad ;
+			path[2] = rad*2; path[3] = rad*2 ;
 			path[4] = angleSt ; path[5] = angleLen ;
 			path[6] = type ; path[7] = type ;
 			
-			
-			setCenterX(x);
-			setCenterY(y);
-			setRadiusX(rad);
-			setRadiusY(rad);
+			setCenterX(x-rad);
+			setCenterY(y-rad);
+			setRadiusX(rad*2);
+			setRadiusY(rad*2);
 			setStartAngle(angleSt);
 			setLength(angleLen);
 			setType(type);
