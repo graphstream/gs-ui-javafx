@@ -42,10 +42,12 @@ public interface Form  {
 		
 		public void drawByPoints(GraphicsContext g, boolean stroke) {
 			if(stroke) {
-				g.strokeRect(getX(), getY(), getWidth(), getHeight());
+				g.strokeRoundRect(getX(), getY(), getWidth(), getHeight(), getArcWidth(), getArcHeight());
 			}
-			else
-				g.fillRect(getX(), getY(), getWidth(), getHeight());
+			else {
+				g.fillRoundRect(getX(), getY(), getWidth(), getHeight(), getArcWidth(), getArcHeight());
+			}
+
 		}
 
 		@Override
