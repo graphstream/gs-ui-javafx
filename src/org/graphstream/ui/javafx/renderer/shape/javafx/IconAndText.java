@@ -27,8 +27,10 @@ public abstract class IconAndText {
 	//protected double width;
 	/** Overall height of the icon and text with all space and padding included. */
 	//protected double height;
-	/** Overall height of the icon and text with all space and padding included. */
-	protected double ascentDescent; 
+	/** Overall descent of the icon and text with all space and padding included. */
+	protected double descent; 
+	/** Overall ascent of the icon and text with all space and padding included. */
+	protected double ascent ;
 	protected TextBox text;
 	protected double offx;
 	protected double offy;
@@ -36,8 +38,8 @@ public abstract class IconAndText {
 	protected double pady;
 	
 	public IconAndText(TextBox text, double offx, double offy, double padx, double pady) {
-		this.ascentDescent = text.getAscentDescent() ;
-		this.text = text ;
+		this.descent = text.getDescent() ;
+		this.ascent = text.getAscent();		this.text = text ;
 		this.offx = offx ;
 		this.offy = offy ;
 		this.padx = padx ;
@@ -110,7 +112,7 @@ class IconAndTextOnlyText extends IconAndText {
 	}
 	
 	public double getHeight() {
-		return text.getAscentDescent()+pady*2 ;
+		return text.getAscent()+text.getDescent()+pady*2 ;
 	}
 	
 	public void setText(Backend backend, String text) {
@@ -124,7 +126,7 @@ class IconAndTextOnlyText extends IconAndText {
 	public void setIcon(Backend backend, String url) {}
 	
 	public void render(Backend backend, FxDefaultCamera camera, double xLeft, double yBottom) {
-		this.text.render(backend, offx+xLeft, offy+yBottom - (ascentDescent/2));
+		this.text.render(backend, offx+xLeft, offy+yBottom - descent);
 	}
 }
 
@@ -162,12 +164,12 @@ class IconAtLeftAndText extends IconAndText {
 		g.drawImage(icon, 0, 0);
 		g.setTransform(transformOrigin);
 		
-		double th = text.getAscentDescent();
+		double th = text.getAscent() + text.getDescent();
 		double dh = 0f ;
 		if(icon.getHeight() > th) 
 			dh = ((icon.getHeight() - th) / 2f) ;
 		
-		this.text.render(backend, offx+xLeft + icon.getWidth() + 5, offy+yBottom - dh - ascentDescent/2);
+		this.text.render(backend, offx+xLeft + icon.getWidth() + 5, offy+yBottom - dh - descent);
 	}
 	
 	public double getWidth() {
@@ -176,9 +178,10 @@ class IconAtLeftAndText extends IconAndText {
 	
 	
 	public double getHeight() {
-		return Math.max(icon.getHeight(), text.getAscentDescent()) + pady*2;
+		return Math.max(icon.getHeight(), text.getAscent() + text.getDescent()) + pady*2;
 	}
 }
+
 
 /** A simple wrapper for a font and a text string. */
 abstract class TextBox {
@@ -193,9 +196,9 @@ abstract class TextBox {
  	
 	public abstract double getWidth();
 	public abstract double getHeight();
-//	public abstract double getDescent();
-//	public abstract double getAscent();
-	public abstract double getAscentDescent();
+	public abstract double getDescent();
+	public abstract double getAscent();
+//	public abstract double getAscentDescent();
 	
 	
 	/**
@@ -273,7 +276,7 @@ class FxTextBox extends TextBox {
 				this.textData = text ;
 				this.text   = new Text(text);
 				this.text.setBoundsType(TextBoundsType.LOGICAL);
-				this.bounds = this.text.getLayoutBounds();
+				this.bounds = this.text.getBoundsInLocal();
 			}
 			else {
 				this.textData = null ;
@@ -309,12 +312,23 @@ class FxTextBox extends TextBox {
 	 * @return
 	 */
 	@Override
-	public double getAscentDescent() {
-		if ( text != null )
-			return text.getBoundsInLocal().getHeight() ;
+	public double getAscent() {
+		if ( text != null ) {
+			return text.getBoundsInLocal().getHeight()/2 ;
+		}
 		else
 			return 0 ;
 	}
+	
+	@Override
+	public double getDescent() {
+		if ( text != null ) {
+			return text.getBoundsInLocal().getHeight()/2 ;
+		}
+		else
+			return 0 ;
+	}
+	
 	
 	public void render(Backend backend, double xLeft, double yBottom) {
 		
@@ -322,20 +336,22 @@ class FxTextBox extends TextBox {
 			GraphicsContext g = backend.graphics2D();
 			
 			if (bgColor != null) {
-				double h = getAscentDescent()/2 ;
+				double a = getAscent() ;
+				double h = a + getDescent() ;
 				
 				g.setStroke(bgColor);
 				g.setFill(bgColor);
 				if(rounded) {
-					g.fillRoundRect(xLeft-padx, yBottom-(h+pady), getWidth()+1+(padx+padx), h+(pady+pady), 6, 6);	
+					g.fillRoundRect(xLeft-padx, yBottom-(a+pady), getWidth()+1+(padx+padx), h+(pady+pady), 6, 6);	
 				} else {
-					g.fillRect(xLeft-padx, yBottom-(h+pady), getWidth()+1+(padx+padx), h+(pady+pady));
+					g.fillRect(xLeft-padx, yBottom-(a+pady), getWidth()+1+(padx+padx), h+(pady+pady));
 				}
 			}
 			g.setStroke(textColor);
 			g.setFill(textColor);
+			g.setFont(font);
 			
-			g.fillText(text.getText(), xLeft, yBottom);
+			g.fillText(text.getText(), xLeft, yBottom-6);
 		}
 	}
 }

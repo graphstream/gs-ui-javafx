@@ -15,7 +15,7 @@ import javafx.scene.shape.PathElement;
 import javafx.scene.shape.QuadCurveTo;
 import javafx.scene.shape.Rectangle;
 
-public interface Form  {
+public interface Form  {	
 	public void drawByPoints(GraphicsContext g, boolean stroke) ;
 	public void setFrame(double x, double y, double w, double h);
 	// used by the Double Stroke (see ShapeStroke.class)
@@ -41,8 +41,9 @@ public interface Form  {
 		}
 		
 		public void drawByPoints(GraphicsContext g, boolean stroke) {
-			if(stroke)
+			if(stroke) {
 				g.strokeRect(getX(), getY(), getWidth(), getHeight());
+			}
 			else
 				g.fillRect(getX(), getY(), getWidth(), getHeight());
 		}
@@ -301,32 +302,34 @@ public interface Form  {
 		double[][] path = new double[2][2];
 		
 		public void setFrameFromCenter(double centerX, double centerY, double cornerX, double cornerY) {
-			setCenterX(centerX);
-			setCenterY(centerY);
-			setRadiusX(cornerX);
-			setRadiusY(cornerY);
+			setCenterX(centerX+(cornerX/2));
+ 	        setCenterY(centerY+(cornerY/2));
+ 	        setRadiusX(cornerX/2);
+ 	        setRadiusY(cornerY/2);
 			
 			path[0][0] = centerX ; path[0][1] = centerY ;
 			path[1][0] = cornerX ; path[1][1] = cornerY ;
 		}
 		
 		public void setFrame(double x, double y, double cornerX, double cornerY) {
-			//----> Need to change from setFrameFromCenter
-			setCenterX(x);
-			setCenterY(y);
-			setRadiusX(cornerX);
-			setRadiusY(cornerY);
-			
-			path[0][0] = x ; path[0][1] = x ;
+			// Setting the local bound
+			setCenterX(x+(cornerX/2));
+ 	        setCenterY(y+(cornerY/2));
+ 	        setRadiusX(cornerX/2);
+ 	        setRadiusY(cornerY/2);
+ 	        
+			path[0][0] = x ; path[0][1] = y ;
 			path[1][0] = cornerX ; path[1][1] = cornerY ;
 		}
 		
 		@Override
 		public void drawByPoints(GraphicsContext g, boolean stroke) {
-			if(stroke)
-				g.strokeOval(getCenterX(), getCenterY(), getRadiusX(), getRadiusY());
+			if(stroke) {
+				g.strokeOval(path[0][0], path[0][1], path[1][0], path[1][1]);
+				//if (PRINT_BOUND) g.setStroke(Color.RED); g.strokeRect(getBoundsInLocal().getMinX(), getBoundsInLocal().getMinY(), getBoundsInLocal().getWidth(), getBoundsInLocal().getHeight());
+			}
 			else
-				g.fillOval(getCenterX(), getCenterY(), getRadiusX(), getRadiusY());
+				g.fillOval(path[0][0], path[0][1], path[1][0], path[1][1]);
 		}
 
 		@Override
