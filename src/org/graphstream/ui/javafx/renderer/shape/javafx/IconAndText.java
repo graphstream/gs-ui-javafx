@@ -159,11 +159,11 @@ class IconAtLeftAndText extends IconAndText {
 	public void render(Backend backend, FxDefaultCamera camera, double xLeft, double yBottom) {
 		GraphicsContext g = backend.graphics2D();
 		Affine transformOrigin = g.getTransform();
-		Affine transform = new Affine(1f, 0f, 0f, 1f, offx+xLeft, offy+(yBottom-(getHeight()/2))-(icon.getHeight()/2)+pady);
+		Affine transform = new Affine(1f, 0f, offx+xLeft, 0f, 1f, offy+(yBottom-(getHeight()/2))-(icon.getHeight()/2)+pady);
 		g.setTransform(transform);
 		g.drawImage(icon, 0, 0);
 		g.setTransform(transformOrigin);
-		
+
 		double th = text.getAscent() + text.getDescent();
 		double dh = 0f ;
 		if(icon.getHeight() > th) 
