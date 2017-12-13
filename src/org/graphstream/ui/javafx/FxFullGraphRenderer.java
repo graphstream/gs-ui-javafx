@@ -31,7 +31,6 @@
  */
 package org.graphstream.ui.javafx;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -69,7 +68,7 @@ import org.graphstream.ui.view.util.InteractiveElement;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Region;
 
 /**	
@@ -301,54 +300,45 @@ public class FxFullGraphRenderer implements GraphRenderer<Region, GraphicsContex
 	public void screenshot(String filename, int width, int height) {
 		if (graph != null) {
 			if (filename.endsWith("png") || filename.endsWith("PNG")) {
-				BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-				Image img = SwingFXUtils.toFXImage(image, null);
-				
+				WritableImage wim = new WritableImage(width, height);
 				Canvas canvas = new Canvas(width, height);
 				GraphicsContext c = canvas.getGraphicsContext2D();
-				c.drawImage(img, 0,0);
-				render(c, 0, 0, width, height);
 				
-				image = SwingFXUtils.fromFXImage(img, null);
+				render(c, 0, 0, width, height);
+				canvas.snapshot(null, wim);
 				
 				File file = new File(filename);
 				try {
-					ImageIO.write(image, "png", file);
+					ImageIO.write(SwingFXUtils.fromFXImage(wim, null), "png", file);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			} else if (filename.endsWith("bmp") || filename.endsWith("BMP")) {
-				BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-				Image img = SwingFXUtils.toFXImage(image, null);
-				
+				WritableImage wim = new WritableImage(width, height);
 				Canvas canvas = new Canvas(width, height);
 				GraphicsContext c = canvas.getGraphicsContext2D();
-				c.drawImage(img, 0,0);
-				render(c, 0, 0, width, height);
 				
-				image = SwingFXUtils.fromFXImage(img, null);
+				render(c, 0, 0, width, height);
+				canvas.snapshot(null, wim);
 				
 				File file = new File(filename);
 				try {
-					ImageIO.write(image, "bmp", file);
+					ImageIO.write(SwingFXUtils.fromFXImage(wim, null), "bmp", file);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			} else if (filename.endsWith("jpg") || filename.endsWith("JPG") || filename.endsWith("jpeg")
 					|| filename.endsWith("JPEG")) {
-				BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-				Image img = SwingFXUtils.toFXImage(image, null);
-				
+				WritableImage wim = new WritableImage(width, height);
 				Canvas canvas = new Canvas(width, height);
 				GraphicsContext c = canvas.getGraphicsContext2D();
-				c.drawImage(img, 0,0);
-				render(c, 0, 0, width, height);
 				
-				image = SwingFXUtils.fromFXImage(img, null);
+				render(c, 0, 0, width, height);
+				canvas.snapshot(null, wim);
 				
 				File file = new File(filename);
 				try {
-					ImageIO.write(image, "jpg", file);
+					ImageIO.write(SwingFXUtils.fromFXImage(wim, null), "jpg", file);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

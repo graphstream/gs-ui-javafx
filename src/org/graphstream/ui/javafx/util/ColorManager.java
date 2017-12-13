@@ -7,74 +7,100 @@ import javafx.scene.paint.Color;
 
 public class ColorManager {
 	/**
-	 * Get fill awt color in group and convert to javafx Color
-	 * @param group
+	 * Get fill awt color in styleGroup and convert to javafx Color
+	 * @param stylegroup
 	 * @param id
 	 * @return javafx.scene.paint.Color
 	 */
 	public static Color getFillColor(StyleGroup group, int id) {
-		return Color.rgb(group.getFillColor(id).getRed(), group.getFillColor(id).getGreen(), group.getFillColor(id).getBlue());
-	}
-	
-
-	public static Color getFillColor(Style group, int id) {
-		return Color.rgb(group.getFillColor(id).getRed(), group.getFillColor(id).getGreen(), group.getFillColor(id).getBlue());
+		return getColor(group.getFillColor(id));
 	}
 	
 	/**
-	 * Get stroke awt color in group and convert to javafx Color
-	 * @param group
+	 * Get fill awt color in group and convert to javafx Color
+	 * @param style
+	 * @param id
+	 * @return javafx.scene.paint.Color
+	 */
+	public static Color getFillColor(Style group, int id) {
+		return getColor(group.getFillColor(id));
+	}
+	
+	/**
+	 * Get stroke awt color in styleGroup and convert to javafx Color
+	 * @param stylegroup
 	 * @param id
 	 * @return javafx.scene.paint.Color
 	 */
 	public static Color getStrokeColor(StyleGroup group, int id) {
-		return Color.rgb(group.getStrokeColor(id).getRed(), group.getStrokeColor(id).getGreen(), group.getStrokeColor(id).getBlue());
+		return getColor(group.getStrokeColor(id));
 	}
 	
 	/**
-	 * Get canvas awt color in group and convert to javafx Color
-	 * @param group
+	 * Get stroke awt color in group and convert to javafx Color
+	 * @param style
+	 * @param id
+	 * @return javafx.scene.paint.Color
+	 */
+	public static Color getStrokeColor(Style group, int id) {
+		return getColor(group.getStrokeColor(id));
+	}
+	
+	/**
+	 * Get canvas awt color in styleGroup and convert to javafx Color
+	 * @param stylegroup
 	 * @param id
 	 * @return javafx.scene.paint.Color
 	 */
 	public static Color getCanvasColor(StyleGroup group, int id) {
-		return Color.rgb(group.getCanvasColor(id).getRed(), group.getCanvasColor(id).getGreen(), group.getCanvasColor(id).getBlue());
+		return getColor(group.getCanvasColor(id));
 	}
 	
 	/**
-	 * Get shadow awt color in group and convert to javafx Color
-	 * @param group
+	 * Get shadow awt color in styleGroup and convert to javafx Color
+	 * @param styleGroup
 	 * @param id
 	 * @return javafx.scene.paint.Color
 	 */
 	public static Color getShadowColor(StyleGroup group, int id) {
-		return Color.rgb(group.getShadowColor(id).getRed(), group.getShadowColor(id).getGreen(), group.getShadowColor(id).getBlue());
+		return getColor(group.getShadowColor(id));
+	}
+	
+	/**
+	 * Get shadow awt color in group and convert to javafx Color
+	 * @param style
+	 * @param id
+	 * @return javafx.scene.paint.Color
+	 */
+	public static Color getShadowColor(Style group, int id) {
+		return getColor(group.getShadowColor(id));
 	}
 
 	/**
-	 * Get test awt color in group and convert to javafx Color
-	 * @param group
+	 * Get text awt color in group and convert to javafx Color
+	 * @param style
 	 * @param id
 	 * @return javafx.scene.paint.Color
 	 */
 	public static Color getTextColor(Style group, int id) {
-		return Color.rgb(group.getTextColor(id).getRed(), group.getTextColor(id).getGreen(), group.getTextColor(id).getBlue());
+		return getColor(group.getTextColor(id));
 	}
 	
 	/**
-	 * Get test background awt color in group and convert to javafx Color
-	 * @param group
+	 * Get text background awt color in group and convert to javafx Color
+	 * @param style
 	 * @param id
 	 * @return javafx.scene.paint.Color
 	 */
 	public static Color getTextBackgroundColor(Style group, int id) {
-		return Color.rgb(group.getTextBackgroundColor(id).getRed(), group.getTextBackgroundColor(id).getGreen(), group.getTextBackgroundColor(id).getBlue());
-	}
-	
-	public static Color getShadowColor(Style group, int id) {
-		return Color.rgb(group.getShadowColor(id).getRed(), group.getShadowColor(id).getGreen(), group.getShadowColor(id).getBlue());
+		return getColor(group.getTextBackgroundColor(id));
 	}
 
+	/**
+	 * Convert java.awt.Color to javafx.scene.paint.Color
+	 * @param java.awt.Color 
+	 * @return javafx.scene.paint.Color
+	 */
 	public static Color getColor(java.awt.Color awtColor) {
 		int r = awtColor.getRed();
 		int g = awtColor.getGreen();
@@ -84,10 +110,4 @@ public class ColorManager {
 		
 		return Color.rgb(r, g, b, opacity);
 	}
-
-	public static Color getStrokeColor(Style group, int id) {
-		return Color.rgb(group.getStrokeColor(id).getRed(), group.getStrokeColor(id).getGreen(), group.getStrokeColor(id).getBlue());
-	}
-	
-	
 }

@@ -157,12 +157,12 @@ public interface ShapePaint {
 		
 				Color color0 = ColorManager.getColor(colors.get( col ));
 				Color color1 = ColorManager.getColor(colors.get( col + 1 ));
-				double  red    = ( (color0.getRed()  *(1-div)) + (color1.getRed()  *div) ) / 255f;
-				double green  = ( (color0.getGreen()*(1-div)) + (color1.getGreen()*div) ) / 255f;
-				double blue   = ( (color0.getBlue() *(1-div)) + (color1.getBlue() *div) ) / 255f;
-				double alpha  = ( (color0.getOpacity()*(1-div)) + (color1.getOpacity()*div) ) / 255f;
-							
-				c = new Color( (float)red, (float)green, (float)blue, (float)alpha );
+				double red = ( ((color0.getRed()*255)  *(1-div)) + ((color1.getRed()*255)  *div) ) / 255f;
+				double green = ( ((color0.getGreen()*255)*(1-div)) + ((color1.getGreen()*255)*div) ) / 255f;
+				double blue = ( ((color0.getBlue()*255) *(1-div)) + ((color1.getBlue()*255) *div) ) / 255f;
+				double alpha = ( ((color0.getOpacity()*255)*(1-div)) + ((color1.getOpacity()*255)*div) ) / 255f;
+				
+				c = new Color( red, green, blue, alpha );
 			}
 		}
 	 
@@ -192,10 +192,10 @@ public interface ShapePaint {
 		
 				Color color0 = colors[ col ].getColor();
 				Color color1 = colors[ col + 1 ].getColor();
-				double  red    = ( (color0.getRed()  *(1-div)) + (color1.getRed()  *div) ) / 255f;
-				double green  = ( (color0.getGreen()*(1-div)) + (color1.getGreen()*div) ) / 255f;
-				double blue   = ( (color0.getBlue() *(1-div)) + (color1.getBlue() *div) ) / 255f;
-				double alpha  = ( (color0.getOpacity()*(1-div)) + (color1.getOpacity()*div) ) / 255f;
+				double  red    = ( ((color0.getRed()*255)  *(1-div)) + ((color1.getRed()*255)  *div) ) / 255f;
+				double green  = ( ((color0.getGreen()*255)*(1-div)) + ((color1.getGreen()*255)*div) ) / 255f;
+				double blue   = ( ((color0.getBlue()*255) *(1-div)) + ((color1.getBlue()*255) *div) ) / 255f;
+				double alpha  = ( ((color0.getOpacity()*255)*(1-div)) + ((color1.getOpacity()*255)*div) ) / 255f;
 							
 				c = new Color( (int)red, (int)green, (int)blue, (int)alpha );
 			}

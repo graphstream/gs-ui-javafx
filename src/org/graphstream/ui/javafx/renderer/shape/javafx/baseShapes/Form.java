@@ -281,7 +281,7 @@ public interface Form  {
 			else
 				g.fillArc(getCenterX(), getCenterY(), getRadiusX(), getRadiusY(), getStartAngle(), getLength(), getType());
 		}
-
+		
 		@Override
 		public String getIdForm() {
 			return "Arc";
