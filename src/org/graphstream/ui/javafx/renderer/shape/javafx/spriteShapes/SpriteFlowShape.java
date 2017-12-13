@@ -33,7 +33,7 @@ public class SpriteFlowShape implements Shape {
 	double along = 0.0;
 	double offset = 0.0;
 	ConnectorSkeleton connectorSkel = null ;
-	Path2D theShape = new Path2D() ;
+	Path2D theShape = new Path2D(0) ;
 	boolean reverse = false ;
 	
 	public SpriteFlowShape() {
@@ -110,15 +110,13 @@ public class SpriteFlowShape implements Shape {
 				
 				per.normalize();
 				per.scalarMult(offset);
-				theShape = new Path2D();
+				theShape = new Path2D((int)(along/inc)+3);
 				theShape.moveTo(P0.x + per.x(), P0.y + per.y());
-				
 				while(t <= along) {
 					theShape.lineTo(
 						CubicCurve.eval(P0.x + per.x(), P1.x + per.x(), P2.x + per.x(), P3.x + per.x(), t),
 						CubicCurve.eval(P0.y + per.y(), P1.y + per.y(), P2.y + per.y(), P3.y + per.y(), t)
 					);
-					
 					t += inc;
 				}
 	        } 
@@ -143,7 +141,7 @@ public class SpriteFlowShape implements Shape {
 				per.normalize();
 				per.scalarMult(offset);
 				
-				theShape = new Path2D();
+				theShape = new Path2D(i+3);
 
 				if(reverse) {
 				    int n = connectorSkel.size();
@@ -179,7 +177,7 @@ public class SpriteFlowShape implements Shape {
 				per.scalarMult(offset);
 				dir.scalarMult(along);
 
-				theShape = new Path2D();
+				theShape = new Path2D(5);
 				theShape.moveTo(P0.x + per.x(), P0.y + per.y());
 				theShape.lineTo(P0.x + dir.x() + per.x(), P0.y + dir.y() + per.y());
 	        }

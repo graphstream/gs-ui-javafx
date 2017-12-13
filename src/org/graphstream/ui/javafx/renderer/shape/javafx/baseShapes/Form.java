@@ -68,8 +68,14 @@ public interface Form  {
 	}
 	
 	public class Path2D extends Path implements Form {
-		PathElement[] path = new PathElement[20];
-		int size = 0;
+		PathElement[] path ;
+		int size ;
+		
+		public Path2D(int nbElement) {
+			super();
+			this.size = 0;
+			this.path = new PathElement[nbElement];
+		}
 		
 		public void moveTo(double x, double y) {
 			MoveTo moveTo = new MoveTo();

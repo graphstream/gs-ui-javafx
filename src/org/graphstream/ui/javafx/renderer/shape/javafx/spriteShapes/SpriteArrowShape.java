@@ -42,7 +42,7 @@ public class SpriteArrowShape extends PolygonalShape {
 		dir.scalarMult( area.theSize.x );
 		per.scalarMult( area.theSize.y / 2 );
 
-		theShape = new Path2D();
+		theShape = new Path2D(5);
 		theShape().moveTo( x + per.x(), y + per.y() );
 		theShape().lineTo( x + dir.x(), y + dir.y() );
 		theShape().lineTo( x - per.x(), y - per.y() );
@@ -60,7 +60,7 @@ public class SpriteArrowShape extends PolygonalShape {
 		dir.scalarMult( area.theSize.x + shadowable.theShadowWidth.x );
 		per.scalarMult( ( area.theSize.y + shadowable.theShadowWidth.y ) / 2 );
 
-		theShape = new Path2D();
+		theShape = new Path2D(5);
 		theShape().moveTo( x + per.x(), y + per.y() );
 		theShape().lineTo( x + dir.x(), y + dir.y() );
 		theShape().lineTo( x - per.x(), y - per.y() );

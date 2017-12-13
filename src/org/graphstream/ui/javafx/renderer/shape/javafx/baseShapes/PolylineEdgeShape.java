@@ -11,7 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class PolylineEdgeShape extends LineConnectorShape {
 	public ShowCubics showCubics ;
-	protected Path2D theShape = new Path2D();
+	protected Path2D theShape = new Path2D(0);
 
 	public PolylineEdgeShape() {
 		this.showCubics = new ShowCubics();
@@ -21,7 +21,7 @@ public class PolylineEdgeShape extends LineConnectorShape {
 	public void make(Backend backend, FxDefaultCamera camera) {
 		int n = skel.size();
 		
-		theShape = new Path2D();
+		theShape = new Path2D(n+2);
 		theShape.moveTo(skel.apply(0).x, skel.apply(0).y);
 		
 		for(int i = 0 ; i < n ; i++) {

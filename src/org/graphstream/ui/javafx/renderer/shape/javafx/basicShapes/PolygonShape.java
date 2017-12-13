@@ -48,7 +48,7 @@ public class PolygonShape extends PolygonalShape implements AttributeUtils {
 		double y = area.theCenter.y;
         double n = theValues.length;
         
-        theShape = new Path2D();
+        theShape = new Path2D((int)n+2);
         
         if(n > 0) {
         	theShape().moveTo(x+theValues[0].x, y+theValues[0].y);
@@ -65,7 +65,7 @@ public class PolygonShape extends PolygonalShape implements AttributeUtils {
 		double x  = area.theCenter.x + shadowable.theShadowOff.x;
 		double y  = area.theCenter.y + shadowable.theShadowOff.y;
 
-        theShape = new Path2D();
+        theShape = new Path2D((int)n+2);
         
         if(n > 0) {
         	theShape().moveTo(x+theValues[0].x, y+theValues[0].y);

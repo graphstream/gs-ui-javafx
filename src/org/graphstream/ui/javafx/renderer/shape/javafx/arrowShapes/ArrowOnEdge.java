@@ -18,7 +18,7 @@ import org.graphstream.ui.javafx.util.AttributeUtils.Tuple;
 import javafx.scene.canvas.GraphicsContext;
 
 public class ArrowOnEdge extends AreaOnConnectorShape {
-	Path2D theShape = new Path2D();
+	Path2D theShape = new Path2D(0);
 
 	@Override
 	public void make(Backend backend, FxDefaultCamera camera) {
@@ -55,7 +55,7 @@ public class ArrowOnEdge extends AreaOnConnectorShape {
 		
 		// Create a polygon.
 
-		theShape = new Path2D();
+		theShape = new Path2D(5);
 		theShape.moveTo( p1.x , p1.y );
 		theShape.lineTo( p1.x - dir.x() + per.x(), p1.y - dir.y() + per.y() );		
 		theShape.lineTo( p1.x - dir.x() - per.x(), p1.y - dir.y() - per.y() );
@@ -96,7 +96,7 @@ public class ArrowOnEdge extends AreaOnConnectorShape {
 		
 		// Create a polygon.
 	
-		theShape = new Path2D();
+		theShape = new Path2D(5);
 		theShape.moveTo( x , y );
 		theShape.lineTo( x - theDirection.x() + perp.x(), y - theDirection.y() + perp.y() );	
 		theShape.lineTo( x - theDirection.x() - perp.x(), y - theDirection.y() - perp.y() );

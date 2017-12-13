@@ -16,7 +16,7 @@ import org.graphstream.ui.javafx.util.AttributeUtils.Tuple;
 import javafx.scene.canvas.GraphicsContext;
 
 public class DiamondOnEdge extends AreaOnConnectorShape {
-	Path2D theShape = new Path2D();
+	Path2D theShape = new Path2D(0);
 	
 	@Override
 	public void make(Backend backend, FxDefaultCamera camera) {
@@ -54,7 +54,7 @@ public class DiamondOnEdge extends AreaOnConnectorShape {
 		
 		// Create a polygon.
 		
-		theShape = new Path2D();
+		theShape = new Path2D(5);
 		theShape.moveTo( p1.x , p1.y );
 		theShape.lineTo( p1.x - dir.x()/2 + per.x(), p1.y - dir.y()/2 + per.y() );
 		theShape.lineTo( p1.x - dir.x(), p1.y - dir.y() );
@@ -85,7 +85,7 @@ public class DiamondOnEdge extends AreaOnConnectorShape {
   
 		// Create a polygon.
 		
-		theShape = new Path2D();
+		theShape = new Path2D(5);
 		theShape.moveTo( x , y );
 		theShape.lineTo( x - theDirection.x() + perp.x(), y - theDirection.y() + perp.y() );	
 		theShape.lineTo( x - theDirection.x()*2, y - theDirection.y()*2 );

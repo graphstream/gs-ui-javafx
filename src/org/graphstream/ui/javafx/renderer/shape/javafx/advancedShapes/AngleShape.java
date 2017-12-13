@@ -12,7 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class AngleShape extends AreaConnectorShape {
 	
-	Path2D theShape = new Path2D();
+	Path2D theShape = new Path2D(0);
 	
 	@Override
 	public void make(Backend backend, FxDefaultCamera camera) {
@@ -63,7 +63,7 @@ public class AngleShape extends AreaConnectorShape {
 		    mid2.scalarMult(theSize * 0.99f);
 		}
 
-		theShape = new Path2D();
+		theShape = new Path2D(20);
 		theShape.moveTo(fromx + perpFrom.x(), fromy + perpFrom.y());
 		if (isDirected) {
 		    theShape.curveTo(c1x + mid1.x(), c1y + mid1.y(), c2x + mid2.x(), c2y + mid2.y(), tox, toy);
@@ -113,7 +113,7 @@ public class AngleShape extends AreaConnectorShape {
 		//  X                     X
 		// from                  to
 		
-		theShape = new Path2D();
+		theShape = new Path2D(10);
 		theShape.moveTo(fromx + perp.x(), fromy + perp.y());
 		if (isDirected) {
 		    theShape.curveTo(c1x + perp1.x(), c1y + perp1.y(),
@@ -150,7 +150,7 @@ public class AngleShape extends AreaConnectorShape {
 
 		 perp.scalarMult((theSize + swx) / 2f);	
 
-		 theShape = new Path2D();
+		 theShape = new Path2D(10);
 		 theShape.moveTo(fromx + perp.x(), fromy + perp.y());
 		 if (isDirected) {
 			 theShape.lineTo(tox, toy);
