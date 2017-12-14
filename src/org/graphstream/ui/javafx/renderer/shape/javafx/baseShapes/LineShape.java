@@ -55,7 +55,7 @@ public class LineShape extends LineConnectorShape {
 	public void render(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
 		GraphicsContext g = bck.graphics2D();
 		make(bck, camera);
-		strokableLine.stroke(g, theShape );
+		strokableLine.stroke(g, theShape);
 		fillableLine.fill(g, theSize, theShape);
 		decorable.decorConnector(bck, camera, skel.iconAndText, element, theShape);
 	}

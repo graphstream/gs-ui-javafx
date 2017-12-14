@@ -6,6 +6,7 @@ import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Rectangle2D;
 import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.javafx.util.Selection;
+import org.graphstream.ui.javafx.util.StrokeFx;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -42,13 +43,14 @@ public class SelectionRenderer {
 			g.setStroke(linesColorQ);
 			g.setFill(linesColorQ);
 
-			g.setLineWidth(1);
+			StrokeFx stroke = new StrokeFx(1);
+			stroke.changeStrokeProperties(g);
 			
-			g.strokeLine(0,(int) y1, panelWidth,(int) y1);
-			g.strokeLine(0, (int)y2, panelWidth,(int) y2);
-			g.strokeLine((int)x1, 0, (int)x1, panelHeight);
-			g.strokeLine((int)x2, 0, (int)x2, panelHeight);
-	
+			g.strokeLine(0, y1, panelWidth, y1);
+			g.strokeLine(0, y2, panelWidth, y2);
+			g.strokeLine(x1, 0, x1, panelHeight);
+			g.strokeLine(x2, 0, x2, panelHeight);
+			
 			shape.setFrame(x1, y1, x2-x1, y2-y1);
 			
 			g.setStroke(fillColor);
@@ -56,7 +58,6 @@ public class SelectionRenderer {
 			shape.drawByPoints(g, false);
 			g.setStroke(linesColorQ);
 			g.setFill(linesColorQ);
-
 			shape.drawByPoints(g, true);
 		}
 	}

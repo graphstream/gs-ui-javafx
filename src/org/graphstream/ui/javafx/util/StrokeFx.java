@@ -22,10 +22,14 @@ public class StrokeFx {
 		this.cap = cap ;
 	}
 	
-	public void changeStrokeProperties(GraphicsContext g) {
+	public void changeStrokeProperties(GraphicsContext g) {		
 		g.setLineWidth(width);
+
 		if (dashes == null)
 			g.setLineDashes(null);
-	    g.setLineCap(cap);
+		else
+			g.setLineDashes(dashes);
+		
+		g.setLineCap(cap);
 	}
 }

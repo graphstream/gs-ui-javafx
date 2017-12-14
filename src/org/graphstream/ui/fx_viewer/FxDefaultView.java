@@ -31,6 +31,7 @@
  */
 package org.graphstream.ui.fx_viewer;
 
+import java.awt.Graphics2D;
 import java.util.Collection;
 import java.util.EnumSet;
 

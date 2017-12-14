@@ -1,8 +1,11 @@
 package org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes;
 
+import org.graphstream.ui.javafx.util.StrokeFx;
+
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.ClosePath;
@@ -26,6 +29,11 @@ public interface Form  {
 	public Object getPath();
 	
 	public class Rectangle2D extends Rectangle implements Form {
+		private StrokeFx strokeBig ;
+		private StrokeFx strokeSmall ;
+		private boolean doubleStroke = false ;
+		private Paint fillColor = null ;
+		
 		double[][] path = new double[2][2];
 		
 		public void setFrame(double x, double y, double w, double h) {
@@ -44,6 +52,15 @@ public interface Form  {
 		}
 		
 		public void drawByPoints(GraphicsContext g, boolean stroke) {
+			if (doubleStroke) {
+				strokeBig.changeStrokeProperties(g);
+				g.strokeRoundRect(getX(), getY(), getWidth(), getHeight(), getArcWidth(), getArcHeight());
+				strokeSmall.changeStrokeProperties(g);
+				
+				g.setFill(fillColor);
+				g.setStroke(fillColor);
+			}
+			
 			if(stroke) {
 				g.strokeRoundRect(getX(), getY(), getWidth(), getHeight(), getArcWidth(), getArcHeight());
 			}
@@ -71,6 +88,15 @@ public interface Form  {
 		@Override
 		public Bounds getBounds() {
 			return getBoundsInLocal();
+		}
+
+		public void setDoubleStroke(StrokeFx strokeBig, StrokeFx strokeSmall, Paint fillColor) {
+			if ( fillColor != null ) {
+				this.strokeSmall = strokeSmall;
+				this.strokeBig = strokeBig;
+				this.doubleStroke = true ;
+				this.fillColor = fillColor ;
+			}
 		}
 	}
 	
@@ -215,7 +241,6 @@ public interface Form  {
 		}	
 	}
 
-	
 	public class CubicCurve2D extends CubicCurve implements Form {
 		double[][] path = new double[4][2];
 		
@@ -264,7 +289,7 @@ public interface Form  {
 			return getBoundsInLocal();
 		}
 	}
-
+	
 	public class Line2D extends Line implements Form {
 		double[][] path = new double[2][2];
 
@@ -358,6 +383,10 @@ public interface Form  {
 	}
 
 	public class Ellipse2D extends Ellipse implements Form {
+		private StrokeFx strokeBig ;
+		private StrokeFx strokeSmall ;
+		private boolean doubleStroke = false ;
+		private Paint fillColor = null ;
 		
 		double[][] path = new double[2][2];
 		
@@ -369,6 +398,8 @@ public interface Form  {
 			
 			path[0][0] = centerX-(cornerX-centerX) ; path[0][1] = centerY-(cornerY-centerY) ;
 			path[1][0] = (cornerX-centerX)*2 ; path[1][1] = (cornerY-centerY)*2;
+			
+			doubleStroke = false ;
 		}
 		
 		public void setFrame(double x, double y, double cornerX, double cornerY) {
@@ -380,10 +411,21 @@ public interface Form  {
  	        
 			path[0][0] = x ; path[0][1] = y ;
 			path[1][0] = cornerX ; path[1][1] = cornerY ;
+			
+			doubleStroke = false ;
 		}
 		
 		@Override
 		public void drawByPoints(GraphicsContext g, boolean stroke) {
+			if (doubleStroke) {
+				strokeBig.changeStrokeProperties(g);
+				g.strokeOval(path[0][0], path[0][1], path[1][0], path[1][1]);
+				strokeSmall.changeStrokeProperties(g);
+				
+				g.setFill(fillColor);
+				g.setStroke(fillColor);
+			}
+			
 			if(stroke) {
 				g.strokeOval(path[0][0], path[0][1], path[1][0], path[1][1]);
 				//g.setStroke(Color.RED); g.strokeRect(getBoundsInLocal().getMinX(), getBoundsInLocal().getMinY(), getBoundsInLocal().getWidth(), getBoundsInLocal().getHeight());
@@ -405,6 +447,15 @@ public interface Form  {
 		@Override
 		public Bounds getBounds() {
 			return getBoundsInLocal();
+		}
+
+		public void setDoubleStroke(StrokeFx strokeBig, StrokeFx strokeSmall, Paint fillColor) {
+			if ( fillColor != null ) {
+				this.strokeSmall = strokeSmall;
+				this.strokeBig = strokeBig;
+				this.doubleStroke = true ;
+				this.fillColor = fillColor ;
+			}
 		}
 	}
 }

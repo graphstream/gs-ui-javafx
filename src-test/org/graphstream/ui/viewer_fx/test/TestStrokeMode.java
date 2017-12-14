@@ -27,27 +27,37 @@ public class TestStrokeMode {
 	}
 	
 	private String styleSheet =
-    		"node {"+
-			"	fill-color: white;"+
-			"	fill-mode: plain;"+
-			"	stroke-mode: dashes;"+
-			"	stroke-width: 1px;"+
-			"	stroke-color: red;"+
-			"	size: 20px;"+
-			"}"+
-			"node#C {"+
-			"	stroke-mode: double;"+
-			"}"+
-			"node#D {"+
-			"	fill-color: gray; "+
-			"	stroke-mode: plain; " +
-			"	stroke-color: blue; "+
-			"}"+
-			"edge {"+
-			"	fill-mode: none;"+
-			"	size: 0px;"+
-			"	stroke-mode: dashes;"+
-			"	stroke-width: 1px;"+
-			"	stroke-color: red;"+
-			"}";
+		"node {"+
+		"	fill-color: white;"+
+		"	fill-mode: plain;"+
+		"	stroke-mode: dashes;"+
+		"	stroke-width: 1px;"+
+		"	stroke-color: red;"+
+		"	size: 20px;"+
+		"}"+
+		"node#A {"+
+		"	stroke-mode: plain;"+
+		"}"+
+		"node#B {"+
+		"	shape: box;"+
+		"	stroke-mode: double;"+
+		"}"+
+		"node#C {"+
+		"	stroke-mode: double;"+
+		"}"+
+		"node#D {"+
+		"	fill-color: gray; "+
+		"	stroke-color: blue; "+
+		"}"+
+		"edge {"+
+		"	shape: cubic-curve;"+
+		"	fill-mode: none;"+
+		"	size: 0px;"+
+		"	stroke-mode: dashes;"+
+		"	stroke-width: 1px;"+
+		"	stroke-color: red;"+
+		"}"+
+		"edge#BC {"+	
+		"	stroke-mode: double;"+
+		"}";
 }

@@ -35,7 +35,7 @@ public class ShadowableLine {
    	public void cast( GraphicsContext g, Form shape ) {
    		g.setStroke(theShadowColor);
    		g.setFill(theShadowColor);
-   		shadowStroke.stroke( theShadowWidth , shape ).changeStrokeProperties(g);
+   		shadowStroke.stroke( theShadowWidth , shape, null ).changeStrokeProperties(g);
    	  	shape.drawByPoints(g, true);
    	}
  

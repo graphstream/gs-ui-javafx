@@ -24,16 +24,15 @@ public class FillableLine {
 		    if(plainFast) {
 				g.setStroke(theFillColor);
 				g.setFill(theFillColor);
-
 				shape.drawByPoints(g, true);
 		    }
 		    else {
-				fillStroke.stroke(width, shape).changeStrokeProperties(g);
-				
-				g.setStroke(theFillColor);
+		    	g.setStroke(theFillColor);
 				g.setFill(theFillColor);
+				
+				fillStroke.stroke(width, shape, null).changeStrokeProperties(g);
 								
-				shape.drawByPoints(g, true);
+				shape.drawByPoints(g, false);
 			}
 		}
 	}
@@ -47,7 +46,7 @@ public class FillableLine {
 		bck.graphics2D().setStroke(theFillColor);
 		bck.graphics2D().setFill(theFillColor);
 		if(fillStroke != null) {
-			fillStroke.stroke(theSize, null).changeStrokeProperties(bck.graphics2D());
+			fillStroke.stroke(theSize, null, theFillColor).changeStrokeProperties(bck.graphics2D());
 		}
 	}
 

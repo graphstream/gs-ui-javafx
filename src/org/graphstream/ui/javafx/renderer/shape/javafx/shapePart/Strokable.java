@@ -4,6 +4,7 @@ import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.renderer.shape.javafx.ShapeStroke;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
+import org.graphstream.ui.javafx.util.ColorManager;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -11,6 +12,8 @@ import javafx.scene.paint.Color;
 public class Strokable {
     /** The stroke color. */
 	public Color strokeColor = null ;
+	
+	public Color fillColor = null ; // Used by doubleStroke
 
 	/** The stroke. */
 	public ShapeStroke theStroke = null ;
@@ -21,12 +24,11 @@ public class Strokable {
  	/** Paint the stroke of the shape. */
 	public void stroke( GraphicsContext g, Form shape ) {
 		if(theStroke != null) {
-			theStroke.stroke( theStrokeWidth, shape).changeStrokeProperties(g);
-
 			g.setStroke(strokeColor);
 			g.setFill(strokeColor);
+			theStroke.stroke(theStrokeWidth, shape, fillColor).changeStrokeProperties(g);
 			shape.drawByPoints(g, true);
-		}	  
+		}
 	}
 	
  	/** Configure all the static parts needed to stroke the shape. */
@@ -35,5 +37,7 @@ public class Strokable {
 		
 		/*if( strokeColor == null )*/ strokeColor = ShapeStroke.strokeColor( style );
 		/*if( theStroke   == null )*/ theStroke   = ShapeStroke.strokeForArea( style );
+		
+		fillColor = ColorManager.getFillColor(style, 0);
  	}
 }
