@@ -12,7 +12,6 @@ import org.graphstream.ui.javafx.util.ColorManager;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 
 public class FillableLine {
 	ShapeStroke fillStroke = null ;
@@ -39,7 +38,7 @@ public class FillableLine {
 		}
 	}
  
-	public void fill(GraphicsContext g, double width, Shape shape) { fill(g, width, theFillPercent, (Form)shape); }
+	public void fill(GraphicsContext g, double width, Form shape) { fill(g, width, theFillPercent, shape); }
  
 	public void configureFillableLineForGroup(Backend bck, Style style, FxDefaultCamera camera, double theSize) {
 		fillStroke = ShapeStroke.strokeForConnectorFill( style );

@@ -10,7 +10,6 @@ import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Shape;
 
 public class Shadowable {
 	/** The shadow paint. */
@@ -32,18 +31,18 @@ public class Shadowable {
      * Render the shadow.
      * @param g The Java2D graphics.
      */
-	public void cast( GraphicsContext g, Shape shape) {
+	public void cast( GraphicsContext g, Form shape) {
 		if ( shadowPaint instanceof ShapeAreaPaint ) {
 			Paint p = ((ShapeAreaPaint)shadowPaint).paint( shape, 1 ) ;
 			g.setStroke(p);
 			g.setFill(p);
-			((Form)shape).drawByPoints(g, false);
+			shape.drawByPoints(g, false);
 		}
 		else if ( shadowPaint instanceof ShapeColorPaint ) {
 			Paint p = ((ShapeColorPaint)shadowPaint).paint( 0, null ) ;
 			g.setStroke(p);
 			g.setFill(p);
-			((Form)shape).drawByPoints(g, false);
+			shape.drawByPoints(g, false);
 		}
 		else {
 			System.out.println("no shadow !!!");

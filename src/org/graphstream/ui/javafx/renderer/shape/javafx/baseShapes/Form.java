@@ -1,5 +1,7 @@
 package org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes;
 
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
@@ -18,6 +20,7 @@ import javafx.scene.shape.Rectangle;
 public interface Form  {	
 	public void drawByPoints(GraphicsContext g, boolean stroke) ;
 	public void setFrame(double x, double y, double w, double h);
+	public Bounds getBounds() ;
 	// used by the Double Stroke (see ShapeStroke.class)
 	public String getIdForm();
 	public Object getPath();
@@ -47,7 +50,6 @@ public interface Form  {
 			else {
 				g.fillRoundRect(getX(), getY(), getWidth(), getHeight(), getArcWidth(), getArcHeight());
 			}
-
 		}
 
 		@Override
@@ -65,16 +67,28 @@ public interface Form  {
 			setArcWidth(r);
 			setArcHeight(r);
 		}
+
+		@Override
+		public Bounds getBounds() {
+			return getBoundsInLocal();
+		}
 	}
 	
 	public class Path2D extends Path implements Form {
 		PathElement[] path ;
 		int size ;
 		
+		double minX, minY, maxX, maxY ; // Bounds
+		
 		public Path2D(int nbElement) {
 			super();
 			this.size = 0;
 			this.path = new PathElement[nbElement];
+			
+			this.minX = Double.MAX_VALUE;
+			this.maxX = Double.MIN_VALUE;
+			this.minY = Double.MAX_VALUE;
+			this.maxY = Double.MIN_VALUE;
 		}
 		
 		public void moveTo(double x, double y) {
@@ -82,6 +96,8 @@ public interface Form  {
 			moveTo.setX(x);
 			moveTo.setY(y);
 			getElements().add(moveTo);
+			
+			updateBounds(x, y);
 			
 			path[size] = moveTo ;
 			size++;
@@ -91,6 +107,8 @@ public interface Form  {
 			LineTo lineTo = new LineTo(x, y);
 			getElements().add(lineTo);
 			
+			updateBounds(x, y);
+			
 			path[size] = lineTo ;
 			size++;
 		}
@@ -98,7 +116,11 @@ public interface Form  {
 		public void curveTo(double xc1, double yc1, double xc2, double yc2, double x1, double y1) {
 			CubicCurveTo curveTo = new CubicCurveTo(xc1, yc1, xc2, yc2, x1, y1);
 			getElements().add(curveTo);
-
+			
+			updateBounds(xc1, yc1);
+			updateBounds(xc1, yc2);
+			updateBounds(x1, y1);
+			
 			path[size] = curveTo ;
 			size++;
 		}
@@ -106,6 +128,9 @@ public interface Form  {
 		public void quadTo(double cx, double cy, double x, double y) {
 			QuadCurveTo quadTo = new QuadCurveTo(cx, cy, x, y);
 			getElements().add(quadTo);
+			
+			updateBounds(cx, cy);
+			updateBounds(x, y);
 			
 			path[size] = quadTo ;
 			size++;
@@ -161,7 +186,7 @@ public interface Form  {
 			else
 				g.fill();
 		}
-
+		
 		@Override
 		public String getIdForm() {
 			return "Path";
@@ -176,8 +201,21 @@ public interface Form  {
 		public void setFrame(double x, double y, double w, double h) {
 			throw new RuntimeException("SetFrame with Path2D ?");
 		}
+		
+		@Override
+		public Bounds getBounds() {
+			return new BoundingBox(minX, minY, maxX-minX, maxY-minY);
+		}
+		
+		private void updateBounds(double x, double y) {
+			if(x < minX) minX = x ;
+			if(x > maxX) maxX = x ;
+			if(y < minY) minY = y ;
+			if(y > maxY) maxY = y ;
+		}	
 	}
 
+	
 	public class CubicCurve2D extends CubicCurve implements Form {
 		double[][] path = new double[4][2];
 		
@@ -220,6 +258,11 @@ public interface Form  {
 		public void setFrame(double x, double y, double w, double h) {
 			throw new RuntimeException("SetFrame with CubicCurve ?");
 		}
+		
+		@Override
+		public Bounds getBounds() {
+			return getBoundsInLocal();
+		}
 	}
 
 	public class Line2D extends Line implements Form {
@@ -259,6 +302,11 @@ public interface Form  {
 			setStartY(y);
 			setEndX(w);
 			setEndY(h);
+		}
+		
+		@Override
+		public Bounds getBounds() {
+			return getBoundsInLocal();
 		}
 	}
 
@@ -302,6 +350,11 @@ public interface Form  {
 		public void setFrame(double x, double y, double w, double h) {
 			throw new RuntimeException("SetFrame with Arc2D ?");
 		}
+		
+		@Override
+		public Bounds getBounds() {
+			return getBoundsInLocal();
+		}
 	}
 
 	public class Ellipse2D extends Ellipse implements Form {
@@ -309,13 +362,13 @@ public interface Form  {
 		double[][] path = new double[2][2];
 		
 		public void setFrameFromCenter(double centerX, double centerY, double cornerX, double cornerY) {
-			setCenterX(centerX+(cornerX/2));
- 	        setCenterY(centerY+(cornerY/2));
- 	        setRadiusX(cornerX/2);
- 	        setRadiusY(cornerY/2);
+			setCenterX(centerX);
+ 	        setCenterY(centerY); 	        
+ 	        setRadiusX(cornerX-centerX);
+ 	        setRadiusY(cornerY-centerY);
 			
-			path[0][0] = centerX ; path[0][1] = centerY ;
-			path[1][0] = cornerX ; path[1][1] = cornerY ;
+			path[0][0] = centerX-(cornerX-centerX) ; path[0][1] = centerY-(cornerY-centerY) ;
+			path[1][0] = (cornerX-centerX)*2 ; path[1][1] = (cornerY-centerY)*2;
 		}
 		
 		public void setFrame(double x, double y, double cornerX, double cornerY) {
@@ -333,7 +386,7 @@ public interface Form  {
 		public void drawByPoints(GraphicsContext g, boolean stroke) {
 			if(stroke) {
 				g.strokeOval(path[0][0], path[0][1], path[1][0], path[1][1]);
-				//if (PRINT_BOUND) g.setStroke(Color.RED); g.strokeRect(getBoundsInLocal().getMinX(), getBoundsInLocal().getMinY(), getBoundsInLocal().getWidth(), getBoundsInLocal().getHeight());
+				//g.setStroke(Color.RED); g.strokeRect(getBoundsInLocal().getMinX(), getBoundsInLocal().getMinY(), getBoundsInLocal().getWidth(), getBoundsInLocal().getHeight());
 			}
 			else
 				g.fillOval(path[0][0], path[0][1], path[1][0], path[1][1]);
@@ -347,6 +400,11 @@ public interface Form  {
 		@Override
 		public Object getPath() {
 			return path;
+		}
+		
+		@Override
+		public Bounds getBounds() {
+			return getBoundsInLocal();
 		}
 	}
 }

@@ -6,8 +6,6 @@ import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Rectangle2D;
 
-import javafx.scene.shape.Shape;
-
 public abstract class RectangularAreaShape extends AreaShape {
 	private Rectangle2D theShape = new Rectangle2D();
 	
@@ -43,7 +41,7 @@ public abstract class RectangularAreaShape extends AreaShape {
  		shadowable.cast(bck.graphics2D(), theShape());
 	}
 	
-	public Shape theShape() {
+	public Form theShape() {
 		return theShape;
 	}
 }

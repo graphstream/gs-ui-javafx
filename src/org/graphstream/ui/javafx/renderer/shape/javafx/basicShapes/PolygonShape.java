@@ -6,8 +6,8 @@ import org.graphstream.ui.javafx.Backend;
 import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.renderer.AreaSkeleton;
 import org.graphstream.ui.javafx.renderer.Skeleton;
-import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.PolygonalShape;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
+import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.PolygonalShape;
 import org.graphstream.ui.javafx.util.AttributeUtils;
 
 public class PolygonShape extends PolygonalShape implements AttributeUtils {

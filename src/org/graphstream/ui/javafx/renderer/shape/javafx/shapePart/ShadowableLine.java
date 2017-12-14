@@ -9,7 +9,6 @@ import org.graphstream.ui.javafx.util.ColorManager;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 
 public class ShadowableLine {
 	/** The shadow paint. */
@@ -33,11 +32,11 @@ public class ShadowableLine {
      * Render the shadow.
      * @param g The Java2D graphics.
      */
-   	public void cast( GraphicsContext g, Shape shape ) {
+   	public void cast( GraphicsContext g, Form shape ) {
    		g.setStroke(theShadowColor);
    		g.setFill(theShadowColor);
-   		shadowStroke.stroke( theShadowWidth , ((Form)shape) ).changeStrokeProperties(g);
-   	  	((Form)shape).drawByPoints(g, true);
+   		shadowStroke.stroke( theShadowWidth , shape ).changeStrokeProperties(g);
+   	  	shape.drawByPoints(g, true);
    	}
  
     /** Configure all the static parts needed to cast the shadow of the shape. */

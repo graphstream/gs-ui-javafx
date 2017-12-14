@@ -2,6 +2,7 @@ package org.graphstream.ui.javafx.renderer.shape.javafx;
 
 import org.graphstream.ui.graphicGraph.stylesheet.Colors;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
+import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
 import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.javafx.util.ImageCache;
 
@@ -14,7 +15,6 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
-import javafx.scene.shape.Shape;
 
 public interface ShapePaint {
 	
@@ -207,8 +207,8 @@ public interface ShapePaint {
 	public abstract class ShapeAreaPaint extends Area implements ShapePaint {
 		public abstract Paint paint(double xFrom, double yFrom, double xTo, double yTo, double px2gu ) ;
 		
-		public Paint paint(Shape shape, double px2gu) {
-			Bounds s = shape.getBoundsInLocal();
+		public Paint paint(Form shape, double px2gu) {
+			Bounds s = shape.getBounds();
 			
 			return paint(s.getMinX(), s.getMinY(), s.getMaxX(), s.getMaxY(), px2gu) ;
 		}

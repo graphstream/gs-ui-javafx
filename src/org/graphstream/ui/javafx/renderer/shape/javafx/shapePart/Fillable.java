@@ -14,7 +14,6 @@ import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Shape;
 
 public class Fillable {
 	
@@ -32,24 +31,24 @@ public class Fillable {
 	 * @param g The Java2D graphics.
 	 * @param dynColor The value between 0 and 1 allowing to know the dynamic plain color, if any.
 	 * @param shape The shape to fill. */
-	public void fill(GraphicsContext g, double dynColor, Color optColor, Shape shape, FxDefaultCamera camera) {
+	public void fill(GraphicsContext g, double dynColor, Color optColor, Form shape, FxDefaultCamera camera) {
 		if(plainFast) {
 			g.setStroke(theFillColor);
 			g.setFill(theFillColor);
-			((Form)shape).drawByPoints(g, false);
+			shape.drawByPoints(g, false);
 	    } 
 		else {
 			if ( fillPaint instanceof ShapeAreaPaint ) {	
 				Paint p = ((ShapeAreaPaint)fillPaint).paint(shape, camera.getMetrics().ratioPx2Gu) ;
 				g.setFill(p);
 				g.setStroke(p);
-				((Form)shape).drawByPoints(g, false);
+				shape.drawByPoints(g, false);
 			}
 			else if (fillPaint instanceof ShapeColorPaint ) {
 				Paint p = ((ShapeColorPaint)fillPaint).paint(dynColor, optColor);
 				g.setFill(p);
 				g.setStroke(p);
-				((Form)shape).drawByPoints(g, false);
+				shape.drawByPoints(g, false);
 			}
 	    }
 	}
@@ -57,7 +56,7 @@ public class Fillable {
 	/** Fill the shape.
 	 * @param g The Java2D graphics.
 	 * @param shape The shape to fill. */
- 	public void fill(GraphicsContext g, Shape shape, FxDefaultCamera camera) {
+ 	public void fill(GraphicsContext g, Form shape, FxDefaultCamera camera) {
  		fill( g, theFillPercent, theFillColor, shape, camera );
  	}
 

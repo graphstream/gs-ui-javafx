@@ -1,14 +1,13 @@
 package org.graphstream.ui.javafx.renderer.shape.javafx.basicShapes;
 
-import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.RectangularAreaShape;
+import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Ellipse2D;
-
-import javafx.scene.shape.Shape;
+import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.RectangularAreaShape;
 
 public class CircleShape extends RectangularAreaShape {
-	private Shape theShape = new Ellipse2D();
+	private Form theShape = new Ellipse2D();
 	
-	public Shape theShape() {
+	public Form theShape() {
 		return theShape;
 	}
 }

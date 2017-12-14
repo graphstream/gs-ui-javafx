@@ -7,7 +7,6 @@ import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 
 public class Strokable {
     /** The stroke color. */
@@ -20,13 +19,13 @@ public class Strokable {
 	public double theStrokeWidth = 0.0 ;
 
  	/** Paint the stroke of the shape. */
-	public void stroke( GraphicsContext g, Shape shape ) {
+	public void stroke( GraphicsContext g, Form shape ) {
 		if(theStroke != null) {
-			theStroke.stroke( theStrokeWidth, ((Form)shape)).changeStrokeProperties(g);
+			theStroke.stroke( theStrokeWidth, shape).changeStrokeProperties(g);
 
 			g.setStroke(strokeColor);
 			g.setFill(strokeColor);
-			((Form)shape).drawByPoints(g, true);
+			shape.drawByPoints(g, true);
 		}	  
 	}
 	

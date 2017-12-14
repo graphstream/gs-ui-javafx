@@ -9,12 +9,11 @@ import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.CubicCurv
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Line2D;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.shape.Shape;
 
 public class LineShape extends LineConnectorShape {
 	protected Line2D theShapeL = new Line2D();
 	protected CubicCurve2D theShapeC = new CubicCurve2D();
-	protected Shape theShape = null;
+	protected Form theShape = null;
 			
 	@Override
 	public void make(Backend backend, FxDefaultCamera camera) {

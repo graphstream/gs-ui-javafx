@@ -4,12 +4,12 @@ import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.javafx.Backend;
 import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.renderer.Skeleton;
-import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.RectangularAreaShape;
+import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Line2D;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Rectangle2D;
+import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.RectangularAreaShape;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.shape.Shape;
 
 public class FreePlaneNodeShape extends RectangularAreaShape {
 	Rectangle2D theShape = new Rectangle2D();
@@ -50,7 +50,7 @@ public class FreePlaneNodeShape extends RectangularAreaShape {
 	}
 	
 	@Override
-	public Shape theShape() {
+	public Form theShape() {
 		return theShape;
 	} 
 	

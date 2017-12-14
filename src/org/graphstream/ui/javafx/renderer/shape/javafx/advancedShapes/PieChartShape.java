@@ -53,7 +53,6 @@ public class PieChartShape extends FillableMulticolored implements Shape, Attrib
 	@Override
 	public void configureForElement(Backend bck, GraphicElement element, Skeleton skel,
 			FxDefaultCamera camera) {
-		GraphicsContext g = bck.graphics2D();
 		decorable.configureDecorableForElement(bck, camera, element, skel);
 		area.configureAreaForElement(bck, camera, (AreaSkeleton)skel, element, decorable.theDecor);		
 	}

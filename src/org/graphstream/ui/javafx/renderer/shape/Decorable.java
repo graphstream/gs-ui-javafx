@@ -9,6 +9,7 @@ import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.IconAndText;
 import org.graphstream.ui.javafx.renderer.shape.javafx.ShapeDecor;
+import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
 
 import javafx.geometry.Bounds;
 
@@ -21,16 +22,16 @@ public class Decorable extends HasSkel {
 	public ShapeDecor theDecor = null ;
   
  	/** Paint the decorations (text and icon). */
- 	public void decorArea(Backend backend, FxDefaultCamera camera, IconAndText iconAndText, GraphicElement element, javafx.scene.shape.Shape shape ) {
+ 	public void decorArea(Backend backend, FxDefaultCamera camera, IconAndText iconAndText, GraphicElement element, Form shape ) {
  	  	boolean visible = true ;
  	  	if( element != null ) visible = camera.isTextVisible( element );
  	  	if( theDecor != null && visible ) {
- 	  		Bounds bounds = shape.getBoundsInLocal();
+ 	  		Bounds bounds = shape.getBounds();
  	  		theDecor.renderInside(backend, camera, iconAndText, bounds.getMinX(), bounds.getMinY(), bounds.getMaxX(), bounds.getMaxY() );
  	  	}
  	}
 	
-	public void decorConnector(Backend backend, FxDefaultCamera camera, IconAndText iconAndText, GraphicElement element, javafx.scene.shape.Shape shape ) {
+	public void decorConnector(Backend backend, FxDefaultCamera camera, IconAndText iconAndText, GraphicElement element, Form shape ) {
 		boolean visible = true ;
  	  	if( element != null ) visible = camera.isTextVisible( element );
  	  	if( theDecor != null && visible ) {
@@ -44,7 +45,7 @@ public class Decorable extends HasSkel {
  	  			}
  	  		}
  	  		else {
- 	 	  		Bounds bounds = shape.getBoundsInLocal();
+ 	 	  		Bounds bounds = shape.getBounds();
  	  			theDecor.renderAlong(backend, camera, iconAndText, bounds.getMinX(), bounds.getMinY(), bounds.getMaxX(), bounds.getMaxY() );
  	  		}
  	  	}
