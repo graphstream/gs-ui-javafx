@@ -199,8 +199,8 @@ public interface ShapePaint {
 				double green  = ( ((color0.getGreen()*255)*(1-div)) + ((color1.getGreen()*255)*div) ) / 255f;
 				double blue   = ( ((color0.getBlue()*255) *(1-div)) + ((color1.getBlue()*255) *div) ) / 255f;
 				double alpha  = ( ((color0.getOpacity()*255)*(1-div)) + ((color1.getOpacity()*255)*div) ) / 255f;
-							
-				c = new Color( (int)red, (int)green, (int)blue, (int)alpha );
+				
+				c = new Color( red, green, blue, alpha );
 			}
 		}
 	 

@@ -50,7 +50,7 @@ public class DemoViewerFxEdgeSelection implements ViewerListener {
 	public static FxViewPanel viewPanel;
 	
 	public static void main(String args[]) {
-		System.setProperty("org.graphstream.ui", "org.graphstream.ui.fx_viewer.util.Display");		
+		System.setProperty("org.graphstream.ui", "org.graphstream.ui.javafx.util.Display");		
 
 		Graph graph = new MultiGraph("main graph");
 		viewPanel = (FxViewPanel) graph.display(true).getDefaultView();
