@@ -25,8 +25,6 @@ public class FillableLine {
 				g.setStroke(theFillColor);
 				g.setFill(theFillColor);
 				shape.drawByPoints(g, false);
-				
-				//Mettre une epaisseur possible pour line ? Oui mais y'a un souci alors
 		    }
 		    else {
 		    	g.setStroke(theFillColor);

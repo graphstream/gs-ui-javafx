@@ -41,9 +41,9 @@ import org.graphstream.graph.Node;
 import org.graphstream.stream.ProxyPipe;
 import org.graphstream.stream.Source;
 import org.graphstream.stream.thread.ThreadProxyPipe;
-import org.graphstream.ui.fx_viewer.basicRenderer.FxBasicGraphRenderer;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphicGraph;
+import org.graphstream.ui.javafx.FxFullGraphRenderer;
 import org.graphstream.ui.layout.Layout;
 import org.graphstream.ui.layout.LayoutRunner;
 import org.graphstream.ui.layout.Layouts;
@@ -317,7 +317,7 @@ public class FxViewer implements Viewer {
 
 	// Access
 	public static GraphRenderer<?, ?> newGraphRenderer() {
-		return new FxBasicGraphRenderer();
+		return new FxFullGraphRenderer();
 	}
 
 

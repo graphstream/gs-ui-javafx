@@ -266,10 +266,7 @@ public interface Form  {
 			g.bezierCurveTo(getControlX1(),getControlY1(), getControlX2(), getControlY2(), getEndX(), getEndY());
 			g.closePath();
 			
-			if (stroke)
-				g.stroke();
-			else
-				g.fill();
+			g.stroke();
 		}
 
 		@Override

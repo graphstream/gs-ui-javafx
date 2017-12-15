@@ -19,7 +19,7 @@ import org.graphstream.ui.view.ViewerPipe;
 
 import javafx.application.Application;
 
-public class TestStars implements  ViewerListener {
+public class TestStars implements ViewerListener {
 	public static void main(String[] args) {
 		(new TestStars()).run();
 	}

@@ -120,14 +120,17 @@ public interface ShapePaint {
 			fractions[nFraction-1] = 1f ; 
 		}
 		
-		
 		for (int i = 0 ; i < theColors.size() ; i++) {
-			
-			if( nFraction < predefFractions.length ) {
-				colors[i] = new Stop(predefFractions[nFraction][i], ColorManager.getColor(theColors.get(i))) ;
+			if ( nFraction < 2 ) {
+				colors[i] = new Stop(i, ColorManager.getColor(theColors.get(i))) ;
 			}
 			else {
-				colors[i] = new Stop(fractions[i], ColorManager.getColor(theColors.get(i))) ;
+				if( nFraction < predefFractions.length ) {
+					colors[i] = new Stop(predefFractions[nFraction][i], ColorManager.getColor(theColors.get(i))) ;
+				}
+				else {
+					colors[i] = new Stop(fractions[i], ColorManager.getColor(theColors.get(i))) ;
+				}
 			}
 		}
 

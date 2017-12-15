@@ -11,9 +11,9 @@ import org.graphstream.ui.javafx.renderer.ConnectorSkeleton;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.AreaOnConnectorShape;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
+import org.graphstream.ui.javafx.util.AttributeUtils.Tuple;
 import org.graphstream.ui.javafx.util.CubicCurve;
 import org.graphstream.ui.javafx.util.ShapeUtil;
-import org.graphstream.ui.javafx.util.AttributeUtils.Tuple;
 
 import javafx.scene.canvas.GraphicsContext;
 

@@ -323,7 +323,7 @@ class FxTextBox extends TextBox {
 	@Override
 	public double getDescent() {
 		if ( text != null ) {
-			return text.getBoundsInLocal().getHeight()/2 ;
+			return (text.getBoundsInLocal().getHeight()/3) ;
 		}
 		else
 			return 0 ;
@@ -350,7 +350,7 @@ class FxTextBox extends TextBox {
 			g.setStroke(textColor);
 			g.setFill(textColor);
 			g.setFont(font);
-			g.fillText(text.getText(), xLeft+1, yBottom-5);
+			g.fillText(text.getText(), xLeft, yBottom);
 		}
 	}
 }
