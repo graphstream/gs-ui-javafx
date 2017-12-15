@@ -9,14 +9,14 @@ import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.AreaOnConnectorShape;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
+import org.graphstream.ui.javafx.util.AttributeUtils.Tuple;
 import org.graphstream.ui.javafx.util.CubicCurve;
 import org.graphstream.ui.javafx.util.ShapeUtil;
-import org.graphstream.ui.javafx.util.AttributeUtils.Tuple;
 
 import javafx.scene.canvas.GraphicsContext;
 
 public class DiamondOnEdge extends AreaOnConnectorShape {
-	Path2D theShape = new Path2D(0);
+	Path2D theShape = new Path2D(0, true);
 	
 	@Override
 	public void make(Backend backend, FxDefaultCamera camera) {
@@ -54,7 +54,7 @@ public class DiamondOnEdge extends AreaOnConnectorShape {
 		
 		// Create a polygon.
 		
-		theShape = new Path2D(5);
+		theShape = new Path2D(5, true);
 		theShape.moveTo( p1.x , p1.y );
 		theShape.lineTo( p1.x - dir.x()/2 + per.x(), p1.y - dir.y()/2 + per.y() );
 		theShape.lineTo( p1.x - dir.x(), p1.y - dir.y() );
@@ -85,7 +85,7 @@ public class DiamondOnEdge extends AreaOnConnectorShape {
   
 		// Create a polygon.
 		
-		theShape = new Path2D(5);
+		theShape = new Path2D(5, true);
 		theShape.moveTo( x , y );
 		theShape.lineTo( x - theDirection.x() + perp.x(), y - theDirection.y() + perp.y() );	
 		theShape.lineTo( x - theDirection.x()*2, y - theDirection.y()*2 );

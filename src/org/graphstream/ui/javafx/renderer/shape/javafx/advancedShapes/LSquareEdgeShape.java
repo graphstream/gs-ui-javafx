@@ -12,7 +12,7 @@ import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
 import javafx.scene.canvas.GraphicsContext;
 
 public class LSquareEdgeShape extends LineConnectorShape {
-	Path2D theShape = new Path2D(0);
+	Path2D theShape = new Path2D(0, true);
 
 	@Override
 	public void make(Backend backend, FxDefaultCamera camera) {
@@ -43,7 +43,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
 		double c2x = skel.apply(2).x + sox;
 		double c2y = skel.apply(2).y + soy;
 
-        theShape = new Path2D(5);
+        theShape = new Path2D(5, true);
         theShape.moveTo(fromx, fromy);
         theShape.curveTo(c1x, c1y, c2x, c2y, tox, toy);
 	}
@@ -58,7 +58,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
 		double c2x = skel.apply(2).x + sox;
 		double c2y = skel.apply(2).y + soy;
 
-        theShape = new Path2D(5);
+        theShape = new Path2D(5, true);
         theShape.moveTo(fromx, fromy);
         theShape.curveTo(c1x, c1y, c2x, c2y, tox, toy);
 	}
@@ -85,7 +85,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
 			skel.setPoly(pts);
 		}
 		
-		theShape = new Path2D(5);
+		theShape = new Path2D(5, true);
 		theShape.moveTo(from.x, from.y);
 		theShape.lineTo(inter.x, inter.y);
 		theShape.lineTo(to.x, to.y);

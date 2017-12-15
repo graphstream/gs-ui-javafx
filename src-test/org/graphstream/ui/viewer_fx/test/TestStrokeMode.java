@@ -36,28 +36,34 @@ public class TestStrokeMode {
 		"	size: 20px;"+
 		"}"+
 		"node#A {"+
+		"	shape: triangle;"+
 		"	stroke-mode: plain;"+
 		"}"+
 		"node#B {"+
-		"	shape: box;"+
-		"	stroke-mode: double;"+
+		"	shape: cross;"+
+		"	stroke-mode: plain;"+
 		"}"+
 		"node#C {"+
-		"	stroke-mode: double;"+
+		"	shape: diamond;"+
+		"	stroke-mode: plain;"+
 		"}"+
 		"node#D {"+
 		"	fill-color: gray; "+
 		"	stroke-color: blue; "+
 		"}"+
 		"edge {"+
-		"	shape: cubic-curve;"+
-		"	fill-mode: none;"+
+		//"	fill-mode: none;"+
+		"	shape: line;"+
 		"	size: 0px;"+
 		"	stroke-mode: dashes;"+
 		"	stroke-width: 1px;"+
 		"	stroke-color: red;"+
+		"	fill-color: red;"+
 		"}"+
 		"edge#BC {"+	
+		"	shape: blob; size: 3px; fill-color: #444;"+
+		"}"+
+		"edge#AD {"+	
 		"	stroke-mode: double;"+
 		"}";
 }

@@ -101,20 +101,23 @@ public interface Form  {
 	}
 	
 	public class Path2D extends Path implements Form {
-		PathElement[] path ;
-		int size ;
+		private PathElement[] path ;
+		private int size ;
 		
-		double minX, minY, maxX, maxY ; // Bounds
+		private double minX, minY, maxX, maxY ; // Bounds
+		private boolean fillable;
 		
-		public Path2D(int nbElement) {
+		public Path2D(int nbElement, boolean fillable) {
 			super();
 			this.size = 0;
 			this.path = new PathElement[nbElement];
 			
-			this.minX = Double.MAX_VALUE;
-			this.maxX = Double.MIN_VALUE;
-			this.minY = Double.MAX_VALUE;
-			this.maxY = Double.MIN_VALUE;
+			this.minX = Double.POSITIVE_INFINITY;
+			this.maxX = Double.NEGATIVE_INFINITY;
+			this.minY = Double.POSITIVE_INFINITY;
+			this.maxY = Double.NEGATIVE_INFINITY;
+			
+			this.fillable = fillable ;
 		}
 		
 		public void moveTo(double x, double y) {
@@ -206,11 +209,11 @@ public interface Form  {
 					throw new RuntimeException("Shape unknown "+path[i]);
 				}
 			}
-			
-			if (stroke)
-				g.stroke();
-			else
+						
+			if (!stroke && fillable)
 				g.fill();
+			else
+				g.stroke();
 		}
 		
 		@Override
@@ -242,7 +245,7 @@ public interface Form  {
 	}
 
 	public class CubicCurve2D extends CubicCurve implements Form {
-		double[][] path = new double[4][2];
+		private double[][] path = new double[4][2];
 		
 		public CubicCurve2D() {
 			super();
@@ -291,7 +294,7 @@ public interface Form  {
 	}
 	
 	public class Line2D extends Line implements Form {
-		double[][] path = new double[2][2];
+		private double[][] path = new double[2][2];
 
 		public Line2D() {
 			super();
@@ -336,7 +339,7 @@ public interface Form  {
 	}
 
 	public class Arc2D extends Arc implements Form {
-		Object[] path = new Object[8];
+		private Object[] path = new Object[8];
 		
 		public void setArcByCenter(double x, double y, double rad, double angleSt, double angleLen, ArcType type) {
 			path[0] = x-rad ; path[1] = y-rad ;
@@ -388,7 +391,7 @@ public interface Form  {
 		private boolean doubleStroke = false ;
 		private Paint fillColor = null ;
 		
-		double[][] path = new double[2][2];
+		private double[][] path = new double[2][2];
 		
 		public void setFrameFromCenter(double centerX, double centerY, double cornerX, double cornerY) {
 			setCenterX(centerX);

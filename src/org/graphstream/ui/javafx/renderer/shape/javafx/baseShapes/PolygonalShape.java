@@ -9,7 +9,7 @@ import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
 import javafx.scene.canvas.GraphicsContext;
 
 public abstract class PolygonalShape extends AreaShape {
-	protected Path2D theShape = new Path2D(0);
+	protected Path2D theShape = new Path2D(0, true);
  
  	public void renderShadow(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skel) {
  		makeShadow(bck, camera);

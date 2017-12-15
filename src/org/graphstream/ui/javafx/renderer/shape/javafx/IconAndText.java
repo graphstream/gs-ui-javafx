@@ -350,7 +350,7 @@ class FxTextBox extends TextBox {
 			g.setStroke(textColor);
 			g.setFill(textColor);
 			g.setFont(font);
-			g.fillText(text.getText(), xLeft, yBottom-6);
+			g.fillText(text.getText(), xLeft+1, yBottom-5);
 		}
 	}
 }

@@ -14,7 +14,7 @@ public class TriangleShape extends PolygonalShape {
 		double w2 = area.theSize.x / 2;
 		double h2 = area.theSize.y / 2;
 		
-		theShape = new Path2D(5);
+		theShape = new Path2D(5, true);
 		theShape().moveTo( x,      y + h2 );
 		theShape().lineTo( x + w2, y - h2 );
 		theShape().lineTo( x - w2, y - h2 );
@@ -28,7 +28,7 @@ public class TriangleShape extends PolygonalShape {
 		double w2 = ( area.theSize.x + shadowable.theShadowWidth.x ) / 2;
 		double h2 = ( area.theSize.y + shadowable.theShadowWidth.y ) / 2;
 		
-		theShape = new Path2D(5);
+		theShape = new Path2D(5, true);
 		theShape().moveTo( x,      y + h2 );
 		theShape().lineTo( x + w2, y - h2 );
 		theShape().lineTo( x - w2, y - h2 );

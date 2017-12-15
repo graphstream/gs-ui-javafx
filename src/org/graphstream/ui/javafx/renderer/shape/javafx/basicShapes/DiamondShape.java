@@ -14,7 +14,7 @@ public class DiamondShape extends PolygonalShape {
 		double w2 = area.theSize.x / 2;
 		double h2 = area.theSize.y / 2;
 		
-		theShape = new Path2D(10);
+		theShape = new Path2D(10, true);
 		theShape().moveTo( x - w2, y );
 		theShape().lineTo( x, y - h2 );
 		theShape().lineTo( x + w2, y );
@@ -29,7 +29,7 @@ public class DiamondShape extends PolygonalShape {
 		double w2 = ( area.theSize.x + shadowable.theShadowWidth.x ) / 2;
 		double h2 = ( area.theSize.y + shadowable.theShadowWidth.y ) / 2;
 		
-		theShape = new Path2D(10);
+		theShape = new Path2D(10, true);
 		theShape().moveTo( x - w2, y );
 		theShape().lineTo( x, y - h2 );
 		theShape().lineTo( x + w2, y );
