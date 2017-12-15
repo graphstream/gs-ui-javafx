@@ -20,6 +20,10 @@ import javafx.scene.shape.PathElement;
 import javafx.scene.shape.QuadCurveTo;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * The interface and the classes that implement it used by all shapes in renderer.shape.javafx 
+ * for create and display a javafx.scene.shape.Shape in a GraphicsContext.
+ */
 public interface Form  {	
 	public void drawByPoints(GraphicsContext g, boolean stroke) ;
 	public void setFrame(double x, double y, double w, double h);

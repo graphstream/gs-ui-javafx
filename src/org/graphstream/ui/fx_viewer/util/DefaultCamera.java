@@ -32,7 +32,6 @@
 package org.graphstream.ui.fx_viewer.util;
 
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -511,7 +510,7 @@ public class DefaultCamera implements Camera {
 
 	/**
 	 * Set the camera view in the given graphics and backup the previous
-	 * transform of the graphics. Call {@link #popView(Graphics2D)} to restore
+	 * transform of the graphics. Call {@link #popView(GraphicsContext)} to restore
 	 * the saved transform. You can only push one time the view.
 	 *
 	 * @param g2
@@ -537,7 +536,7 @@ public class DefaultCamera implements Camera {
 
 	/**
 	 * Restore the transform that was used before
-	 * {@link #pushView(GraphicGraph, Graphics2D)} is used.
+	 * {@link #pushView(GraphicGraph, GraphicsContext)} is used.
 	 *
 	 * @param g2
 	 *            The Swing graphics to restore.

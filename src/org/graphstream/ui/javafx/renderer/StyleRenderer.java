@@ -1,12 +1,12 @@
 package org.graphstream.ui.javafx.renderer;
 
-import java.awt.Graphics2D;
-
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.javafx.Backend;
 import org.graphstream.ui.javafx.FxDefaultCamera;
 import org.graphstream.ui.javafx.FxFullGraphRenderer;
+
+import javafx.scene.canvas.GraphicsContext;
 
 public abstract class StyleRenderer implements GraphicElement.SwingElementRenderer {
 	
@@ -150,7 +150,7 @@ public abstract class StyleRenderer implements GraphicElement.SwingElementRender
 		renderShadow(bck, camera, element);
 	};
 	
-	/** Called during rendering in place of {@link #renderElement(Graphics2D, FxDefaultCamera, GraphicElement)}
+	/** Called during rendering in place of {@link #renderElement(GraphicsContext, FxDefaultCamera, GraphicElement)}
 	 * to signal that the given element is not inside the view. The renderElement() method will be
 	 * called as soon as the element becomes visible anew.
 	 * @param bck The rendering back-end.

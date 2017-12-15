@@ -5,6 +5,9 @@ import org.graphstream.ui.graphicGraph.stylesheet.Style;
 
 import javafx.scene.paint.Color;
 
+/**
+ * Static class used for translate awt color to javafx
+ */
 public class ColorManager {
 	/**
 	 * Get fill awt color in styleGroup and convert to javafx Color

@@ -158,6 +158,9 @@ public class BackendJ2D implements Backend {
 	}
 
 	@Override
+	/**
+	 * Antialiasing and Quality are set directly in the main Application (see DefaultApplication.class)
+	 */
 	public void setAntialias(Boolean on) {
 		/*if(on) {
 			g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,    RenderingHints.VALUE_STROKE_PURE);

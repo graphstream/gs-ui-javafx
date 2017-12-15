@@ -12,6 +12,9 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * Default Application used by Display for visualize the graph. 
+ */
 public class DefaultApplication extends Application {
 	private static Graph graph ;
 	private static Stage stage ;

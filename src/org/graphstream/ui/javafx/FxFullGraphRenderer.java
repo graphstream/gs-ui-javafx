@@ -90,7 +90,7 @@ import javafx.scene.layout.Region;
  * and renders it.
  * 
  * The renderer uses a backend so that it can adapt to multiple rendering
- * targets (here Swing and OpenGL). As the shapes are finally responsible
+ * targets. As the shapes are finally responsible
  * for drawing the graph, the backend is also responsible for the shape
  * creation.
  */
@@ -375,7 +375,7 @@ public class FxFullGraphRenderer implements GraphRenderer<Region, GraphicsContex
     	if(oldStyle != null) {
     		SwingElementRenderer renderer = oldStyle.getRenderer(FxFullGraphRenderer.DEFAULT_RENDERER);
 
-    		// Not implemented yet
+    		/** Not implemented yet !**/
 	    	/*if((renderer != null ) && renderer instanceof FxComponentRenderer)
 	    		((FxComponentRenderer)renderer).unequipElement((GraphicElement)element);*/
     	}

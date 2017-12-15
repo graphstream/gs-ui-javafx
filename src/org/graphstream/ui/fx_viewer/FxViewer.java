@@ -79,7 +79,7 @@ import javafx.util.Duration;
  * </p>
  * 
  * <p>
- * <u>Once created, the viewer runs in a loop inside the Swing thread. You
+ * <u>Once created, the viewer runs in a loop inside the UI thread. You
  * cannot call methods on it directly if you are not in this thread</u>. The
  * only operation that you can use in other threads is the constructor, the
  * {@link #addView(View)}, {@link #removeView(String)} and the {@link #close()}
@@ -90,7 +90,7 @@ import javafx.util.Duration;
  * Some constructors allow a {@link ProxyPipe} as argument. If given, the
  * graphic graph is made listener of this pipe and the pipe is "pumped" during
  * the view loop. This allows to run algorithms on a graph in the main thread
- * (or any other thread) while letting the viewer run in the swing thread.
+ * (or any other thread) while letting the viewer run in the ui thread.
  * </p>
  * 
  * <p>
@@ -120,7 +120,7 @@ public class FxViewer implements Viewer {
 
 	/**
 	 * How does the viewer synchronise its internal graphic graph with the graph
-	 * displayed. The graph we display can be in the Swing thread (as will be
+	 * displayed. The graph we display can be in the UI thread (as will be
 	 * the viewer, therefore in the same thread as the viewer), in another
 	 * thread, or on a distant machine.
 	 */
@@ -212,10 +212,10 @@ public class FxViewer implements Viewer {
 	}
 
 	/**
-	 * New viewer on an existing graph. The viewer always run in the Swing
+	 * New viewer on an existing graph. The viewer always run in the UI
 	 * thread, therefore, you must specify how it will take graph events from
 	 * the graph you give. If the graph you give will be accessed only from the
-	 * Swing thread use ThreadingModel.GRAPH_IN_GUI_THREAD. If the graph you use
+	 * UI thread use ThreadingModel.GRAPH_IN_GUI_THREAD. If the graph you use
 	 * is accessed in another thread use ThreadingModel.GRAPH_IN_ANOTHER_THREAD.
 	 * This last scheme is more powerful since it allows to run algorithms on
 	 * the graph in parallel with the viewer.
@@ -355,7 +355,7 @@ public class FxViewer implements Viewer {
 
 	/**
 	 * The underlying graphic graph. Caution : Use the returned graph only in
-	 * the Swing thread !!
+	 * the UI thread !!
 	 */
 	public GraphicGraph getGraphicGraph() {
 		return graph;
@@ -506,7 +506,7 @@ public class FxViewer implements Viewer {
 	/**
 	 * Called on a regular basis by the timer. Checks if some events occurred
 	 * from the graph pipe or from the layout pipe, and if the graph changed,
-	 * triggers a repaint. Never call this method, it is called by a Swing Timer
+	 * triggers a repaint. Never call this method, it is called by a UI Timer
 	 * automatically.
 	 */
 	public void actionPerformed() {
@@ -590,7 +590,7 @@ public class FxViewer implements Viewer {
 	 * runs in its own thread, and the main graph is in another thread, xyz
 	 * attribute change will be disabled until a listener is added.
 	 * 
-	 * When the viewer is created to be used only in the swing thread, this
+	 * When the viewer is created to be used only in the ui thread, this
 	 * feature is always on.
 	 */
 	public void enableXYZfeedback(boolean on) {

@@ -40,9 +40,9 @@ import javafx.scene.layout.StackPane;
 /**
  * A view on a graphic graph.
  * 
- * Basically a view is a Swing panel where a
+ * Basically a view is a Stack panel where a
  * {@link org.graphstream.ui.view.GraphRenderer} renders the graphic graph. If
- * you are in the Swing thread, you can change the view on the graphic graph
+ * you are in the UI thread, you can change the view on the graphic graph
  * using methods to translate, zoom and rotate the view.
  */
 public abstract class FxViewPanel extends StackPane implements View {
@@ -57,7 +57,7 @@ public abstract class FxViewPanel extends StackPane implements View {
 	 * New view.
 	 *
 	 * @param identifier
-	 *            The view unique identifier.
+	 * The view unique identifier.
 	 */
 	public FxViewPanel(final String identifier) {
 
