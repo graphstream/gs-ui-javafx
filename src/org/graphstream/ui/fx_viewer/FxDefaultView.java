@@ -31,6 +31,7 @@
  */
 package org.graphstream.ui.fx_viewer;
 
+import java.awt.Graphics2D;
 import java.util.Collection;
 import java.util.EnumSet;
 
@@ -83,7 +84,7 @@ import javafx.scene.canvas.GraphicsContext;
  * <p>
  * All the painting, by default, is deferred to a {@link GraphRenderer}
  * instance. This mechanism allows developers that do not want to mess with the
- * viewer/view mechanisms to render a graph in any Swing surface.
+ * viewer/view mechanisms to render a graph in any javafx surface.
  * </p>
  * 
  * <h3>The optional frame handling</h3>

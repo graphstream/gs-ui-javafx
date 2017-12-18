@@ -2,7 +2,6 @@ package org.graphstream.ui.fx_viewer.util;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.ui.fx_viewer.FxDefaultView;
-import org.graphstream.ui.view.View;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -13,6 +12,9 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * Default Application used by Display for visualize the graph. 
+ */
 public class DefaultApplication extends Application {
 	private static Graph graph ;
 	private static Stage stage ;
@@ -59,7 +61,7 @@ public class DefaultApplication extends Application {
 		if (title != null)
 			stage.setTitle(title);
 		else
-			stage.setTitle("GraphStream Fx");
+			stage.setTitle("GraphStream FX");
 		
 	}
 	

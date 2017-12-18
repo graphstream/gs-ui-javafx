@@ -32,7 +32,7 @@
 package org.graphstream.ui.fx_viewer.basicRenderer;
 
 import org.graphstream.graph.Element;
-import org.graphstream.ui.fx_viewer.util.FxDefaultCamera;
+import org.graphstream.ui.fx_viewer.util.DefaultCamera;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.GraphicSprite;
@@ -40,6 +40,7 @@ import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.StyleGroup.ElementEvents;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.Units;
+import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.view.Camera;
 
 import javafx.geometry.Point2D;
@@ -202,15 +203,6 @@ public abstract class FxElementRenderer {
 		textFont = Font.font(fontName, textSize);
 	}
 	
-	/**
-	 * Get awt color in group and convert to javafx Color
-	 * @param group
-	 * @param id
-	 * @return javafx.scene.paint.Color
-	 */
-	public static Color getFillColor(StyleGroup group, int id) {
-		return  Color.rgb(group.getFillColor(id).getRed(), group.getFillColor(id).getGreen(), group.getFillColor(id).getBlue());
-	}
 	
 	protected void renderText(StyleGroup group, GraphicsContext g, Camera camera,
 			GraphicElement element) {
@@ -225,7 +217,7 @@ public abstract class FxElementRenderer {
 
 			if (element instanceof GraphicSprite) {
 				s   = (GraphicSprite) element;
-				pos = ((FxDefaultCamera) camera).getSpritePosition(s,
+				pos = ((DefaultCamera) camera).getSpritePosition(s,
 					new Point2D(0, 0), StyleConstants.Units.GU);
 			}
 
@@ -266,7 +258,7 @@ public abstract class FxElementRenderer {
 	}
 
 	protected Color interpolateColor(StyleGroup group, GraphicElement element) {
-		Color color = getFillColor(group, 0);
+		Color color = ColorManager.getFillColor(group, 0);
 
 		int n = group.getFillColorCount();
 
@@ -280,7 +272,7 @@ public abstract class FxElementRenderer {
 					value = 1;
 
 				if (value == 1) {
-					color = getFillColor(group, n - 1); // Simplification,
+					color = ColorManager.getFillColor(group, n - 1); // Simplification,
 					// faster.
 				} else if (value != 0) // If value == 0, color is already set
 				// above.
@@ -291,8 +283,8 @@ public abstract class FxElementRenderer {
 					div = (value - (div * col)) / div;
 					// div = value / div - col;
 
-					Color color0 = getFillColor(group, col);
-					Color color1 = getFillColor(group, col + 1);
+					Color color0 = ColorManager.getFillColor(group, col);
+					Color color1 = ColorManager.getFillColor(group, col + 1);
 					double red = (((color0.getRed()*255) * (1 - div)) + ((color1
 							.getRed()*255) * div)) / 255f;
 					double green = (((color0.getGreen()*255) * (1 - div)) + ((color1

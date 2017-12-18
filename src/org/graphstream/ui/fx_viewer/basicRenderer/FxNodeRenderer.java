@@ -37,6 +37,7 @@ import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.FillMode;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.SizeMode;
+import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.graphicGraph.stylesheet.Values;
 import org.graphstream.ui.view.Camera;
 import org.graphstream.ui.view.util.GraphMetrics;
@@ -64,7 +65,7 @@ public class FxNodeRenderer extends FxElementRenderer {
 	@Override
 	protected void pushDynStyle(StyleGroup group, GraphicsContext g, Camera camera,
 			GraphicElement element) {
-		Color color = FxElementRenderer.getFillColor(group, 0);
+		Color color = ColorManager.getFillColor(group, 0);
 
 		if (element != null && group.getFillMode() == FillMode.DYN_PLAIN)
 			color = interpolateColor(group, element);
@@ -99,7 +100,7 @@ public class FxNodeRenderer extends FxElementRenderer {
 		w2 = width / 2;
 		h2 = height / 2;
 
-		Color color = FxElementRenderer.getFillColor(group, 0);
+		Color color = ColorManager.getFillColor(group, 0);
 
 		g.setFill(color);
         g.setStroke(color);

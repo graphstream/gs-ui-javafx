@@ -29,56 +29,54 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-C and LGPL licenses and that you accept their terms.
  */
-package org.graphstream.ui.viewer_fx.test;
-
-import java.util.EnumSet;
+package org.graphstream.ui.viewer.test;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
-import org.graphstream.ui.fx_viewer.FxViewPanel;
-import org.graphstream.ui.fx_viewer.FxViewer;
-import org.graphstream.ui.fx_viewer.util.FxMouseManager;
 import org.graphstream.ui.view.ViewerListener;
 import org.graphstream.ui.view.ViewerPipe;
-import org.graphstream.ui.view.util.InteractiveElement;
+
 /**
  * Test the viewer.
  */
-public class DemoViewerFxEdgeSelection implements ViewerListener {
-	protected static boolean loop = true;
-	public static FxViewPanel viewPanel;
-	
+public class DemoViewerFxColorInterpolation implements ViewerListener {
 	public static void main(String args[]) {
-		System.setProperty("org.graphstream.ui", "org.graphstream.ui.fx_viewer.util.Display");		
-
-		Graph graph = new MultiGraph("main graph");
-		viewPanel = (FxViewPanel) graph.display(true).getDefaultView();
-		FxViewer view = (FxViewer) viewPanel.getViewer();
+		// System.setProperty( "gs.ui.renderer",
+		// "org.graphstream.ui.j2dviewer.J2DGraphRenderer" );
+		System.setProperty("org.graphstream.ui", "org.graphstream.ui.javafx.util.Display");		
 		
-		view.getDefaultView().setMouseManager(new FxMouseManager(EnumSet.of(InteractiveElement.EDGE, InteractiveElement.NODE, InteractiveElement.SPRITE)));
-		ViewerPipe pipe = view.newViewerPipe();
+		new DemoViewerFxColorInterpolation();
+	}
+
+	protected boolean loop = true;
+
+	public DemoViewerFxColorInterpolation() {
+		Graph graph = new MultiGraph("main graph");
+		ViewerPipe pipe = graph.display(false).newViewerPipe();
 
 		// graph.setAttribute( "ui.quality" );
 		graph.setAttribute("ui.antialias");
 
-		pipe.addViewerListener(new DemoViewerFxEdgeSelection());
+		pipe.addViewerListener(this);
 
-		for (String nodeId : new String[]{"A", "B", "C"}) {
-			Node node = graph.addNode(nodeId);
-			node.setAttribute("ui.label", nodeId);
-
-		}
+		Node A = graph.addNode("A");
+		Node B = graph.addNode("B");
+		Node C = graph.addNode("C");
 
 		graph.addEdge("AB", "A", "B", true);
 		graph.addEdge("BC", "B", "C", true);
 		graph.addEdge("CA", "C", "A", true);
 
+		A.setAttribute("xyz", 0, 1, 0);
+		B.setAttribute("xyz", 1, 0, 0);
+		C.setAttribute("xyz", -1, 0, 0);
+
 		graph.setAttribute("ui.stylesheet", styleSheet);
 
 		float color = 0;
 		float dir = 0.01f;
-		
+
 		while (loop) {
 			try {
 				Thread.sleep(100);
@@ -98,11 +96,15 @@ public class DemoViewerFxEdgeSelection implements ViewerListener {
 				dir = -dir;
 			}
 
+			A.setAttribute("ui.color", color);
 			showSelection(graph);
 		}
+
+		System.out.printf("Bye bye ...%n");
+		System.exit(0);
 	}
 
-	protected static void showSelection(Graph graph) {
+	protected void showSelection(Graph graph) {
 		boolean selection = false;
 		StringBuilder sb = new StringBuilder();
 
@@ -127,8 +129,6 @@ public class DemoViewerFxEdgeSelection implements ViewerListener {
 	protected static String styleSheet = "graph         { padding: 20px; stroke-width: 0px; }"
 			+ "node:selected { fill-color: red;  fill-mode: plain; }"
 			+ "node:clicked  { fill-color: blue; fill-mode: plain; }"
-			+ "edge:selected { fill-color: purple; fill-mode: plain; }"
-			+ "edge:clicked  { fill-color: orange; fill-mode: plain; }"
 			+ "node#A        { fill-color: green, yellow, purple; fill-mode: dyn-plain; }";
 
 	public void buttonPushed(String id) {

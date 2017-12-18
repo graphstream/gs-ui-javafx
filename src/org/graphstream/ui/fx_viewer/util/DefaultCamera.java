@@ -32,8 +32,8 @@
 package org.graphstream.ui.fx_viewer.util;
 
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -54,6 +54,7 @@ import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.GraphicGraph;
 import org.graphstream.ui.graphicGraph.GraphicNode;
 import org.graphstream.ui.graphicGraph.GraphicSprite;
+import org.graphstream.ui.graphicGraph.stylesheet.Selector;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.Units;
@@ -91,11 +92,11 @@ import javafx.scene.transform.NonInvertibleTransformException;
  * cursor actually ?".
  * </p>
  */
-public class FxDefaultCamera implements Camera {
+public class DefaultCamera implements Camera {
 	/**
 	 * class level logger
 	 */
-	private static final Logger logger = Logger.getLogger(FxDefaultCamera.class.getSimpleName());
+	private static final Logger logger = Logger.getLogger(DefaultCamera.class.getSimpleName());
 
 	// Attribute
 
@@ -168,7 +169,7 @@ public class FxDefaultCamera implements Camera {
 	/**
 	 * New camera.
 	 */
-	public FxDefaultCamera(GraphicGraph graph) {
+	public DefaultCamera(GraphicGraph graph) {
 		this.graph = graph;
 	}
 
@@ -313,6 +314,23 @@ public class FxDefaultCamera implements Camera {
 		}
 	}
 
+	public boolean isTextVisible(GraphicElement element) {
+		 Values visibility = element.getStyle().getTextVisibility();
+		 
+		 switch (element.getStyle().getTextVisibilityMode()) {
+			case HIDDEN: return false ;
+			case AT_ZOOM: return (zoom == visibility.get(0)) ;
+			case UNDER_ZOOM: return (zoom <= visibility.get(0)) ;
+			case OVER_ZOOM:	return (zoom >= visibility.get(0)) ;
+			case ZOOM_RANGE: 
+				if(visibility.size() > 1) 
+					return (zoom >= visibility.get(0) && zoom <= visibility.get(1)) ;
+				else return true ;
+			case ZOOMS: return Arrays.asList(Selector.Type.values()).contains(visibility.get(0)) ;
+			default: return true ;
+		}
+	 }
+	
 	/*
 	 * (non-Javadoc)
 	 *
@@ -492,7 +510,7 @@ public class FxDefaultCamera implements Camera {
 
 	/**
 	 * Set the camera view in the given graphics and backup the previous
-	 * transform of the graphics. Call {@link #popView(Graphics2D)} to restore
+	 * transform of the graphics. Call {@link #popView(GraphicsContext)} to restore
 	 * the saved transform. You can only push one time the view.
 	 *
 	 * @param g2
@@ -518,7 +536,7 @@ public class FxDefaultCamera implements Camera {
 
 	/**
 	 * Restore the transform that was used before
-	 * {@link #pushView(GraphicGraph, Graphics2D)} is used.
+	 * {@link #pushView(GraphicGraph, GraphicsContext)} is used.
 	 *
 	 * @param g2
 	 *            The Swing graphics to restore.
