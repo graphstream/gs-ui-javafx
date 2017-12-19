@@ -47,7 +47,7 @@ public class FxMouseManager implements MouseManager
 	// Command
 
 	protected void mouseButtonPress(MouseEvent event) {
-		view.requestFocus();
+		view.requireFocus();
 	
 		// Unselect all.
 		if (!event.isShiftDown()) {

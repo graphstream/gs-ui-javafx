@@ -294,6 +294,12 @@ public class FxDefaultView extends FxViewPanel {
 		return this.viewer;
 	}
 	
+	@Override
+	public Object requireFocus() {
+		requestFocus();
+		return null;
+	}
+	
 	public <T, U> void addListener(T descriptor, U listener) {
 		EventType eventType = (EventType) descriptor;
 		EventHandler eventFilter = (EventHandler) listener;
