@@ -17,8 +17,8 @@ public class SelectionRenderer {
 	
 	protected Rectangle2D shape = new Rectangle2D();
 	
-	protected Color linesColorQ  = ColorManager.getColor(new java.awt.Color(  0,   0,   0, 64));
-	protected Color fillColor    = ColorManager.getColor(new java.awt.Color( 50,  50, 200, 32));
+	protected Color linesColorQ  = ColorManager.getColor(new org.graphstream.ui.graphicGraph.stylesheet.Color(  0,   0,   0, 64));
+	protected Color fillColor    = ColorManager.getColor(new org.graphstream.ui.graphicGraph.stylesheet.Color( 50,  50, 200, 32));
 			
 	public SelectionRenderer(Selection selection, GraphicGraph graph) {
 		this.selection = selection ;

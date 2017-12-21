@@ -104,11 +104,11 @@ public class ColorManager {
 	 * @param java.awt.Color 
 	 * @return javafx.scene.paint.Color
 	 */
-	public static Color getColor(java.awt.Color awtColor) {
-		int r = awtColor.getRed();
-		int g = awtColor.getGreen();
-		int b = awtColor.getBlue();
-		int a = awtColor.getAlpha();
+	public static Color getColor(org.graphstream.ui.graphicGraph.stylesheet.Color gscoreColor) {
+		int r = gscoreColor.getRed();
+		int g = gscoreColor.getGreen();
+		int b = gscoreColor.getBlue();
+		int a = gscoreColor.getAlpha();
 		double opacity = a / 255.0 ;
 		
 		return Color.rgb(r, g, b, opacity);
