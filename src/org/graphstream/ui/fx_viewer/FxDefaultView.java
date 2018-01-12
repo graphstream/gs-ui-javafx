@@ -31,7 +31,6 @@
  */
 package org.graphstream.ui.fx_viewer;
 
-import java.awt.Graphics2D;
 import java.util.Collection;
 import java.util.EnumSet;
 
@@ -72,12 +71,12 @@ import javafx.scene.canvas.GraphicsContext;
  * <h3>The painting mechanism</h3>
  * 
  * <p>
- * The main method to implement is {@link #render(Graphics2D)}. This method is
+ * The main method to implement is {@link #render(GraphicsContext)}. This method is
  * called each time the graph needs to be rendered anew in the canvas.
  * </p>
  * 
  * <p>
- * The {@link #render(Graphics2D)} is called only when a repainting is really
+ * The {@link #render(GraphicsContext)} is called only when a repainting is really
  * needed.
  * </p>
  * 

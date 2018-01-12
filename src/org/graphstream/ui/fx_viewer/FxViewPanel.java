@@ -36,16 +36,16 @@ import org.graphstream.ui.view.Viewer;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 /**
  * A view on a graphic graph.
  * 
- * Basically a view is a Stack panel where a
+ * Basically a view is a Pane where a
  * {@link org.graphstream.ui.view.GraphRenderer} renders the graphic graph. If
  * you are in the UI thread, you can change the view on the graphic graph
  * using methods to translate, zoom and rotate the view.
  */
-public abstract class FxViewPanel extends StackPane implements View {
+public abstract class FxViewPanel extends Pane implements View {
 
 	/**
 	 * The view identifier.
