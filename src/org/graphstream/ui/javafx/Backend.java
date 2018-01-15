@@ -6,12 +6,12 @@ import org.graphstream.ui.javafx.renderer.GraphBackgroundRenderer;
 import org.graphstream.ui.javafx.renderer.shape.Shape;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.Pane;
 
 public interface Backend {
     
     /** Called before any prior use of this back-end. */
-    void open(Region drawingSurface);
+    void open(Pane drawingSurface);
     
     /** Called after finished using this object. */
     void close();
@@ -83,5 +83,5 @@ public interface Backend {
      * The drawing surface may be different than the one passed as
      * argument to open(), the back-end is free to create a new surface
      * as it sees fit. */
-    Region drawingSurface();
+    Pane drawingSurface();
 }	

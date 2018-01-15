@@ -35,13 +35,13 @@ import org.graphstream.ui.javafx.renderer.shape.javafx.spriteShapes.SpriteFlowSh
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.Pane;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.NonInvertibleTransformException;
 
 public class BackendJ2D implements Backend {
 	
-	private Region surface ;
+	private Pane surface ;
 	private GraphicsContext g2 ;
 	private Stack<Affine> matrixStack ;
 	private Affine Tx ;
@@ -61,7 +61,7 @@ public class BackendJ2D implements Backend {
 	}
 		
 	@Override
-	public void open(Region drawingSurface) {
+	public void open(Pane drawingSurface) {
 		surface = drawingSurface ;
 	}
 
@@ -436,7 +436,7 @@ public class BackendJ2D implements Backend {
 	}
 
 	@Override
-	public Region drawingSurface() {
+	public Pane drawingSurface() {
 		return surface ;
 	}
 

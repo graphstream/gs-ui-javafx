@@ -69,7 +69,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.Pane;
 
 /**	
  * 2D renderer.
@@ -94,7 +94,7 @@ import javafx.scene.layout.Region;
  * for drawing the graph, the backend is also responsible for the shape
  * creation.
  */
-public class FxFullGraphRenderer implements GraphRenderer<Region, GraphicsContext>, StyleGroupListener {
+public class FxFullGraphRenderer implements GraphRenderer<Pane, GraphicsContext>, StyleGroupListener {
 	public final static String DEFAULT_RENDERER = "j2d_def_rndr";
 	
 	protected FxDefaultCamera camera = null;
@@ -114,7 +114,7 @@ public class FxFullGraphRenderer implements GraphRenderer<Region, GraphicsContex
 // Construction
 
 	@Override
-	public void open(GraphicGraph graph, Region drawingSurface) {
+	public void open(GraphicGraph graph, Pane drawingSurface) {
 		if( this.graph == null ) {
 			this.graph   = graph;
 			this.backend = new BackendJ2D();		// choose it according to some setting
@@ -151,7 +151,7 @@ public class FxFullGraphRenderer implements GraphRenderer<Region, GraphicsContex
 		return camera;
 	}
 		  
-	public Region renderingSurface() {
+	public Pane renderingSurface() {
 		return backend.drawingSurface();
 	}
 	
