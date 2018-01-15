@@ -54,8 +54,8 @@ import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.StyleGroupSet;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.FillMode;
-import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.graphicGraph.stylesheet.Value;
+import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.view.Camera;
 import org.graphstream.ui.view.LayerRenderer;
 import org.graphstream.ui.view.util.GraphMetrics;
@@ -65,7 +65,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Region ;
+import javafx.scene.layout.Pane ;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Ellipse;
@@ -128,7 +128,7 @@ public class FxBasicGraphRenderer extends FxGraphRendererBase {
 	 * graphicGraph.GraphicGraph, java.lang.Object)
 	 */
 	@Override
-	public void open(GraphicGraph graph, Region renderingSurface) {
+	public void open(GraphicGraph graph, Pane renderingSurface) {
 		super.open(graph, renderingSurface);
 		camera = new DefaultCamera(graph);
 	}

@@ -36,12 +36,12 @@ import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Region ;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 
-public abstract class FxGraphRendererBase extends GraphRendererBase<Region, GraphicsContext>
+public abstract class FxGraphRendererBase extends GraphRendererBase<Pane, GraphicsContext>
 		implements FxGraphRenderer {
 
 	// Utilities

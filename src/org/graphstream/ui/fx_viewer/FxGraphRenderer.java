@@ -34,8 +34,8 @@ package org.graphstream.ui.fx_viewer;
 import org.graphstream.ui.view.GraphRenderer;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Region ;
+import javafx.scene.layout.Pane;
 
-public interface FxGraphRenderer extends GraphRenderer<Region, GraphicsContext> {
+public interface FxGraphRenderer extends GraphRenderer<Pane, GraphicsContext> {
 
 }
