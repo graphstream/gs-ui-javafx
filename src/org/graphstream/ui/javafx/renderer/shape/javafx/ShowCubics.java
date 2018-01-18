@@ -2,7 +2,7 @@ package org.graphstream.ui.javafx.renderer.shape.javafx;
 
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.javafx.renderer.ConnectorSkeleton;
-import org.graphstream.ui.view.Camera;
+import org.graphstream.ui.view.camera.Camera;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

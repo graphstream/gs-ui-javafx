@@ -3,7 +3,7 @@ package org.graphstream.ui.javafx.renderer.shape.javafx.basicShapes;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.AreaSkeleton;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
@@ -17,7 +17,7 @@ public class PolygonShape extends PolygonalShape implements AttributeUtils {
 	Object valuesRef = null ;
 	
 	@Override
-	public void configureForElement(Backend bck, GraphicElement element, Skeleton skel, FxDefaultCamera camera) {
+	public void configureForElement(Backend bck, GraphicElement element, Skeleton skel, DefaultCamera2D camera) {
 		super.configureForElement(bck, element, skel, camera);
 		
         if(element.hasAttribute( "ui.points" )) {
@@ -43,7 +43,7 @@ public class PolygonShape extends PolygonalShape implements AttributeUtils {
 	}
 	
 	@Override
-	public void make(Backend backend, FxDefaultCamera camera) {
+	public void make(Backend backend, DefaultCamera2D camera) {
 		double x = area.theCenter.x;
 		double y = area.theCenter.y;
         double n = theValues.length;
@@ -60,7 +60,7 @@ public class PolygonShape extends PolygonalShape implements AttributeUtils {
 	}
 	
 	@Override
-	public void makeShadow(Backend backend, FxDefaultCamera camera) {
+	public void makeShadow(Backend backend, DefaultCamera2D camera) {
 		double n = theValues.length;
 		double x  = area.theCenter.x + shadowable.theShadowOff.x;
 		double y  = area.theCenter.y + shadowable.theShadowOff.y;

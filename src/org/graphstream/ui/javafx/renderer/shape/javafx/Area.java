@@ -6,7 +6,7 @@ import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.AreaSkeleton;
 
 /** Trait for elements painted inside an area (most nodes and sprites).
@@ -27,7 +27,7 @@ public class Area {
 	/** Fit the shape size to its contents? */
 	protected boolean fit = false;
 	
-	public void configureAreaForGroup(Style style, FxDefaultCamera camera) {
+	public void configureAreaForGroup(Style style, DefaultCamera2D camera) {
 		sizeForGroup(style, camera);
 	}
 	
@@ -36,7 +36,7 @@ public class Area {
 	 *   - The style,
 	 *   - Eventually the element specific size attribute,
 	 *   - Eventually the element contents (decor). */
-	public void configureAreaForElement(Backend backend, FxDefaultCamera camera, AreaSkeleton skel, GraphicElement element, ShapeDecor decor) {
+	public void configureAreaForElement(Backend backend, DefaultCamera2D camera, AreaSkeleton skel, GraphicElement element, ShapeDecor decor) {
 		Point3 pos = camera.getNodeOrSpritePositionGU(element, null);
 		
 		if(fit) {
@@ -55,7 +55,7 @@ public class Area {
 	 * Also look if the style SizeMode says if the element must fit to its contents.
 	 * If so, the configureAreaForElement() method will recompute the size for each
 	 * element according to the contents (shape decoration). */
-	private void sizeForGroup(Style style, FxDefaultCamera camera) {
+	private void sizeForGroup(Style style, DefaultCamera2D camera) {
 		double w = camera.getMetrics().lengthToGu( style.getSize(), 0 );
 		double h = w;
 		if( style.getSize().size() > 1 )
@@ -67,7 +67,7 @@ public class Area {
 	}
 	
 	/** Try to compute the size of this area according to the given element. */
-	private void sizeForElement(Style style, FxDefaultCamera camera, GraphicElement element) {
+	private void sizeForElement(Style style, DefaultCamera2D camera, GraphicElement element) {
 		double w = camera.getMetrics().lengthToGu(style.getSize(), 0);
 		double h = w ;
 		if(style.getSize().size() > 1) 
@@ -87,7 +87,7 @@ public class Area {
 	
 	/** Assign a position to the shape according to the element, set the size of the element,
 	 * and update the skeleton of the element. */
-	private void positionAndFit(FxDefaultCamera camera, AreaSkeleton skel, GraphicElement element, double x, double y, double contentOverallWidth, double contentOverallHeight) {
+	private void positionAndFit(DefaultCamera2D camera, AreaSkeleton skel, GraphicElement element, double x, double y, double contentOverallWidth, double contentOverallHeight) {
 		if(skel != null) {
 			if(contentOverallWidth > 0 && contentOverallHeight > 0)
 				theSize.set(contentOverallWidth, contentOverallHeight);

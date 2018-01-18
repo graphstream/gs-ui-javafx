@@ -1,7 +1,7 @@
 package org.graphstream.ui.javafx.renderer.shape.javafx.basicShapes;
 
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Rectangle2D;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.RectangularAreaShape;
@@ -10,7 +10,7 @@ public class RoundedSquareShape extends RectangularAreaShape {
 	Rectangle2D theShape = new Rectangle2D();
 	
 	@Override
-	public void make(Backend backend, FxDefaultCamera camera) {
+	public void make(Backend backend, DefaultCamera2D camera) {
 		double w = area.theSize.x ;
 		double h = area.theSize.x ;
 		double r = h/8 ;
@@ -20,7 +20,7 @@ public class RoundedSquareShape extends RectangularAreaShape {
 	}
 	
 	@Override
-	public void makeShadow(Backend backend, FxDefaultCamera camera) {
+	public void makeShadow(Backend backend, DefaultCamera2D camera) {
 		double x = area.theCenter.x + shadowable.theShadowOff.x;
 		double y = area.theCenter.y + shadowable.theShadowOff.y;
 		double w = area.theSize.x + shadowable.theShadowWidth.x * 2;

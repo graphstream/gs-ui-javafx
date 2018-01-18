@@ -40,7 +40,7 @@ import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.FillMode;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.SizeMode;
 import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.graphicGraph.stylesheet.Values;
-import org.graphstream.ui.view.Camera;
+import org.graphstream.ui.view.camera.Camera;
 import org.graphstream.ui.view.util.GraphMetrics;
 
 import javafx.geometry.Point2D;

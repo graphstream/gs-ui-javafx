@@ -7,7 +7,7 @@ import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.TextStyle;
 import org.graphstream.ui.graphicGraph.stylesheet.Value;
 import org.graphstream.ui.graphicGraph.stylesheet.Values;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.javafx.util.FontCache;
 import org.graphstream.ui.javafx.util.ImageCache;
@@ -46,7 +46,7 @@ public abstract class IconAndText {
 		this.pady = pady ;
 	}
 	
-	public static IconAndText apply(Style style, FxDefaultCamera camera, GraphicElement element) {
+	public static IconAndText apply(Style style, DefaultCamera2D camera, GraphicElement element) {
 		Image icon = null ;
 		TextBox text = TextBox.apply(camera, style);
 		Values padd = style.getPadding();
@@ -94,7 +94,7 @@ public abstract class IconAndText {
 		}
 	}
 	
-	public abstract void render(Backend backend, FxDefaultCamera camera, double xLeft, double yBottom) ;
+	public abstract void render(Backend backend, DefaultCamera2D camera, double xLeft, double yBottom) ;
 	public abstract void setIcon(Backend backend, String url) ;
 	public abstract void setText(Backend backend, String text);
 	public abstract double getWidth();
@@ -125,7 +125,7 @@ class IconAndTextOnlyText extends IconAndText {
 	
 	public void setIcon(Backend backend, String url) {}
 	
-	public void render(Backend backend, FxDefaultCamera camera, double xLeft, double yBottom) {
+	public void render(Backend backend, DefaultCamera2D camera, double xLeft, double yBottom) {
 		this.text.render(backend, offx+xLeft, offy+yBottom - descent);
 	}
 }
@@ -156,7 +156,7 @@ class IconAtLeftAndText extends IconAndText {
 		}
 	}
 	
-	public void render(Backend backend, FxDefaultCamera camera, double xLeft, double yBottom) {
+	public void render(Backend backend, DefaultCamera2D camera, double xLeft, double yBottom) {
 		GraphicsContext g = backend.graphics2D();
 		Affine transformOrigin = g.getTransform();
 		Affine transform = new Affine(1f, 0f, offx+xLeft, 0f, 1f, offy+(yBottom-(getHeight()/2))-(icon.getHeight()/2)+pady);
@@ -206,7 +206,7 @@ abstract class TextBox {
 	 */
 //	static FontRenderContext defaultFontRenderContext = new FontRenderContext(new AffineTransform(), true, true);
 	
-	public static TextBox apply(FxDefaultCamera camera, Style style) {
+	public static TextBox apply(DefaultCamera2D camera, Style style) {
 		String fontName  = style.getTextFont();
 		TextStyle fontStyle = style.getTextStyle();
 		Value fontSize  = style.getTextSize();

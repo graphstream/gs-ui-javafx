@@ -4,7 +4,7 @@ import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.geom.Vector2;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.LineConnectorShape;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
@@ -15,25 +15,25 @@ public class LSquareEdgeShape extends LineConnectorShape {
 	Path2D theShape = new Path2D(0, false);
 
 	@Override
-	public void make(Backend backend, FxDefaultCamera camera) {
+	public void make(Backend backend, DefaultCamera2D camera) {
 		make(camera, 0, 0, 0, 0);
 	}
 	
-	private void make(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void make(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		if (skel.multi() > 1 || skel.isLoop()) // is a loop or a multi edge
 			makeMultiOrLoop(camera, sox, soy, swx, swy);
         else 
         	makeSingle(camera, sox, soy, swx, swy); // is a single edge.
 	}
 
-	private void makeMultiOrLoop(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void makeMultiOrLoop(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		if (skel.isLoop())
 			makeLoop(camera, sox, soy, swx, swy);
         else
         	makeMulti(camera, sox, soy, swx, swy);
 	}
 
-	private void makeLoop(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void makeLoop(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		double fromx = skel.apply(0).x + sox;
 		double fromy = skel.apply(0).y + soy;
 		double tox = skel.apply(3).x + sox;
@@ -48,7 +48,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
         theShape.curveTo(c1x, c1y, c2x, c2y, tox, toy);
 	}
 
-	private void makeMulti(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void makeMulti(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		double fromx = skel.apply(0).x + sox;
 		double fromy = skel.apply(0).y + soy;
 		double tox = skel.apply(3).x + sox;
@@ -63,7 +63,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
         theShape.curveTo(c1x, c1y, c2x, c2y, tox, toy);
 	}
 
-	private void makeSingle(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void makeSingle(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		Point3 from = new Point3(skel.from().x + sox, skel.from().y + soy, 0);
 		Point3 to = new Point3(skel.to().x + sox, skel.to().y + soy, 0);
 		Vector2 mainDir = new Vector2(from, to);
@@ -92,7 +92,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
 	}
 
 	@Override
-	public void makeShadow(Backend backend, FxDefaultCamera camera) {
+	public void makeShadow(Backend backend, DefaultCamera2D camera) {
 		if (skel.isCurve())
 			makeMultiOrLoop(camera, shadowableLine.theShadowOff.x, shadowableLine.theShadowOff.y, shadowableLine.theShadowWidth, shadowableLine.theShadowWidth);
         else
@@ -100,7 +100,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
 	}
 
 	@Override
-	public void render(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
+	public void render(Backend bck, DefaultCamera2D camera, GraphicElement element, Skeleton skeleton) {
 		GraphicsContext g = bck.graphics2D();
 		make(bck, camera);
 		strokableLine.stroke(g, theShape);
@@ -109,7 +109,7 @@ public class LSquareEdgeShape extends LineConnectorShape {
 	}
 
 	@Override
-	public void renderShadow(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
+	public void renderShadow(Backend bck, DefaultCamera2D camera, GraphicElement element, Skeleton skeleton) {
 		makeShadow(bck, camera);
 		shadowableLine.cast(bck.graphics2D(), theShape);
 	}

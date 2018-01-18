@@ -6,7 +6,7 @@ import org.graphstream.ui.graphicGraph.GraphicSprite;
 import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.FxFullGraphRenderer;
 import org.graphstream.ui.javafx.renderer.shape.Shape;
 
@@ -26,20 +26,20 @@ public class SpriteRenderer extends StyleRenderer {
 	}
 
 	@Override
-	public void setupRenderingPass(Backend bck, FxDefaultCamera camera, boolean forShadow) {
+	public void setupRenderingPass(Backend bck, DefaultCamera2D camera, boolean forShadow) {
 		shape = bck.chooseSpriteShape(shape, group);		
 	}
 
 	@Override
-	public void pushStyle(Backend bck, FxDefaultCamera camera, boolean forShadow) {
+	public void pushStyle(Backend bck, DefaultCamera2D camera, boolean forShadow) {
 		shape.configureForGroup(bck, group, camera);
 	}
 
 	@Override
-	public void pushDynStyle(Backend bck, FxDefaultCamera camera, GraphicElement element) {}
+	public void pushDynStyle(Backend bck, DefaultCamera2D camera, GraphicElement element) {}
 
 	@Override
-	public void renderElement(Backend bck, FxDefaultCamera camera, GraphicElement element) {
+	public void renderElement(Backend bck, DefaultCamera2D camera, GraphicElement element) {
 		GraphicSprite sprite = (GraphicSprite)element;
 		AreaSkeleton skel = getOrSetAreaSkeleton(element);
 		
@@ -48,7 +48,7 @@ public class SpriteRenderer extends StyleRenderer {
 	}
 
 	@Override
-	public void renderShadow(Backend bck, FxDefaultCamera camera, GraphicElement element) {
+	public void renderShadow(Backend bck, DefaultCamera2D camera, GraphicElement element) {
 		GraphicSprite sprite = (GraphicSprite)element;
 		Point3 pos = camera.getSpritePosition(sprite, new Point3(), StyleConstants.Units.GU);
 		AreaSkeleton skel = getOrSetAreaSkeleton(element);
@@ -58,7 +58,7 @@ public class SpriteRenderer extends StyleRenderer {
 	}
 
 	@Override
-	public void elementInvisible(Backend bck, FxDefaultCamera camera, GraphicElement element) {}
+	public void elementInvisible(Backend bck, DefaultCamera2D camera, GraphicElement element) {}
 
 	private AreaSkeleton getOrSetAreaSkeleton(GraphicElement element) {
 		if(element instanceof GraphicSprite) {
@@ -77,7 +77,7 @@ public class SpriteRenderer extends StyleRenderer {
 	}
 	
 	@Override
-	public void endRenderingPass(Backend bck, FxDefaultCamera camera, boolean forShadow) {
+	public void endRenderingPass(Backend bck, DefaultCamera2D camera, boolean forShadow) {
 		// TODO Auto-generated method stub
 		
 	}

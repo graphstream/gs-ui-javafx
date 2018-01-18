@@ -8,7 +8,7 @@ import org.graphstream.ui.graphicGraph.GraphicSprite;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.SpriteOrientation;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.ConnectorSkeleton;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 
@@ -21,10 +21,10 @@ public class Orientable {
 	public Point3 target = new Point3();
 	
 	/** Configure the orientation mode for the group according to the style. */
-	public void configureOrientableForGroup(Style style, FxDefaultCamera camera) { orientation = style.getSpriteOrientation(); }
+	public void configureOrientableForGroup(Style style, DefaultCamera2D camera) { orientation = style.getSpriteOrientation(); }
 	
 	/** Compute the orientation vector for the given element according to the orientation mode. */
-	public void configureOrientableForElement(FxDefaultCamera camera, GraphicSprite sprite) {
+	public void configureOrientableForElement(DefaultCamera2D camera, GraphicSprite sprite) {
 		if ( sprite.getAttachment() instanceof GraphicNode ) {
 			switch (sprite.getStyle().getSpriteOrientation()) {
 				case NONE: 
@@ -70,7 +70,7 @@ public class Orientable {
 		}
 	}
 	
-	private void setTargetOnLineEdge(FxDefaultCamera camera, GraphicSprite sprite, GraphicEdge ge) {
+	private void setTargetOnLineEdge(DefaultCamera2D camera, GraphicSprite sprite, GraphicEdge ge) {
 		Vector2 dir = new Vector2(ge.to.getX()-ge.from.getX(), ge.to.getY()-ge.from.getY());
 		dir.scalarMult(sprite.getX());
 		target.set(ge.from.getX() + dir.x(), ge.from.getY() + dir.y());

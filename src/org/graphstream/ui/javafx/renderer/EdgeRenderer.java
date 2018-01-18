@@ -4,7 +4,7 @@ import org.graphstream.ui.graphicGraph.GraphicEdge;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.FxFullGraphRenderer;
 import org.graphstream.ui.javafx.renderer.shape.Connector;
 import org.graphstream.ui.javafx.renderer.shape.Shape;
@@ -23,13 +23,13 @@ public class EdgeRenderer extends StyleRenderer {
 	}
 
 	@Override
-	public void setupRenderingPass(Backend bck, FxDefaultCamera camera, boolean forShadow) {
+	public void setupRenderingPass(Backend bck, DefaultCamera2D camera, boolean forShadow) {
 		shape = bck.chooseEdgeShape(shape, group);
 		arrow = (AreaOnConnectorShape)bck.chooseEdgeArrowShape(arrow, group);
 	}
 
 	@Override
-	public void pushStyle(Backend bck, FxDefaultCamera camera, boolean forShadow) {
+	public void pushStyle(Backend bck, DefaultCamera2D camera, boolean forShadow) {
 		shape.configureForGroup(bck, group, camera);
 		
 		if(arrow != null) {
@@ -38,10 +38,10 @@ public class EdgeRenderer extends StyleRenderer {
 	}
 
 	@Override
-	public void pushDynStyle(Backend bck, FxDefaultCamera camera, GraphicElement element) {}
+	public void pushDynStyle(Backend bck, DefaultCamera2D camera, GraphicElement element) {}
 
 	@Override
-	public void renderElement(Backend bck, FxDefaultCamera camera, GraphicElement element) {
+	public void renderElement(Backend bck, DefaultCamera2D camera, GraphicElement element) {
 		GraphicEdge edge = (GraphicEdge)element;
 		ConnectorSkeleton skel = getOrSetConnectorSkeleton(element);
 		shape.configureForElement(bck, element, skel, camera);
@@ -55,7 +55,7 @@ public class EdgeRenderer extends StyleRenderer {
 	}
 
 	@Override
-	public void renderShadow(Backend bck, FxDefaultCamera camera, GraphicElement element) {
+	public void renderShadow(Backend bck, DefaultCamera2D camera, GraphicElement element) {
 		GraphicEdge edge = (GraphicEdge)element;
 		ConnectorSkeleton skel = getOrSetConnectorSkeleton(element);
 				
@@ -91,8 +91,8 @@ public class EdgeRenderer extends StyleRenderer {
 	}
 	
 	@Override
-	public void elementInvisible(Backend bck, FxDefaultCamera camera, GraphicElement element) {}
+	public void elementInvisible(Backend bck, DefaultCamera2D camera, GraphicElement element) {}
 	
 	@Override
-	public void endRenderingPass(Backend bck, FxDefaultCamera camera, boolean forShadow) {}
+	public void endRenderingPass(Backend bck, DefaultCamera2D camera, boolean forShadow) {}
 }

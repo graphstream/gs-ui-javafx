@@ -1,7 +1,7 @@
 package org.graphstream.ui.javafx.renderer.shape.javafx.shapePart;
 
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.shape.javafx.ShapeStroke;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
 import org.graphstream.ui.javafx.util.ColorManager;
@@ -32,7 +32,7 @@ public class Strokable {
 	}
 	
  	/** Configure all the static parts needed to stroke the shape. */
- 	public void configureStrokableForGroup( Style style, FxDefaultCamera camera ) {
+ 	public void configureStrokableForGroup( Style style, DefaultCamera2D camera ) {
 		theStrokeWidth = camera.getMetrics().lengthToGu( style.getStrokeWidth() );
 		
 		/*if( strokeColor == null )*/ strokeColor = ShapeStroke.strokeColor( style );

@@ -7,7 +7,7 @@ import org.graphstream.ui.graphicGraph.GraphicNode;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.ShapeKind;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.StrokeMode;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.AreaSkeleton;
 import org.graphstream.ui.javafx.renderer.ConnectorSkeleton;
 import org.graphstream.ui.javafx.renderer.Skeleton;
@@ -20,7 +20,7 @@ public class ShapeUtil {
 	  * @param edge The edge (it contains its target node).
 	  * @param camera the camera.
 	  * @return The radius. */
-	public static double evalTargetRadius2D(GraphicEdge edge, FxDefaultCamera camera) {
+	public static double evalTargetRadius2D(GraphicEdge edge, DefaultCamera2D camera) {
 		ConnectorSkeleton eskel = (ConnectorSkeleton)edge.getAttribute(Skeleton.attributeName);
 		if(eskel != null) {
 			return evalTargetRadius2D(
@@ -45,7 +45,7 @@ public class ShapeUtil {
 	  * @param node The target node shape.
 	  * @param the camera.
 	  * @return The radius. */
-	public static double evalTargetRadius2D(Point3 from, Point3 to, GraphicNode node, FxDefaultCamera camera) {
+	public static double evalTargetRadius2D(Point3 from, Point3 to, GraphicNode node, DefaultCamera2D camera) {
 		return evalTargetRadius2D(node.getStyle(), (AreaSkeleton)node.getAttribute(Skeleton.attributeName),
 	            from, null, null, to, camera);
 	}
@@ -61,7 +61,7 @@ public class ShapeUtil {
 	  * @param p3 the target point of the edge.
 	  * @param camera the camera.
 	  * @return the radius. */
-  	public static double evalTargetRadius2D(Style style, AreaSkeleton skeleton, Point3 p0, Point3 p3, FxDefaultCamera camera) {
+  	public static double evalTargetRadius2D(Style style, AreaSkeleton skeleton, Point3 p0, Point3 p3, DefaultCamera2D camera) {
   		return evalTargetRadius2D(style, skeleton, p0, null, null, p3, camera);
   	}
   	
@@ -74,7 +74,7 @@ public class ShapeUtil {
 	  * @param p3 the target point of the edge.
 	  * @param camera the camera.
 	  * @return the radius. */
- 	public static double evalTargetRadius2D(GraphicEdge edge, Point3 p0, Point3 p1, Point3 p2, Point3 p3, FxDefaultCamera camera) {
+ 	public static double evalTargetRadius2D(GraphicEdge edge, Point3 p0, Point3 p1, Point3 p2, Point3 p3, DefaultCamera2D camera) {
  		return evalTargetRadius2D(edge.to.getStyle(),
  	 			(AreaSkeleton)edge.to.getAttribute(Skeleton.attributeName),
  	 			p0, p1, p2, p3, camera);
@@ -90,7 +90,7 @@ public class ShapeUtil {
 	  * @param p3 the target point of the edge.
 	  * @param camera the camera.
 	  * @return the radius. */
- 	public static double evalTargetRadius2D(Style style, AreaSkeleton skeleton, Point3 p0, Point3 p1, Point3 p2, Point3 p3, FxDefaultCamera camera) { 
+ 	public static double evalTargetRadius2D(Style style, AreaSkeleton skeleton, Point3 p0, Point3 p1, Point3 p2, Point3 p3, DefaultCamera2D camera) { 
  	  	double w = 0.0;
  	  	double h = 0.0;
  	  	double s = 0f ;

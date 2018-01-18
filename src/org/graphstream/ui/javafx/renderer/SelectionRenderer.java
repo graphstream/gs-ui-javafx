@@ -2,7 +2,7 @@ package org.graphstream.ui.javafx.renderer;
 
 import org.graphstream.ui.graphicGraph.GraphicGraph;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Rectangle2D;
 import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.javafx.util.Selection;
@@ -24,7 +24,7 @@ public class SelectionRenderer {
 		this.selection = selection ;
 	}
 	
-	public void render(Backend bck, FxDefaultCamera camera, int panelWidth, int panelHeight) {
+	public void render(Backend bck, DefaultCamera2D camera, int panelWidth, int panelHeight) {
 	    // XXX
 	    // TODO make this an abstract class whose implementation are create by the back-end
 	    // XXX

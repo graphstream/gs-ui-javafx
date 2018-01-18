@@ -5,7 +5,7 @@ import org.graphstream.ui.geom.Vector2;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.AreaOnConnectorShape;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
@@ -19,16 +19,16 @@ public class DiamondOnEdge extends AreaOnConnectorShape {
 	Path2D theShape = new Path2D(0, true);
 	
 	@Override
-	public void make(Backend backend, FxDefaultCamera camera) {
+	public void make(Backend backend, DefaultCamera2D camera) {
 		make( false, camera );
 	}
 
 	@Override
-	public void makeShadow(Backend backend, FxDefaultCamera camera) {
+	public void makeShadow(Backend backend, DefaultCamera2D camera) {
 		make( true, camera );
 	}
 
-	private void make(boolean forShadow, FxDefaultCamera camera) {
+	private void make(boolean forShadow, DefaultCamera2D camera) {
 		if( theConnector.skel.isCurve() )
 			makeOnCurve( forShadow, camera );
 		else
@@ -36,7 +36,7 @@ public class DiamondOnEdge extends AreaOnConnectorShape {
 	}
 	
 
-	private void makeOnCurve(boolean forShadow, FxDefaultCamera camera) {
+	private void makeOnCurve(boolean forShadow, DefaultCamera2D camera) {
 		Tuple<Point2, Double> tuple = CubicCurve.approxIntersectionPointOnCurve( theEdge, theConnector, camera );
 
 		Point2 p1 = tuple.x ;
@@ -62,7 +62,7 @@ public class DiamondOnEdge extends AreaOnConnectorShape {
 		theShape.closePath();
 	}
 
-	private void makeOnLine(boolean forShadow, FxDefaultCamera camera) {
+	private void makeOnLine(boolean forShadow, DefaultCamera2D camera) {
 		double off = ShapeUtil.evalTargetRadius2D( theEdge, camera );
 		Vector2 theDirection = new Vector2(
 			theConnector.toPos().x - theConnector.fromPos().x,
@@ -94,7 +94,7 @@ public class DiamondOnEdge extends AreaOnConnectorShape {
 	}
 
 	@Override
-	public void render(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
+	public void render(Backend bck, DefaultCamera2D camera, GraphicElement element, Skeleton skeleton) {
 		GraphicsContext g = bck.graphics2D();
 		make( false, camera );
 		strokable.stroke( g, theShape );
@@ -102,7 +102,7 @@ public class DiamondOnEdge extends AreaOnConnectorShape {
 	}
 
 	@Override
-	public void renderShadow(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
+	public void renderShadow(Backend bck, DefaultCamera2D camera, GraphicElement element, Skeleton skeleton) {
 		make( true, camera );
 		shadowable.cast(bck.graphics2D(), theShape );
 	}

@@ -57,11 +57,12 @@ import org.graphstream.ui.javafx.renderer.SelectionRenderer;
 import org.graphstream.ui.javafx.renderer.StyleRenderer;
 import org.graphstream.ui.javafx.util.FPSLogger;
 import org.graphstream.ui.javafx.util.Selection;
-import org.graphstream.ui.view.Camera;
 import org.graphstream.ui.view.GraphRenderer;
 import org.graphstream.ui.view.LayerRenderer;
 import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
+import org.graphstream.ui.view.camera.Camera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.view.util.GraphMetrics;
 import org.graphstream.ui.view.util.InteractiveElement;
 
@@ -97,7 +98,7 @@ import javafx.scene.layout.Pane;
 public class FxFullGraphRenderer implements GraphRenderer<Pane, GraphicsContext>, StyleGroupListener {
 	public final static String DEFAULT_RENDERER = "j2d_def_rndr";
 	
-	protected FxDefaultCamera camera = null;
+	protected DefaultCamera2D camera = null;
 	
 	protected GraphicGraph graph = null;
 	
@@ -118,7 +119,7 @@ public class FxFullGraphRenderer implements GraphRenderer<Pane, GraphicsContext>
 		if( this.graph == null ) {
 			this.graph   = graph;
 			this.backend = new BackendJ2D();		// choose it according to some setting
-		  	this.camera  = new FxDefaultCamera(graph);
+		  	this.camera  = new DefaultCamera2D(graph);
 		  	graph.getStyleGroups().addListener(this);
 		  	backend.open(drawingSurface);
 	  	}

@@ -4,7 +4,7 @@ import org.graphstream.ui.javafx.renderer.shape.javafx.IconAndText;
 
 /** Elements of rendering that, contrary to the shapes, are specific to the element, not the style
  * group and define the basic geometry of the shape. */
-public abstract class Skeleton {
+public abstract class Skeleton implements org.graphstream.ui.view.camera.Skeleton {
 	public static String attributeName = "ui.j2dsk" ;
 	
 	public IconAndText iconAndText = null ;

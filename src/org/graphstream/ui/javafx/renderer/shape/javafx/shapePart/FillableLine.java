@@ -4,7 +4,7 @@ import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.shape.javafx.ShapePaint;
 import org.graphstream.ui.javafx.renderer.shape.javafx.ShapeStroke;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form;
@@ -39,7 +39,7 @@ public class FillableLine {
  
 	public void fill(GraphicsContext g, double width, Form shape) { fill(g, width, theFillPercent, shape); }
  
-	public void configureFillableLineForGroup(Backend bck, Style style, FxDefaultCamera camera, double theSize) {
+	public void configureFillableLineForGroup(Backend bck, Style style, DefaultCamera2D camera, double theSize) {
 		fillStroke = ShapeStroke.strokeForConnectorFill( style );
   	  	plainFast = (style.getSizeMode() == StyleConstants.SizeMode.NORMAL); 
 		theFillColor = ColorManager.getFillColor(style, 0);
@@ -50,7 +50,7 @@ public class FillableLine {
 		}
 	}
 
-	public void configureFillableLineForElement( Style style, FxDefaultCamera camera, GraphicElement element ) {
+	public void configureFillableLineForElement( Style style, DefaultCamera2D camera, GraphicElement element ) {
 		theFillPercent = 0 ;
   	  	if( style.getFillMode() == StyleConstants.FillMode.DYN_PLAIN && element != null ) {
   	  		

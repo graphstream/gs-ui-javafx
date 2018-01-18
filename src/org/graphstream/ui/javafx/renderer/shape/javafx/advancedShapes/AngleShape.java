@@ -3,7 +3,7 @@ package org.graphstream.ui.javafx.renderer.shape.javafx.advancedShapes;
 import org.graphstream.ui.geom.Vector2;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.AreaConnectorShape;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
@@ -15,11 +15,11 @@ public class AngleShape extends AreaConnectorShape {
 	Path2D theShape = new Path2D(0, true);
 	
 	@Override
-	public void make(Backend backend, FxDefaultCamera camera) {
+	public void make(Backend backend, DefaultCamera2D camera) {
         make(camera, 0, 0, 0, 0);		
 	}
 
-	private void make(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void make(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		if (skel.isCurve())
 			makeOnCurve(camera, sox, soy, swx, swy);
 		else if (skel.isPoly())
@@ -28,14 +28,14 @@ public class AngleShape extends AreaConnectorShape {
 			makeOnLine(camera, sox, soy, swx, swy);
 	}
 
-	private void makeOnCurve(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void makeOnCurve(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		if (skel.isLoop())
 			makeLoop(camera, sox, soy, swx, swy);
         else 
         	makeMulti(camera, sox, soy, swx, swy);
 	}
 	
-	private void makeLoop(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void makeLoop(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		double fromx = skel.apply(0).x + sox;
 		double fromy = skel.apply(0).y + soy;
 		double tox = skel.apply(3).x + sox;
@@ -80,7 +80,7 @@ public class AngleShape extends AreaConnectorShape {
 		theShape.closePath();
 	}
 
-	private void makeMulti(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void makeMulti(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		double fromx = skel.apply(0).x + sox;
 		double fromy = skel.apply(0).y + soy;
 		double tox = skel.apply(3).x + sox;
@@ -135,11 +135,11 @@ public class AngleShape extends AreaConnectorShape {
 		theShape.closePath();
 	}
 
-	private void makeOnPolyline(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void makeOnPolyline(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		makeOnLine(camera, sox, soy, swx, swy);
 	}
 	
-	private void makeOnLine(FxDefaultCamera camera, double sox, double soy, double swx, double swy) {
+	private void makeOnLine(DefaultCamera2D camera, double sox, double soy, double swx, double swy) {
 		 double fromx = skel.from().x + sox;
 		 double fromy = skel.from().y + soy;
 		 double tox = skel.to().x + sox;
@@ -163,7 +163,7 @@ public class AngleShape extends AreaConnectorShape {
 	}
 
 	@Override
-	public void makeShadow(Backend backend, FxDefaultCamera camera) {
+	public void makeShadow(Backend backend, DefaultCamera2D camera) {
 		if (skel.isCurve())
             makeOnCurve(camera, (int)shadowable.theShadowOff.x, (int)shadowable.theShadowOff.y, (int)shadowable.theShadowWidth.x, (int)shadowable.theShadowWidth.y);
         else
@@ -171,7 +171,7 @@ public class AngleShape extends AreaConnectorShape {
 	}
 
 	@Override
-	public void render(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
+	public void render(Backend bck, DefaultCamera2D camera, GraphicElement element, Skeleton skeleton) {
 		GraphicsContext g = bck.graphics2D();
 		make(bck, camera);
 		strokable.stroke(g, theShape);
@@ -181,7 +181,7 @@ public class AngleShape extends AreaConnectorShape {
 	}
 
 	@Override
-	public void renderShadow(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
+	public void renderShadow(Backend bck, DefaultCamera2D camera, GraphicElement element, Skeleton skeleton) {
 		makeShadow(bck, camera);
 		shadowable.cast(bck.graphics2D(), theShape);
 	}

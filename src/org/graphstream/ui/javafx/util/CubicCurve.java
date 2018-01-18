@@ -36,7 +36,7 @@ import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.geom.Vector2;
 import org.graphstream.ui.graphicGraph.GraphicEdge;
 import org.graphstream.ui.graphicGraph.GraphicNode;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.AreaSkeleton;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.Connector;
@@ -230,7 +230,7 @@ public class CubicCurve {
 	/** Return two points, one inside and the second outside of the shape of the destination node
 	 * of the given `edge`, the points can be used to deduce a vector along the Bézier curve entering
 	 * point in the shape. */
-	public static Tuple<Point2, Point2> approxVectorEnteringCurve( GraphicEdge edge, Connector c, FxDefaultCamera camera ) {
+	public static Tuple<Point2, Point2> approxVectorEnteringCurve( GraphicEdge edge, Connector c, DefaultCamera2D camera ) {
 		GraphicNode node = edge.to;
 		AreaSkeleton info = (AreaSkeleton)node.getAttribute(Skeleton.attributeName);
 		double w = 0.0;
@@ -272,7 +272,7 @@ public class CubicCurve {
 	 * The maximal recursive depth of the dichotomy is fixed to 7 here.
 	 * @return A 2-tuple made of the point of intersection and the associated parametric position.
 	 */
-	public static Tuple<Point2, Double> approxIntersectionPointOnCurve( GraphicEdge edge, Connector c, FxDefaultCamera camera ) {
+	public static Tuple<Point2, Double> approxIntersectionPointOnCurve( GraphicEdge edge, Connector c, DefaultCamera2D camera ) {
 		return approxIntersectionPointOnCurve( edge, c, camera, 7 );
 	}
 		
@@ -283,7 +283,7 @@ public class CubicCurve {
 	 * `maxDepth` parameter allows to set this depth.
 	 * @return A 2-tuple made of the point of intersection and the associated parametric position.
 	 */
-	public static Tuple<Point2,Double> approxIntersectionPointOnCurve( GraphicEdge edge, Connector c, FxDefaultCamera camera, int maxDepth ) {
+	public static Tuple<Point2,Double> approxIntersectionPointOnCurve( GraphicEdge edge, Connector c, DefaultCamera2D camera, int maxDepth ) {
 		GraphicNode node = edge.to;
 		AreaSkeleton info = (AreaSkeleton)node.getAttribute(Skeleton.attributeName);
 		double w = 0.0;

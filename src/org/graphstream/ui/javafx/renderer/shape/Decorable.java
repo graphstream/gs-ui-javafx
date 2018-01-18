@@ -5,7 +5,7 @@ import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.IconAndText;
 import org.graphstream.ui.javafx.renderer.shape.javafx.ShapeDecor;
@@ -22,7 +22,7 @@ public class Decorable extends HasSkel {
 	public ShapeDecor theDecor = null ;
   
  	/** Paint the decorations (text and icon). */
- 	public void decorArea(Backend backend, FxDefaultCamera camera, IconAndText iconAndText, GraphicElement element, Form shape ) {
+ 	public void decorArea(Backend backend, DefaultCamera2D camera, IconAndText iconAndText, GraphicElement element, Form shape ) {
  	  	boolean visible = true ;
  	  	if( element != null ) visible = camera.isTextVisible( element );
  	  	if( theDecor != null && visible ) {
@@ -31,7 +31,7 @@ public class Decorable extends HasSkel {
  	  	}
  	}
 	
-	public void decorConnector(Backend backend, FxDefaultCamera camera, IconAndText iconAndText, GraphicElement element, Form shape ) {
+	public void decorConnector(Backend backend, DefaultCamera2D camera, IconAndText iconAndText, GraphicElement element, Form shape ) {
 		boolean visible = true ;
  	  	if( element != null ) visible = camera.isTextVisible( element );
  	  	if( theDecor != null && visible ) {
@@ -52,11 +52,11 @@ public class Decorable extends HasSkel {
 	}
 	
 	/** Configure all the static parts needed to decor the shape. */
-  	public void configureDecorableForGroup( Style style, FxDefaultCamera camera) {
+  	public void configureDecorableForGroup( Style style, DefaultCamera2D camera) {
 		/*if( theDecor == null )*/ theDecor = ShapeDecor.apply( style );
   	}
   	/** Setup the parts of the decor specific to each element. */
-  	public void configureDecorableForElement(Backend backend, FxDefaultCamera camera, GraphicElement element, Skeleton skel) {
+  	public void configureDecorableForElement(Backend backend, DefaultCamera2D camera, GraphicElement element, Skeleton skel) {
   		text = element.label;
   		if( skel != null ) {
   			StyleGroup style = element.getStyle();

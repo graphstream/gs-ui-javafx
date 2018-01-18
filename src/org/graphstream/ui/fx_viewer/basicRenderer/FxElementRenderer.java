@@ -41,7 +41,7 @@ import org.graphstream.ui.graphicGraph.StyleGroup.ElementEvents;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.Units;
 import org.graphstream.ui.javafx.util.ColorManager;
-import org.graphstream.ui.view.Camera;
+import org.graphstream.ui.view.camera.Camera;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;

@@ -6,7 +6,7 @@ import org.graphstream.ui.graphicGraph.GraphicGraph;
 import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.util.ColorManager;
 import org.graphstream.ui.javafx.util.ImageCache;
 import org.graphstream.ui.view.util.GraphMetrics;
@@ -67,7 +67,7 @@ public class GraphBackgroundRenderer implements GraphicElement.SwingElementRende
 	}
 	
 	
-	public void render(Backend bck, FxDefaultCamera camera, int w, int h) {
+	public void render(Backend bck, DefaultCamera2D camera, int w, int h) {
 		if ( (camera.graphViewport() == null) && camera.getMetrics().diagonal == 0
 				&& (graph.getNodeCount() == 0 && graph.getSpriteCount() == 0)) {
 			displayNothingToDo(bck, w, h);
@@ -78,7 +78,7 @@ public class GraphBackgroundRenderer implements GraphicElement.SwingElementRende
 		}
 	}
 
-	private void renderGraphBackground(Backend bck, FxDefaultCamera camera) {
+	private void renderGraphBackground(Backend bck, DefaultCamera2D camera) {
 		GraphicsContext g = bck.graphics2D() ;
 		switch (graph.getStyle().getFillMode()) {
 		case NONE:
@@ -108,14 +108,14 @@ public class GraphBackgroundRenderer implements GraphicElement.SwingElementRende
 		}
 	}
 
-	private void fillBackground(GraphicsContext g, FxDefaultCamera camera) {
+	private void fillBackground(GraphicsContext g, DefaultCamera2D camera) {
 		GraphMetrics metrics = camera.getMetrics();
 		
 		g.setFill(ColorManager.getFillColor(style, 0));
 		g.fillRect(0, 0, (int)metrics.viewport[2], (int)metrics.viewport[3]);
 	}
 	
-	private void fillCanvasBackground(GraphicsContext g, FxDefaultCamera camera) {
+	private void fillCanvasBackground(GraphicsContext g, DefaultCamera2D camera) {
 		GraphMetrics metrics = camera.getMetrics();
 
 		g.setFill(ColorManager.getCanvasColor(style, 0));
@@ -123,7 +123,7 @@ public class GraphBackgroundRenderer implements GraphicElement.SwingElementRende
 	}
 	
 
-	private void fillImageTiled(GraphicsContext g, FxDefaultCamera camera) {
+	private void fillImageTiled(GraphicsContext g, DefaultCamera2D camera) {
 		GraphMetrics metrics = camera.getMetrics();
 		double px2gu = metrics.ratioPx2Gu;
 		Image img = null ;
@@ -143,7 +143,7 @@ public class GraphBackgroundRenderer implements GraphicElement.SwingElementRende
 	}
 	
 
-	private void fillImageScaled(GraphicsContext g, FxDefaultCamera camera, int mode) {
+	private void fillImageScaled(GraphicsContext g, DefaultCamera2D camera, int mode) {
 		GraphMetrics metrics = camera.getMetrics();
 		double px2gu = metrics.ratioPx2Gu;
 		Image img = null ;
@@ -197,7 +197,7 @@ public class GraphBackgroundRenderer implements GraphicElement.SwingElementRende
 		}
 	}
 
-	private void strokeGraph(Backend bck, FxDefaultCamera camera) {
+	private void strokeGraph(Backend bck, DefaultCamera2D camera) {
 		GraphMetrics metrics = camera.getMetrics();
 		GraphicsContext g = bck.graphics2D() ;
 		
@@ -215,7 +215,7 @@ public class GraphBackgroundRenderer implements GraphicElement.SwingElementRende
 		}
 	}
 	
-	protected void fillGradient(GraphicsContext g, FxDefaultCamera camera) {
+	protected void fillGradient(GraphicsContext g, DefaultCamera2D camera) {
 		GraphMetrics metrics = camera.getMetrics();
 
 		if( style.getFillColors().size() < 2 ) {

@@ -7,7 +7,7 @@ import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.Units;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.AreaOnConnectorShape;
 import org.graphstream.ui.javafx.util.CubicCurve;
@@ -25,12 +25,12 @@ public class ImageOnEdge extends AreaOnConnectorShape {
 	double angle = 0.0;
 	
 	@Override
-	public void configureForGroup(Backend bck, Style style, FxDefaultCamera camera) {
+	public void configureForGroup(Backend bck, Style style, DefaultCamera2D camera) {
 		super.configureForGroup(bck, style, camera);
 	}
 	
 	@Override
-	public void configureForElement(Backend bck, GraphicElement element, Skeleton skel, FxDefaultCamera camera) {
+	public void configureForElement(Backend bck, GraphicElement element, Skeleton skel, DefaultCamera2D camera) {
 		super.configureForElement(bck, element, skel, camera);
 		
 		String url = element.getStyle().getArrowImage();
@@ -51,22 +51,22 @@ public class ImageOnEdge extends AreaOnConnectorShape {
 	}
 	
 	@Override
-	public void make(Backend backend, FxDefaultCamera camera) {
+	public void make(Backend backend, DefaultCamera2D camera) {
 		make( false, camera );
 	}
 	@Override
-	public void makeShadow(Backend backend, FxDefaultCamera camera) {
+	public void makeShadow(Backend backend, DefaultCamera2D camera) {
 		make( true, camera );
 	}
 	
-	private void make(boolean forShadow, FxDefaultCamera camera) {
+	private void make(boolean forShadow, DefaultCamera2D camera) {
 		if( theConnector.skel.isCurve() )
 			makeOnCurve( forShadow, camera );
 		else
 			makeOnLine( forShadow, camera );	
 	}
 	
-	private void makeOnCurve(boolean forShadow, FxDefaultCamera camera) {
+	private void makeOnCurve(boolean forShadow, DefaultCamera2D camera) {
 		Tuple<Point2, Double> tuple = CubicCurve.approxIntersectionPointOnCurve( theEdge, theConnector, camera );
 		Point2 p1 = tuple.x ;
 		double t = tuple.y ;
@@ -93,7 +93,7 @@ public class ImageOnEdge extends AreaOnConnectorShape {
 			angle = ( Math.PI - angle );
 	}
 	
-	private void makeOnLine(boolean forShadow, FxDefaultCamera camera) {
+	private void makeOnLine(boolean forShadow, DefaultCamera2D camera) {
 		double off = ShapeUtil.evalTargetRadius2D( theEdge, camera );
 		
 		Vector2 theDirection = new Vector2(
@@ -119,7 +119,7 @@ public class ImageOnEdge extends AreaOnConnectorShape {
 	}
 
 	@Override
-	public void render(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
+	public void render(Backend bck, DefaultCamera2D camera, GraphicElement element, Skeleton skeleton) {
 		GraphicsContext g = bck.graphics2D();
 
  		make( false, camera );
@@ -141,7 +141,7 @@ public class ImageOnEdge extends AreaOnConnectorShape {
 	}
 
 	@Override
-	public void renderShadow(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
+	public void renderShadow(Backend bck, DefaultCamera2D camera, GraphicElement element, Skeleton skeleton) {
 		//make( true, camera );
 		//shadowable.cast( g, theShape );
 	}	

@@ -19,7 +19,7 @@ import org.graphstream.ui.javafx.util.EdgePoints;
  *     - A polycurve (in absolute coordinates).
  *     - A vector representation (points are relative to an origin and the whole may be rotated).  
  */
-public class ConnectorSkeleton extends Skeleton implements AttributeUtils {
+public class ConnectorSkeleton extends Skeleton implements AttributeUtils, org.graphstream.ui.view.camera.ConnectorSkeleton {
 	
 	private EdgePoints points;
 	private double[] lengths;

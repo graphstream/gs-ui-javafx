@@ -8,7 +8,7 @@ import org.graphstream.ui.graphicGraph.GraphicNode;
 import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.AreaSkeleton;
 import org.graphstream.ui.javafx.renderer.ConnectorSkeleton;
 import org.graphstream.ui.javafx.renderer.Skeleton;
@@ -57,11 +57,11 @@ public class Connector extends HasSkel {
 		return skel.to();
 	}
 
-	public void configureConnectorForGroup(Style style, FxDefaultCamera camera) {
+	public void configureConnectorForGroup(Style style, DefaultCamera2D camera) {
 		sizeForGroup(style, camera);
 	}
 
-	public void configureConnectorForElement(FxDefaultCamera camera, GraphicEdge element, ConnectorSkeleton skel) {
+	public void configureConnectorForElement(DefaultCamera2D camera, GraphicEdge element, ConnectorSkeleton skel) {
 		this.skel = skel;
 		this.theEdge = element;
 			    
@@ -88,19 +88,19 @@ public class Connector extends HasSkel {
 	}
 
 	/** Set the size of the connector using the predefined style. */
-	private void sizeForGroup(Style style, FxDefaultCamera camera) {
+	private void sizeForGroup(Style style, DefaultCamera2D camera) {
 		theSize = camera.getMetrics().lengthToGu( style.getSize(), 0 ) ;
 	}
 	
 	/** Set the size of the connector for this particular `element`. */
-	private void sizeForElement(StyleGroup style, FxDefaultCamera camera, GraphicEdge element) {
+	private void sizeForElement(StyleGroup style, DefaultCamera2D camera, GraphicEdge element) {
 		if(style.getSizeMode() == StyleConstants.SizeMode.DYN_SIZE && element.hasAttribute( "ui.size")) {
 			theSize = camera.getMetrics().lengthToGu(StyleConstants.convertValue(element.getAttribute("ui.size")));
 		}			
 	}
 	
 	/** Define the two end points sizes using the fit size stored in the nodes. */
-	public void endPoints(GraphicNode from, GraphicNode to, boolean directed, FxDefaultCamera camera) {
+	public void endPoints(GraphicNode from, GraphicNode to, boolean directed, DefaultCamera2D camera) {
 		AreaSkeleton fromInfo = (AreaSkeleton)from.getAttribute( Skeleton.attributeName );
 		AreaSkeleton toInfo = (AreaSkeleton)to.getAttribute( Skeleton.attributeName );
 		
@@ -127,7 +127,7 @@ public class Connector extends HasSkel {
 		isDirected = directed;
 	}
 	
-	public void endPoints(StyleGroup sourceStyle, StyleGroup targetStyle, boolean directed, FxDefaultCamera camera) {
+	public void endPoints(StyleGroup sourceStyle, StyleGroup targetStyle, boolean directed, DefaultCamera2D camera) {
 		double srcx = camera.getMetrics().lengthToGu(sourceStyle.getSize(), 0);
 		double srcy = srcx ;
 		if(sourceStyle.getSize().size() > 1)

@@ -56,8 +56,8 @@ import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.FillMode;
 import org.graphstream.ui.graphicGraph.stylesheet.Value;
 import org.graphstream.ui.javafx.util.ColorManager;
-import org.graphstream.ui.view.Camera;
 import org.graphstream.ui.view.LayerRenderer;
+import org.graphstream.ui.view.camera.Camera;
 import org.graphstream.ui.view.util.GraphMetrics;
 import org.graphstream.ui.view.util.InteractiveElement;
 

@@ -3,7 +3,7 @@ package org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.CubicCurve2D;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Line2D;
@@ -16,7 +16,7 @@ public class LineShape extends LineConnectorShape {
 	protected Form theShape = null;
 			
 	@Override
-	public void make(Backend backend, FxDefaultCamera camera) {
+	public void make(Backend backend, DefaultCamera2D camera) {
 		Point3 from = skel.from();
 		Point3 to = skel.to();
 		if( skel.isCurve() ) {
@@ -31,7 +31,7 @@ public class LineShape extends LineConnectorShape {
 	}
 
 	@Override
-	public void makeShadow(Backend backend, FxDefaultCamera camera) {
+	public void makeShadow(Backend backend, DefaultCamera2D camera) {
 		double x0 = skel.from().x + shadowableLine.theShadowOff.x;
 		double y0 = skel.from().y + shadowableLine.theShadowOff.y;
 		double x1 = skel.to().x + shadowableLine.theShadowOff.x;
@@ -52,7 +52,7 @@ public class LineShape extends LineConnectorShape {
 	}
 	
 	@Override
-	public void render(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
+	public void render(Backend bck, DefaultCamera2D camera, GraphicElement element, Skeleton skeleton) {
 		GraphicsContext g = bck.graphics2D();
 		make(bck, camera);
 		strokableLine.stroke(g, theShape);
@@ -61,7 +61,7 @@ public class LineShape extends LineConnectorShape {
 	}
 
 	@Override
-	public void renderShadow(Backend bck, FxDefaultCamera camera, GraphicElement element, Skeleton skeleton) {
+	public void renderShadow(Backend bck, DefaultCamera2D camera, GraphicElement element, Skeleton skeleton) {
 		makeShadow(bck, camera);
  		shadowableLine.cast(bck.graphics2D(), theShape);
 	}

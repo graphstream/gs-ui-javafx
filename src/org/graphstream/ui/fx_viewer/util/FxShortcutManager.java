@@ -2,8 +2,8 @@ package org.graphstream.ui.fx_viewer.util;
 
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphicGraph;
-import org.graphstream.ui.view.Camera;
 import org.graphstream.ui.view.View;
+import org.graphstream.ui.view.camera.Camera;
 import org.graphstream.ui.view.util.ShortcutManager;
 
 import javafx.event.EventHandler;

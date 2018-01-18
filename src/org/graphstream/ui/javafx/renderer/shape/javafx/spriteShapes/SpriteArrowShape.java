@@ -5,7 +5,7 @@ import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.GraphicSprite;
 import org.graphstream.ui.graphicGraph.stylesheet.Style;
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.Skeleton;
 import org.graphstream.ui.javafx.renderer.shape.Orientable;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.PolygonalShape;
@@ -19,19 +19,19 @@ public class SpriteArrowShape extends PolygonalShape {
 	}
 	
 	@Override
-	public void configureForGroup(Backend bck, Style style, FxDefaultCamera camera) {
+	public void configureForGroup(Backend bck, Style style, DefaultCamera2D camera) {
 		super.configureForGroup(bck, style, camera);
 		orientable.configureOrientableForGroup(style, camera);
 	}
 	
 	@Override
-	public void configureForElement(Backend bck, GraphicElement element, Skeleton skel, FxDefaultCamera camera) {
+	public void configureForElement(Backend bck, GraphicElement element, Skeleton skel, DefaultCamera2D camera) {
 		super.configureForElement(bck, element, skel, camera);
 		orientable.configureOrientableForElement(camera, (GraphicSprite)element);
 	}
 
 	@Override
-	public void make(Backend backend, FxDefaultCamera camera) {
+	public void make(Backend backend, DefaultCamera2D camera) {
 		double x = area.theCenter.x;
 		double y = area.theCenter.y;
 		Vector2 dir = new Vector2(  orientable.target.x - x, orientable.target.y - y ); 
@@ -50,7 +50,7 @@ public class SpriteArrowShape extends PolygonalShape {
 	}
 
 	@Override
-	public void makeShadow(Backend backend, FxDefaultCamera camera) {
+	public void makeShadow(Backend backend, DefaultCamera2D camera) {
 		double x = area.theCenter.x + shadowable.theShadowOff.x;
 		double y = area.theCenter.y + shadowable.theShadowOff.y;
 		Vector2 dir = new Vector2( orientable.target.x - x, orientable.target.y - y );

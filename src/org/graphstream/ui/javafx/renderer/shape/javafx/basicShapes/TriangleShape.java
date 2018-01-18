@@ -1,14 +1,14 @@
 package org.graphstream.ui.javafx.renderer.shape.javafx.basicShapes;
 
 import org.graphstream.ui.javafx.Backend;
-import org.graphstream.ui.javafx.FxDefaultCamera;
+import org.graphstream.ui.view.camera.DefaultCamera2D;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.PolygonalShape;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.Form.Path2D;
 
 public class TriangleShape extends PolygonalShape {
 
 	@Override
-	public void make(Backend backend, FxDefaultCamera camera) {
+	public void make(Backend backend, DefaultCamera2D camera) {
 		double x  = area.theCenter.x;
 		double y  = area.theCenter.y;
 		double w2 = area.theSize.x / 2;
@@ -22,7 +22,7 @@ public class TriangleShape extends PolygonalShape {
 	}
 
 	@Override
-	public void makeShadow(Backend backend, FxDefaultCamera camera) {
+	public void makeShadow(Backend backend, DefaultCamera2D camera) {
 		double x  = area.theCenter.x + shadowable.theShadowOff.x;
 		double y  = area.theCenter.y + shadowable.theShadowOff.y;
 		double w2 = ( area.theSize.x + shadowable.theShadowWidth.x ) / 2;
