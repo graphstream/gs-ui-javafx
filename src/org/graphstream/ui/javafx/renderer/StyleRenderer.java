@@ -4,7 +4,7 @@ import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.javafx.Backend;
 import org.graphstream.ui.view.camera.DefaultCamera2D;
-import org.graphstream.ui.javafx.FxFullGraphRenderer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -13,7 +13,7 @@ public abstract class StyleRenderer implements GraphicElement.SwingElementRender
 	protected StyleGroup group ;
 	protected boolean hadEvents = false ;
 	
-	public static StyleRenderer apply(StyleGroup style, FxFullGraphRenderer mainRenderer) {
+	public static StyleRenderer apply(StyleGroup style, FxGraphRenderer mainRenderer) {
 		switch (style.getType()) {
 			case NODE: return NodeRenderer.apply(style, mainRenderer) ; 
 			case EDGE: return new EdgeRenderer(style, mainRenderer) ; 

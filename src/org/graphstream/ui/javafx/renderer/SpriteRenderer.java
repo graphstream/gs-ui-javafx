@@ -7,7 +7,7 @@ import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
 import org.graphstream.ui.javafx.Backend;
 import org.graphstream.ui.view.camera.DefaultCamera2D;
-import org.graphstream.ui.javafx.FxFullGraphRenderer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
 import org.graphstream.ui.javafx.renderer.shape.Shape;
 
 public class SpriteRenderer extends StyleRenderer {
@@ -18,7 +18,7 @@ public class SpriteRenderer extends StyleRenderer {
 		super(style);
 	}
 	
-	public static StyleRenderer apply(StyleGroup style, FxFullGraphRenderer renderer) {
+	public static StyleRenderer apply(StyleGroup style, FxGraphRenderer renderer) {
 		/*if( style.getShape() == org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.Shape.JCOMPONENT )
 		     return new JComponentRenderer( style, renderer );
 		else*/

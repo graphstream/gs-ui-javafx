@@ -5,7 +5,7 @@ import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.thread.ThreadProxyPipe;
 import org.graphstream.ui.fx_viewer.FxDefaultView;
 import org.graphstream.ui.fx_viewer.FxViewer;
-import org.graphstream.ui.javafx.FxFullGraphRenderer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
 import org.graphstream.ui.view.Viewer;
 
 import javafx.application.Application;
@@ -41,8 +41,8 @@ public class TestTwoViewersInOneFrame extends Application {
 		graph1.setAttribute("ui.stylesheet", styleSheet1);
 		graph2.setAttribute("ui.stylesheet", styleSheet2);
 
-		FxDefaultView view1 = new FxDefaultView(viewer1, "view1", new FxFullGraphRenderer());
-		FxDefaultView view2 = new FxDefaultView(viewer2, "view2", new FxFullGraphRenderer());
+		FxDefaultView view1 = new FxDefaultView(viewer1, "view1", new FxGraphRenderer());
+		FxDefaultView view2 = new FxDefaultView(viewer2, "view2", new FxGraphRenderer());
 		viewer1.addView(view1);
 		viewer2.addView(view2);
 		viewer1.enableAutoLayout();

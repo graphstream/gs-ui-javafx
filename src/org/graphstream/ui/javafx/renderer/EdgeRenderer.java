@@ -5,7 +5,7 @@ import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.StyleGroup;
 import org.graphstream.ui.javafx.Backend;
 import org.graphstream.ui.view.camera.DefaultCamera2D;
-import org.graphstream.ui.javafx.FxFullGraphRenderer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
 import org.graphstream.ui.javafx.renderer.shape.Connector;
 import org.graphstream.ui.javafx.renderer.shape.Shape;
 import org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes.AreaOnConnectorShape;
@@ -18,7 +18,7 @@ public class EdgeRenderer extends StyleRenderer {
 		super(styleGroup);
 	}
 	
-	public EdgeRenderer(StyleGroup styleGroup, FxFullGraphRenderer mainRenderer) {
+	public EdgeRenderer(StyleGroup styleGroup, FxGraphRenderer mainRenderer) {
 		super(styleGroup);
 	}
 

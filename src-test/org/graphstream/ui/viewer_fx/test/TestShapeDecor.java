@@ -5,7 +5,7 @@ import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.ui.fx_viewer.FxDefaultView;
 import org.graphstream.ui.fx_viewer.FxViewer;
-import org.graphstream.ui.javafx.FxFullGraphRenderer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
 import org.graphstream.ui.javafx.util.ImageCache;
 import org.graphstream.ui.view.Viewer;
 import org.graphstream.ui.view.ViewerListener;
@@ -32,7 +32,7 @@ public class TestShapeDecor extends Application implements ViewerListener {
 		
 		Viewer viewer = new FxViewer( graph, FxViewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD );
 		ViewerPipe pipeIn = viewer.newViewerPipe();
-		FxDefaultView view = (FxDefaultView)viewer.addView("view1", new FxFullGraphRenderer() );
+		FxDefaultView view = (FxDefaultView)viewer.addView("view1", new FxGraphRenderer() );
 		
 		view.resize(500, 430);
 		

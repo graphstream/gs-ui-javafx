@@ -7,7 +7,7 @@ import org.graphstream.ui.fx_viewer.FxDefaultView;
 import org.graphstream.ui.fx_viewer.FxViewer;
 import org.graphstream.ui.fx_viewer.util.DefaultApplication;
 import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants;
-import org.graphstream.ui.javafx.FxFullGraphRenderer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
 import org.graphstream.ui.spriteManager.Sprite;
 import org.graphstream.ui.spriteManager.SpriteManager;
 import org.graphstream.ui.view.Viewer;
@@ -27,7 +27,7 @@ public class TestSize implements ViewerListener {
 		
 		Viewer viewer = new FxViewer( graph, FxViewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD );
 		ViewerPipe pipeIn = viewer.newViewerPipe();
-		FxDefaultView view = (FxDefaultView)viewer.addView("view1", new FxFullGraphRenderer() );
+		FxDefaultView view = (FxDefaultView)viewer.addView("view1", new FxGraphRenderer() );
 		
 		DefaultApplication.init(view, graph);
 	    new Thread(() -> Application.launch(DefaultApplication.class)).start();

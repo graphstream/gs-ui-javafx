@@ -9,7 +9,7 @@ import org.graphstream.ui.fx_viewer.FxDefaultView;
 import org.graphstream.ui.fx_viewer.FxViewer;
 import org.graphstream.ui.geom.Point3;
 import org.graphstream.ui.graphicGraph.GraphPosLengthUtils;
-import org.graphstream.ui.javafx.FxFullGraphRenderer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
 import org.graphstream.ui.view.Viewer;
 import org.graphstream.ui.view.ViewerPipe;
 
@@ -43,7 +43,7 @@ public class TestStars2 extends Application {
 		
 		Viewer viewer = new FxViewer( graph, FxViewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD );
 		ViewerPipe pipeIn = viewer.newViewerPipe();
-		FxDefaultView view = (FxDefaultView)viewer.addView("view1", new FxFullGraphRenderer() );
+		FxDefaultView view = (FxDefaultView)viewer.addView("view1", new FxGraphRenderer() );
 		
 		view.resize(1000, (int)(1200*(height/width)));
 		

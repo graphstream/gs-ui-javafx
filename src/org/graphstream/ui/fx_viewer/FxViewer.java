@@ -36,7 +36,7 @@ import org.graphstream.stream.ProxyPipe;
 import org.graphstream.stream.Source;
 import org.graphstream.stream.thread.ThreadProxyPipe;
 import org.graphstream.ui.graphicGraph.GraphicGraph;
-import org.graphstream.ui.javafx.FxFullGraphRenderer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
 import org.graphstream.ui.view.GraphRenderer;
 import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
@@ -239,7 +239,7 @@ public class FxViewer extends Viewer {
 	@Override
 	public GraphRenderer<?, ?> newDefaultGraphRenderer() {
 		// TODO Auto-generated method stub
-		return new FxFullGraphRenderer();
+		return new FxGraphRenderer();
 	}
 	
 	/**

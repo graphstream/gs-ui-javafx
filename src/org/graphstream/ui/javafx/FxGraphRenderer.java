@@ -95,7 +95,7 @@ import javafx.scene.layout.Pane;
  * for drawing the graph, the backend is also responsible for the shape
  * creation.
  */
-public class FxFullGraphRenderer implements GraphRenderer<Pane, GraphicsContext>, StyleGroupListener {
+public class FxGraphRenderer implements GraphRenderer<Pane, GraphicsContext>, StyleGroupListener {
 	public final static String DEFAULT_RENDERER = "j2d_def_rndr";
 	
 	protected DefaultCamera2D camera = null;
@@ -374,7 +374,7 @@ public class FxFullGraphRenderer implements GraphRenderer<Pane, GraphicsContext>
     	// XXX The element renderer should be the listener, not this. ... XXX
 
     	if(oldStyle != null) {
-    		SwingElementRenderer renderer = oldStyle.getRenderer(FxFullGraphRenderer.DEFAULT_RENDERER);
+    		SwingElementRenderer renderer = oldStyle.getRenderer(FxGraphRenderer.DEFAULT_RENDERER);
 
     		/** Not implemented yet !**/
 	    	/*if((renderer != null ) && renderer instanceof FxComponentRenderer)

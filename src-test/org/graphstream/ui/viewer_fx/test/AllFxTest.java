@@ -4,7 +4,7 @@ import org.graphstream.algorithm.generator.DorogovtsevMendesGenerator;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.ui.fx_viewer.FxViewPanel;
 import org.graphstream.ui.fx_viewer.FxViewer;
-import org.graphstream.ui.javafx.FxFullGraphRenderer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -27,7 +27,7 @@ public class AllFxTest extends Application {
 		g.setAttribute("ui.stylesheet", styleSheet);
 		
 		v.enableAutoLayout();
-		FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxFullGraphRenderer());
+		FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxGraphRenderer());
 		
 		gen.addSink(g);
 		gen.begin();
