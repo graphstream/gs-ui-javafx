@@ -1,6 +1,8 @@
 package org.graphstream.ui.javafx.util;
 
 import org.graphstream.graph.Graph;
+import org.graphstream.stream.file.FileSinkImages;
+import org.graphstream.stream.file.images.FileSinkImagesFactory;
 import org.graphstream.ui.fx_viewer.FxDefaultView;
 import org.graphstream.ui.fx_viewer.FxViewer;
 import org.graphstream.ui.fx_viewer.util.DefaultApplication;
@@ -12,7 +14,7 @@ import org.graphstream.ui.view.Viewer;
 
 import javafx.application.Application;
 
-public class Display implements org.graphstream.util.Display {
+public class Display implements org.graphstream.util.Display, FileSinkImagesFactory {
 
 	@Override
 	public Viewer display(Graph graph, boolean autoLayout) {
@@ -32,5 +34,8 @@ public class Display implements org.graphstream.util.Display {
 		
 		return viewer;
 	}
-	
+
+	@Override public FileSinkImages createFileSinkImages() {
+		return new FxFileSinkImages();
+	}
 }

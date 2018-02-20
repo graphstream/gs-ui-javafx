@@ -6,3 +6,4 @@ target/
 *.jar
 *.jardesc
 .idea
+gs-ui-javafx.iml
