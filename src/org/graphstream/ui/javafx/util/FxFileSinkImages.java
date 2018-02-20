@@ -32,6 +32,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import org.graphstream.stream.file.FileSinkImages;
+import org.graphstream.stream.file.images.Resolution;
+import org.graphstream.stream.file.images.Resolutions;
 import org.graphstream.ui.javafx.FxGraphRenderer;
 import org.graphstream.ui.view.camera.Camera;
 
@@ -49,6 +51,16 @@ public class FxFileSinkImages extends FileSinkImages {
 	private FxGraphRenderer renderer;
 
 	public FxFileSinkImages() {
+		this(OutputType.PNG, Resolutions.HD720);
+	}
+
+	public FxFileSinkImages(OutputType outputType, Resolution resolution) {
+		this(outputType, resolution, OutputPolicy.NONE);
+	}
+
+	public FxFileSinkImages(OutputType type, Resolution resolution, OutputPolicy outputPolicy) {
+		super(type, resolution, outputPolicy);
+
 		this.renderer = new FxGraphRenderer();
 		this.renderer.open(gg, null);
 	}
