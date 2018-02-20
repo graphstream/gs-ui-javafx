@@ -268,7 +268,6 @@ public interface Form  {
 			g.beginPath();
 			g.moveTo(getStartX(), getStartY());
 			g.bezierCurveTo(getControlX1(),getControlY1(), getControlX2(), getControlY2(), getEndX(), getEndY());
-			g.closePath();
 			
 			g.stroke();
 		}
