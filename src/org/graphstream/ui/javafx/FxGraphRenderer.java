@@ -67,10 +67,12 @@ import org.graphstream.ui.view.util.GraphMetrics;
 import org.graphstream.ui.view.util.InteractiveElement;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**	
  * 2D renderer.
@@ -306,7 +308,10 @@ public class FxGraphRenderer implements GraphRenderer<Pane, GraphicsContext>, St
 				GraphicsContext c = canvas.getGraphicsContext2D();
 				
 				render(c, 0, 0, width, height);
-				canvas.snapshot(null, wim);
+				
+				SnapshotParameters sp = new SnapshotParameters();
+			    sp.setFill(Color.TRANSPARENT);
+				canvas.snapshot(sp, wim);
 				
 				File file = new File(filename);
 				try {
@@ -320,7 +325,10 @@ public class FxGraphRenderer implements GraphRenderer<Pane, GraphicsContext>, St
 				GraphicsContext c = canvas.getGraphicsContext2D();
 				
 				render(c, 0, 0, width, height);
-				canvas.snapshot(null, wim);
+				
+				SnapshotParameters sp = new SnapshotParameters();
+			    sp.setFill(Color.TRANSPARENT);
+				canvas.snapshot(sp, wim);
 				
 				File file = new File(filename);
 				try {
@@ -335,7 +343,10 @@ public class FxGraphRenderer implements GraphRenderer<Pane, GraphicsContext>, St
 				GraphicsContext c = canvas.getGraphicsContext2D();
 				
 				render(c, 0, 0, width, height);
-				canvas.snapshot(null, wim);
+				
+				SnapshotParameters sp = new SnapshotParameters();
+			    sp.setFill(Color.TRANSPARENT);
+				canvas.snapshot(sp, wim);
 				
 				File file = new File(filename);
 				try {

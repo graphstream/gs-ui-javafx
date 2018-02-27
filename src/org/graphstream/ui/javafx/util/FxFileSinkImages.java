@@ -27,10 +27,13 @@ package org.graphstream.ui.javafx.util;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
+
 import org.graphstream.stream.file.FileSinkImages;
 import org.graphstream.stream.file.images.Resolution;
 import org.graphstream.stream.file.images.Resolutions;
@@ -76,8 +79,11 @@ public class FxFileSinkImages extends FileSinkImages {
 		Platform.runLater(() -> {
 			GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 			renderer.render(graphicsContext, 0, 0, resolution.getWidth(), resolution.getHeight());
-			canvas.snapshot(null, image);
 
+			SnapshotParameters sp = new SnapshotParameters();
+		    sp.setFill(Color.TRANSPARENT);
+			canvas.snapshot(sp, image);
+			
 			synchronized (FxFileSinkImages.this) {
 				FxFileSinkImages.this.notify();
 			}
@@ -93,6 +99,7 @@ public class FxFileSinkImages extends FileSinkImages {
 	}
 
 	@Override protected BufferedImage getRenderedImage() {
+		
 		return SwingFXUtils.fromFXImage(image, null);
 	}
 
