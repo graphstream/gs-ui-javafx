@@ -42,6 +42,24 @@ public class DefaultApplication extends Application {
         primaryStage.show();
 	}
 	
+	public static void newDisplay(FxDefaultView view2) {
+		Stage newStage = new Stage();
+		newStage.setTitle("GraphStream FX");
+		
+		Scene scene = new Scene(view2, 800, 600, true, SceneAntialiasing.DISABLED);
+		newStage.setScene(scene);
+        
+		newStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+		
+		newStage.show();
+	}
+	
 	public static void init(FxDefaultView v, Graph g) {
 		graph = g ;
 		view = v ;

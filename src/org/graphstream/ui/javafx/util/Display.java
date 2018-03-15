@@ -13,15 +13,20 @@ import org.graphstream.ui.view.GraphRenderer;
 import org.graphstream.ui.view.Viewer;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 
 public class Display implements org.graphstream.util.Display, FileSinkImagesFactory {
-
+	public static boolean instanceJavaFX = false ;
+	
 	@Override
 	public Viewer display(Graph graph, boolean autoLayout) {
+		
 		FxViewer viewer = new FxViewer(graph,
 				FxViewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 		
 		GraphRenderer renderer = new FxGraphRenderer();
+		
 		FxDefaultView view = (FxDefaultView) viewer.addView(FxViewer.DEFAULT_VIEW_ID, renderer);
 		
 		if(autoLayout) {
@@ -29,10 +34,27 @@ public class Display implements org.graphstream.util.Display, FileSinkImagesFact
 			viewer.enableAutoLayout(layout);
 		}
 		
-		DefaultApplication.init(view, graph);
-	    new Thread(() -> Application.launch(DefaultApplication.class)).start();
-		
-		return viewer;
+		if (!instanceJavaFX) {
+			instanceJavaFX = true ;	
+			
+			DefaultApplication.init(view, graph);
+		    new Thread(() -> {
+		    	Application.launch(DefaultApplication.class);
+		    }).start();
+			
+		    return viewer;
+		}
+		else {
+			new Thread(() -> { 
+				new JFXPanel();
+				
+				Platform.runLater(() -> {
+					DefaultApplication.newDisplay(view)	;
+				});
+			}).start();
+			
+			return viewer ;
+		}
 	}
 
 	@Override public FileSinkImages createFileSinkImages() {
