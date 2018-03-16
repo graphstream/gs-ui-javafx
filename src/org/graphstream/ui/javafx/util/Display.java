@@ -38,11 +38,7 @@ public class Display implements org.graphstream.util.Display, FileSinkImagesFact
 			instanceJavaFX = true ;	
 			
 			DefaultApplication.init(view, graph);
-		    new Thread(() -> {
-		    	Application.launch(DefaultApplication.class);
-		    }).start();
-			
-		    return viewer;
+		    new Thread(() -> Application.launch(DefaultApplication.class)).start();
 		}
 		else {
 			new Thread(() -> { 
@@ -52,9 +48,9 @@ public class Display implements org.graphstream.util.Display, FileSinkImagesFact
 					DefaultApplication.newDisplay(view)	;
 				});
 			}).start();
-			
-			return viewer ;
 		}
+		
+	    return viewer;
 	}
 
 	@Override public FileSinkImages createFileSinkImages() {

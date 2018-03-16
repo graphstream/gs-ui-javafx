@@ -144,7 +144,8 @@ public class BackendJ2D implements Backend {
 	private void computeInverse() {
 		try {
 			xT = new Affine(Tx);
-			xT.invert();
+			if ( xT.determinant() != 0)
+				xT.invert();
 		}
 		catch (NonInvertibleTransformException e) {
 			 Logger.getLogger(this.getClass().getSimpleName()).log(Level.WARNING, "Cannot inverse matrix.", e);
