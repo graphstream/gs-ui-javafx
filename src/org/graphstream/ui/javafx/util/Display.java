@@ -21,14 +21,10 @@ public class Display implements org.graphstream.util.Display, FileSinkImagesFact
 	
 	@Override
 	public Viewer display(Graph graph, boolean autoLayout) {
-		
 		FxViewer viewer = new FxViewer(graph,
 				FxViewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
-		
 		GraphRenderer renderer = new FxGraphRenderer();
-		
 		FxDefaultView view = (FxDefaultView) viewer.addView(FxViewer.DEFAULT_VIEW_ID, renderer);
-		
 		if(autoLayout) {
 			Layout layout = Layouts.newLayoutAlgorithm() ;
 			viewer.enableAutoLayout(layout);
@@ -36,21 +32,32 @@ public class Display implements org.graphstream.util.Display, FileSinkImagesFact
 		
 		if (!instanceJavaFX) {
 			instanceJavaFX = true ;	
-			
 			DefaultApplication.init(view, graph);
-		    new Thread(() -> Application.launch(DefaultApplication.class)).start();
+			new Thread(() -> {
+				try {
+					Application.launch(DefaultApplication.class);
+				}
+				catch (Exception e) {
+					newDisplay(view);
+				}
+			}).start();	
+			
 		}
 		else {
-			new Thread(() -> { 
-				new JFXPanel();
-				
-				Platform.runLater(() -> {
-					DefaultApplication.newDisplay(view)	;
-				});
-			}).start();
+			newDisplay(view);
 		}
 		
 	    return viewer;
+	}
+	
+	public void newDisplay(FxDefaultView view) {
+		new Thread(() -> { 
+			new JFXPanel();
+			
+			Platform.runLater(() -> {
+				DefaultApplication.newDisplay(view)	;
+			});
+		}).start();
 	}
 
 	@Override public FileSinkImages createFileSinkImages() {
