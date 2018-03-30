@@ -25,11 +25,11 @@
 		<version>7</version>
 	</parent>
 	
-	<groupId>gs-ui-javafx</groupId>
+	<groupId>org.graphstream</groupId>
 	<artifactId>gs-ui-javafx</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>gs-ui-javafx</name>
-	<description>Swing interface for GraphStream</description>
+	<description>JavaFX interface for GraphStream</description>
   
  	<url>http://graphstream-project.org</url>
   
@@ -325,7 +325,6 @@
     		<version>2.0.0-SNAPSHOT</version>
     		<scope>compile</scope>
     	</dependency>
-		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
