@@ -101,8 +101,8 @@ public class FxMouseManager implements MouseManager
 			if (curElement != null) {
 				mouseButtonPressOnElement(curElement, e);
 			} else {
-				x1 = e.getSceneX();
-				y1 = e.getSceneY();
+				x1 = e.getX();
+				y1 = e.getY();
 				mouseButtonPress(e);
 				view.beginSelectionAt(x1, y1);
 			}
