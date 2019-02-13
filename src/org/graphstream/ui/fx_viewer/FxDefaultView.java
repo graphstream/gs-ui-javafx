@@ -36,6 +36,7 @@ import java.util.EnumSet;
 
 import org.graphstream.ui.fx_viewer.util.DefaultApplication;
 import org.graphstream.ui.fx_viewer.util.FxMouseManager;
+import org.graphstream.ui.fx_viewer.util.FxMouseOverMouseManager;
 import org.graphstream.ui.fx_viewer.util.FxShortcutManager;
 import org.graphstream.ui.graphicGraph.GraphicElement;
 import org.graphstream.ui.graphicGraph.GraphicGraph;
@@ -273,6 +274,14 @@ public class FxDefaultView extends FxViewPanel {
 		manager.init(graph, this);
 		
 		mouseClicks = manager;
+	}
+	
+	/**
+	 * This is a shortcut to a call setShortcutManager with a MouseOverMouseManager instance and with
+	 * (InteractiveElement.EDGE, InteractiveElement.NODE, InteractiveElement.SPRITE).
+	 */
+	public void enableMouseOptions() {
+		setMouseManager(new FxMouseOverMouseManager(EnumSet.of(InteractiveElement.EDGE, InteractiveElement.NODE, InteractiveElement.SPRITE)));
 	}
 
 	public void setShortcutManager(ShortcutManager manager) {

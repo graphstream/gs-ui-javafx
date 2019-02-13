@@ -93,4 +93,6 @@ public abstract class FxViewPanel extends Pane implements View {
 
 	@Override
 	protected abstract void layoutChildren() ;
+	
+	public abstract void enableMouseOptions();
 }
