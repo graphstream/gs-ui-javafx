@@ -277,7 +277,7 @@ public class FxDefaultView extends FxViewPanel {
 	}
 	
 	/**
-	 * This is a shortcut to a call setShortcutManager with a MouseOverMouseManager instance and with
+	 * This is a shortcut to a call setMouseManager with a MouseOverMouseManager instance and with
 	 * (InteractiveElement.EDGE, InteractiveElement.NODE, InteractiveElement.SPRITE).
 	 */
 	public void enableMouseOptions() {
