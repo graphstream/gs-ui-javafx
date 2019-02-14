@@ -102,7 +102,7 @@ public class Area {
 		double w = camera.getMetrics().lengthToGu(style.getSize(), 0);
 		double h = w ;
 		if(style.getSize().size() > 1) 
-			camera.getMetrics().lengthToGu(style.getSize(), 1) ;
+			h = camera.getMetrics().lengthToGu(style.getSize(), 1) ;
 				
 		if(style.getSizeMode() == StyleConstants.SizeMode.DYN_SIZE) {
 			Object s = element.getAttribute("ui.size");
