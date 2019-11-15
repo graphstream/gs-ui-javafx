@@ -250,7 +250,12 @@
 			<scope>provided</scope>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-swing</artifactId>
+			<version>13</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>com.github.graphstream</groupId>
