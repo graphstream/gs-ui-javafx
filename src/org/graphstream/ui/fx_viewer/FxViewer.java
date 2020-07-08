@@ -208,7 +208,17 @@ public class FxViewer extends Viewer {
 		//timer.setRepeats(true);
 		//timer.start();
 		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.play();
+		
+		String debugModule = System.getProperty("org.graphstream.debug");
+		new Thread(() -> {
+			if (debugModule != null && !debugModule.isEmpty()) {
+		    	// if debug is enable, add a delay to allow time for the interface to be created (some compilation require that) 
+				System.out.println("-- Debug Mode");
+				try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); } 
+			}
+			
+	    	timeline.play();
+	    }).start();
 	}
 
 	/**
