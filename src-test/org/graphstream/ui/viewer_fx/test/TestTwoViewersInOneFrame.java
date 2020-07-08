@@ -45,6 +45,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -91,10 +92,15 @@ public class TestTwoViewersInOneFrame extends Application {
 		gen.removeSink(graph1);
 		gen.removeSink(graph2);
 		
+		StackPane paneView1 = new StackPane();
+		paneView1.getChildren().addAll(view1); // prevent UI shift issues
+	
+		StackPane paneView2 = new StackPane();
+		paneView2.getChildren().addAll(view2); // prevent UI shift issues
 		
 		GridPane gridpane = new GridPane();
-		gridpane.add(view1, 1, 0);
-		gridpane.add(view2, 2, 0);
+		gridpane.add(paneView1, 1, 0);
+		gridpane.add(paneView2, 2, 0);
 		
 		
 		Scene scene = new Scene(gridpane, 800, 600, true, SceneAntialiasing.BALANCED);
