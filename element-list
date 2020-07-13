@@ -1,0 +1,13 @@
+org.graphstream.ui.fx_viewer
+org.graphstream.ui.fx_viewer.util
+org.graphstream.ui.javafx
+org.graphstream.ui.javafx.renderer
+org.graphstream.ui.javafx.renderer.shape
+org.graphstream.ui.javafx.renderer.shape.javafx
+org.graphstream.ui.javafx.renderer.shape.javafx.advancedShapes
+org.graphstream.ui.javafx.renderer.shape.javafx.arrowShapes
+org.graphstream.ui.javafx.renderer.shape.javafx.baseShapes
+org.graphstream.ui.javafx.renderer.shape.javafx.basicShapes
+org.graphstream.ui.javafx.renderer.shape.javafx.shapePart
+org.graphstream.ui.javafx.renderer.shape.javafx.spriteShapes
+org.graphstream.ui.javafx.util
