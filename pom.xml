@@ -113,6 +113,19 @@
 		</testResources>
 
 		<plugins>
+			<plugin>				<!-- Create sources.jar -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -152,7 +165,18 @@
 					<version>true</version>
 					<windowtitle>The GraphStream ${project.version} API</windowtitle>
 				</configuration>
-				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<doclint>none</doclint>
+						</configuration>
+					</execution>
+				</executions>
+				<version>3.1.1</version>			
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
