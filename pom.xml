@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of GraphStream <http://graphstream-project.org>. GraphStream 
+	is a library whose purpose is to handle static or dynamic graph, create them 
+	from scratch, file or any source and display them. This program is free software 
+	distributed under the terms of two licenses, the CeCILL-C license that fits 
+	European law, and the GNU Lesser General Public License. You can use, modify 
+	and/ or redistribute the software under the terms of the CeCILL-C license 
+	as circulated by CEA, CNRS and INRIA at the following URL <http://www.cecill.info> 
+	or under the terms of the GNU LGPL as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+	details. You should have received a copy of the GNU Lesser General Public 
+	License along with this program. If not, see <http://www.gnu.org/licenses/>. 
+	The fact that you are presently reading this means that you have had knowledge 
+	of the CeCILL-C and LGPL licenses and that you accept their terms. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>org.graphstream</groupId>
+	<artifactId>gs-ui-javafx</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	
+	<name>gs-ui-javafx</name>
+	<description>javafx interface for GraphStream</description>
+  
+ 	<url>http://graphstream-project.org</url>
+  
+ 	<!-- Source code of GraphStream is hosted on GitHub. -->
+	<scm>
+		<connection>scm:git:git://github.com/graphstream/gs-ui-javafx.git</connection>
+		<developerConnection>scm:git:git://github.com/graphstream/gs-ui-javafx.git</developerConnection>
+		<url>https://github.com/graphstream/gs-ui-javafx</url>
+	</scm>
+	
+	<!-- GraphStream is using the GitHub issue tracker. -->
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/graphstream/gs-ui-javafx/issues</url>
+	</issueManagement>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<licenses>
+		<license>
+			<name>LGPL3</name>
+			<url>http://www.gnu.org/copyleft/lesser.html</url>
+		</license>
+
+		<license>
+			<name>Cecill-C</name>
+			<url>http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.html
+			</url>
+		</license>
+	</licenses>
+	
+	<profiles>
+		<profile>
+			<!--
+				This profile has to be enabled when releasing the package. It will
+				enable the sign phase.
+			-->
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<configuration>
+							<keyname><![CDATA[GraphStream Team <team@graphstream-project.org>]]></keyname>
+							<skip>false</skip>
+						</configuration>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>package</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<outputDirectory>bin</outputDirectory>
+		<testSourceDirectory>src-test</testSourceDirectory>
+		<defaultGoal>compile</defaultGoal>
+
+		<resources>
+			<!-- Resources other than classes are included here. -->
+			<resource>
+				<directory>src</directory>
+			</resource>
+		</resources>
+
+		<testResources>
+			<testResource>
+				<directory>src-test</directory>
+				<includes>
+					<include>org/graphstream/**/test/data/**</include>
+				</includes>
+			</testResource>
+		</testResources>
+
+		<plugins>
+			<plugin>				<!-- Create sources.jar -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+				<version>3.7.0</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<tags>
+						<tag>
+							<name>complexity</name>
+							<placement>a</placement>
+							<head>Computational Complexity :</head>
+						</tag>
+						<tag>
+							<name>reference</name>
+							<placement>a</placement>
+							<head>Scientific Reference :</head>
+						</tag>
+					</tags>
+					<author>true</author>
+					<failOnError>flase</failOnError>
+					<nodeprecated>false</nodeprecated>
+					<nodeprecatedlist>false</nodeprecatedlist>
+					<noindex>false</noindex>
+					<nonavbar>false</nonavbar>
+					<notree>false</notree>
+					<show>public</show>
+					<source>1.8</source>
+					<splitindex>true</splitindex>
+					<use>true</use>
+					<version>true</version>
+					<windowtitle>The GraphStream ${project.version} API</windowtitle>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<doclint>none</doclint>
+						</configuration>
+					</execution>
+				</executions>
+				<version>3.1.1</version>			
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>org/graphstream/ui/viewer/test/**/</exclude>
+						<exclude>**/*$*</exclude>
+					</excludes>
+				</configuration>
+				<version>2.20</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<!-- TODO : Add rules to force code quality (e.g. % of coverage) -->
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<!-- select non-aggregate reports -->
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	
+	<dependencies>
+		<dependency>
+    		<groupId>com.github.graphstream</groupId>
+    		<artifactId>gs-core</artifactId>
+    		<version>dev-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<optional>false</optional>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+    		<groupId>com.github.graphstream</groupId>
+    		<artifactId>gs-algo</artifactId>
+    		<version>dev-SNAPSHOT</version>
+    		<scope>test</scope>
+    	</dependency>
+    	
+    	<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-swing</artifactId>
+			<version>13</version>
+			<scope>provided</scope>
+		</dependency>
+		
+    	<dependency>
+			<groupId>org.openjfx</groupId> 			
+    		<artifactId>javafx-fxml</artifactId> 		
+			<version>13</version> 		
+	   	</dependency>
+
+	</dependencies>
+</project>
