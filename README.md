@@ -52,7 +52,7 @@ then, add the `gs-core` and `gs-ui-javafx` to your dependencies:
 </dependency>
 ```
 
-You can use any version of `gs-core` and `gs-ui-javafx` you need, provided they are the same. Simply specify the desired version in the `<version>` tag. The version can be a git tag name (e.g. `2.0-alpha`), a commit number, or a branch name followed by `-SNAPSHOT` (e.g. `dev-SNAPSHOT`). More details on the [possible versions on jitpack](https://jitpack.io/#graphstream/gs-core).
+You can use any version of `gs-core` and `gs-ui-javafx` you need, provided they are the same. Simply specify the desired version in the `<version>` tag. The version can be a git tag name (e.g. `2.0`), a commit number, or a branch name followed by `-SNAPSHOT` (e.g. `dev-SNAPSHOT`). More details on the [possible versions on jitpack](https://jitpack.io/#graphstream/gs-core).
 
 ## Configure UI
 
