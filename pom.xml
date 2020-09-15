@@ -25,7 +25,23 @@
 	
 	<name>gs-ui-javafx</name>
 	<description>javafx interface for GraphStream</description>
-  
+  	
+	<developers>
+		<developer>
+			<id>hichbra</id>
+			<name>Hicham Brahimi</name>
+			<email>hicham.brahimi@graphstream-project.org</email>
+			<organization>LITIS</organization>
+			<organizationUrl>http://www.litislab.eu</organizationUrl>
+		</developer>
+		<developer>
+			<id>pigne</id>
+			<name>Yoann Pigné</name>
+			<email>yoann.pigne@graphstream-project.org</email>
+			<organization>LITIS</organization>
+			<organizationUrl>http://www.litislab.eu</organizationUrl>
+		</developer>
+	</developers>
  	<url>http://graphstream-project.org</url>
   
  	<!-- Source code of GraphStream is hosted on GitHub. -->
@@ -65,6 +81,12 @@
 				enable the sign phase.
 			-->
 			<id>release</id>
+			<distributionManagement>
+				<repository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+				</repository>
+			</distributionManagement>
 			<build>
 				<plugins>
 					<plugin>
@@ -240,16 +262,9 @@
 		</plugins>
 	</reporting>
 
-	<repositories>
-		<repository>
-		    <id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-	</repositories>
-	
 	<dependencies>
 		<dependency>
-    		<groupId>com.github.graphstream</groupId>
+    		<groupId>org.graphstream</groupId>
     		<artifactId>gs-core</artifactId>
     		<version>2.0</version>
 			<scope>provided</scope>
@@ -264,7 +279,7 @@
 		</dependency>
 		
 		<dependency>
-    		<groupId>com.github.graphstream</groupId>
+    		<groupId>org.graphstream</groupId>
     		<artifactId>gs-algo</artifactId>
     		<version>2.0</version>
     		<scope>test</scope>
